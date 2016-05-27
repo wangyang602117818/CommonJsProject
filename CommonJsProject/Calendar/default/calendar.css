@@ -22,11 +22,18 @@
     background: url(calendar.png) no-repeat;
 }
 
+.calendar .currItem {
+    border-color: #48B8E0;
+}
+
+    .calendar .currItem:hover {
+        cursor: default;
+    }
+
 .date {
     background: url(date.png) no-repeat;
     background-position: right;
     padding-right: 0;
-    
 }
 
 .add_cal_len1 { /*第二种日期框高度*/
@@ -81,7 +88,7 @@
     float: left;
 }
 
-.last_year, .last_month, .next_year, .next_month { 
+.last_year, .last_month, .next_year, .next_month {
     display: inline-block;
 }
 
@@ -351,14 +358,6 @@
     .calendar_mainmonth_containter .disabled:hover {
         cursor: default;
         border-color: transparent;
-    }
-
-.calendar_mainmonth_containter .currMonth {
-    border-color: #48B8E0;
-}
-
-    .calendar_mainmonth_containter .currMonth:hover {
-        cursor: default;
     }
 
 .calendar_mainmonth_containter div:hover {

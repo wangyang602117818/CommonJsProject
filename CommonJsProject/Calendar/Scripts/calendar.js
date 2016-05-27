@@ -55,14 +55,14 @@
         that.keypress(function (event) {
             return false;
         });  //禁用文本框输入
-
+        var dv = that.attr('dateval');
+        setDate(dv);
         return {
             setDate: setDate,
             getDate: getDate
         };
         function setDate(dateString) {
-            that.attr("dateval", "");
-            if (dateString.trim()) {
+            if (dateString && dateString.trim()) {
                 date = inputDateConvert(dateString);
                 curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
                 text_time_arr = curr_time_arr.slice(0);
@@ -155,8 +155,8 @@
             con_year = createYearEle(curr_time_arr[0]);
             con_month = createMonthEle();
             calendar.append(con_year, con_month);
-            calendar.find(".title_year").bind("click", displayYearDiv);
-            calendar.find(".title_month").bind("click", displayMonthDiv);
+            calendar.find(".title_year").bind("click", showYearDiv);
+            calendar.find(".title_month").bind("click", showMonthDiv);
             calendar.find(".last_year").bind("click", lastYear);
             calendar.find(".next_year").bind("click", nextYear);
             calendar.find(".last_month").bind("click", lastMonth);
@@ -181,9 +181,9 @@
             con_hour.bind("click", hourSelected);
             con_minute.bind("click", minuteSelected);
             con_second.bind("click", secondSelected);
-            calendar_time.find("#hover_txt").bind("click", dispalyHoverDiv);
-            calendar_time.find("#minute_txt").bind("click", dispalyMinuteDiv);
-            calendar_time.find("#second_txt").bind("click", dispalySecondDiv);
+            calendar_time.find("#hover_txt").bind("click", showHoverDiv);
+            calendar_time.find("#minute_txt").bind("click", showMinuteDiv);
+            calendar_time.find("#second_txt").bind("click", showSecondDiv);
         }
         //将文本框中的日期字符串转成日期对象,供默认选中用
         function inputDateConvert(str) {
@@ -229,7 +229,7 @@
             return zindex;
         }
         //显示年份div
-        function displayYearDiv() {
+        function showYearDiv() {
             con_year.stop(); con_month.stop();
             //重设年份容器的年份内容
             con_year.html(createYearEle(curr_time_arr[0]).unbind("click", yearSelected).html());
@@ -250,7 +250,7 @@
             }
         }
         //显示月份div
-        function displayMonthDiv() {
+        function showMonthDiv() {
             con_year.stop(); con_month.stop();
             con_month.html(createMonthEle().unbind("click", monthSelected).html());  //重设月份的内容
             con_month.css({ "z-index": getMaxZIndex() + 1 });  //让moth层在year层上面
@@ -268,7 +268,7 @@
             }
         }
         //显示小时div
-        function dispalyHoverDiv() {
+        function showHoverDiv() {
             con_hour.css("z-index", getMaxZIndex() + 1);
             if (con_hour.attr("flag") == "0") {
                 calendar.find(".last_year,.next_year,.last_month,.next_month").addClass("disabled");
@@ -284,7 +284,7 @@
             }
         }
         //显示分钟div
-        function dispalyMinuteDiv() {
+        function showMinuteDiv() {
             con_minute.css("z-index", getMaxZIndex() + 1);
             if (con_minute.attr("flag") == "0") {
                 calendar.find(".last_year,.next_year,.last_month,.next_month").addClass("disabled");
@@ -299,7 +299,7 @@
                 con_minute.animate({ bottom: "-176px" }, dur, function () { $(this).attr("flag", "0") });
             }
         }
-        function dispalySecondDiv() {
+        function showSecondDiv() {
             con_second.css("z-index", getMaxZIndex() + 1);
             if (con_second.attr("flag") == "0") {
                 calendar.find(".last_year,.next_year,.last_month,.next_month").addClass("disabled");
@@ -484,11 +484,12 @@
             start_disp_year = Math.floor(curr_year / 16) * 16;
             var year_div = "<div class=\"calendar_mainyear_containter\" flag=\"0\">";
             for (var i = start_disp_year; i < start_disp_year + 16; i++) {
-                if (i < start_time_arr[0] || i > end_time_arr[0]) {  //设置禁用标记
-                    year_div += "<div class=\"disabled\">" + i + "</div>";
-                } else {
-                    year_div += "<div>" + i + "</div>";
-                }
+                var classtText = "";
+                if (i == curr_time_arr[0]) classtText = "currItem";
+                var disabled = false;  //禁用标记
+                if (i < start_time_arr[0] || i > end_time_arr[0]) disabled = true;
+                if (disabled) classtText += " disabled";
+                year_div += "<div class=\"" + classtText.trim() + "\">" + i + "</div>";
             }
             year_div += "</div>";
             var year_ele = $(year_div);
@@ -501,7 +502,7 @@
             var month_div = "<div class=\"calendar_mainmonth_containter\" flag=\"0\">";
             for (var i = 0; i < commonlang[lang].month.length; i++) {
                 var classtText = "";
-                if (i == curr_time_arr[1]) classtText = "currMonth";
+                if (i == curr_time_arr[1]) classtText = "currItem";
                 var disabled = false;  //禁用标记
                 var months = Number(curr_time_arr[0]) * 12 + i,
                     startmonths = Number(start_time_arr[0]) * 12 + Number(start_time_arr[1]),
@@ -520,7 +521,9 @@
         function createHoverEle() {
             var time_div = "<div class=\"hover_containter\" id=\"hover_containter\" flag=\"0\">";
             for (var i = 0; i <= 23; i++) {
-                time_div += "<div>" + monthFormat(i, 2) + "</div>";
+                var classtText = "";
+                if (i == curr_time_arr[3]) classtText = "currItem";
+                time_div += "<div class=\"" + classtText.trim() + "\">" + monthFormat(i, 2) + "</div>";
             }
             time_div += "</div>";
             var time_ele = $(time_div);
@@ -530,7 +533,9 @@
         function createMinuteEle() {
             var time_div = "<div class=\"minute_containter\" id=\"minute_containter\" flag=\"0\">";
             for (var i = 0; i <= 55; i += 5) {
-                time_div += "<div>" + monthFormat(i, 2) + "</div>";
+                var classtText = "";
+                if (i == curr_time_arr[4]) classtText = "currItem";
+                time_div += "<div class=\"" + classtText.trim() + "\">" + monthFormat(i, 2) + "</div>";
             }
             time_div += "</div>";
             var time_ele = $(time_div);
@@ -540,7 +545,9 @@
         function createSecondEle() {
             var time_div = "<div class=\"minute_containter\" id=\"second_containter\" flag=\"0\">";
             for (var i = 0; i <= 55; i += 5) {
-                time_div += "<div>" + monthFormat(i, 2) + "</div>";
+                var classtText = "";
+                if (i == curr_time_arr[5]) classtText = "currItem";
+                time_div += "<div class=\"" + classtText.trim() + "\">" + monthFormat(i, 2) + "</div>";
             }
             time_div += "</div>";
             var time_ele = $(time_div);
@@ -559,7 +566,7 @@
                     changeMainData("right");
                 }
                 calendar.find(".title_year").text(txt + commonlang[lang].title[0]);
-                displayYearDiv();
+                showYearDiv();
             }
         }
         function monthSelected(event) {
@@ -577,7 +584,7 @@
                         changeMainData("right");
                     }
                     calendar.find(".title_month").text(commonlang[lang].month[i] + commonlang[lang].title[3]);
-                    displayMonthDiv();
+                    showMonthDiv();
                     return;
                 }
             }
@@ -593,34 +600,35 @@
                     curr_time_arr[4] = calendar_time.find("#minute").val();
                     curr_time_arr[5] = calendar_time.find("#second").val();
                 }
-                var showdate = dateFormat(curr_time_arr, defaults.format);
                 var usedate = dateFormat(curr_time_arr, defaults.useFormat);
-                that.val(showdate);
-                that.attr("dateval", usedate);
+                setDate(usedate);
                 calendar.hide();
             }
         }
+
         function hourSelected(event) {
             var srcElement = $(event.target);
             if (srcElement.hasClass("disabled")) return false;
             var txt = srcElement.text();
             if (txt >= 0 && txt <= 23) {
                 calendar_time.find("#hour").val(txt);
-                dispalyHoverDiv();
+                showHoverDiv();
+                showMinuteDiv();
             }
         }
         function minuteSelected(event) {
             var txt = $(event.target).text();
             if (txt >= 0 && txt <= 55) {
                 calendar_time.find("#minute").val(txt);
-                dispalyMinuteDiv();
+                showMinuteDiv();
+                showSecondDiv();
             }
         }
         function secondSelected(event) {
             var txt = $(event.target).text();
             if (txt >= 0 && txt <= 55) {
                 calendar_time.find("#second").val(txt);
-                dispalySecondDiv();
+                showSecondDiv();
             }
         }
         function nextYearDiv(direction) {
@@ -724,6 +732,8 @@
             if (weekday == 6 || weekday == 0) return true;
             return false;
         }
+
+
     }
     //Date方法扩展,方便客户端调用
     win.Date.prototype.addYear = function (year) {

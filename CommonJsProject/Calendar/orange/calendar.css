@@ -22,11 +22,20 @@
     background: url(calendar.png) no-repeat;
 }
 
+.calendar .currItem {
+    border-color: #eb8c00;
+}
+
+    .calendar .currItem:hover {
+        cursor: default;
+    }
+
 .date {
     background: url(date.png) no-repeat;
     background-position: right;
     padding-right: 0;
-    height: 13px;
+    padding: 5px 8px;
+    /*height: 13px;*/
 }
 
 .add_cal_len1 { /*第二种日期框高度*/
@@ -351,14 +360,6 @@
     .calendar_mainmonth_containter .disabled:hover {
         cursor: default;
         border-color: transparent;
-    }
-
-.calendar_mainmonth_containter .currMonth {
-    border-color: #eb8c00;
-}
-
-    .calendar_mainmonth_containter .currMonth:hover {
-        cursor: default;
     }
 
 .calendar_mainmonth_containter div:hover {
