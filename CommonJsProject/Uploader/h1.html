@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Scripts/jquery-1.7.1.js"></script>
+    <script src="Scripts/file-uploader.js"></script>
+    
+    <style>
+        .upload-file-list .uploaded .filename {
+            color: blue;
+            cursor: pointer;
+        }
+        .upload-file-list .uploaded .filedel,
+        .upload-file-list .error .filedel {
+             color: blue;
+            cursor: pointer;
+         }
+        .upload-file-list .error .filename {
+            color: red;
+        }
+        .upload-file-list .error .fileprogress {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <a class="uploaderControl">上传文件</a>
+
+    <!--<div class="file">
+        <span class="filename">Tulips.jpg</span>
+        <span class="filesize">(300K)</span>
+        <span class="fileprogress">20%</span>
+        <span class="filedel"><a href="#">删除</a></span>
+    </div>-->
+    <br />
+    <br />
+    <div id="txt" style="border: 1px solid red"></div>
+</body>
+</html>
+<script>
+    $(".uploaderControl").Uploader();
+
+    var str = $(".uploaderControl").siblings(":first");
+
+    var s = 0;
+</script>

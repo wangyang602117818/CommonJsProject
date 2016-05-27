@@ -1,0 +1,476 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+}
+
+.calendar { /*日期框容器*/
+    position: absolute;
+    z-index: 10000;
+    border: 1px solid #76ABD3;
+    width: 203px;
+    height: 201px; /*+22*/
+    /*height:226px;*/
+    left: 250px;
+    top: 200px;
+    font-size: 14px;
+    font-family: "宋体";
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.calendar_img {
+    background: url(calendar.png) no-repeat;
+}
+
+.date {
+    background: url(date.png) no-repeat;
+    background-position: right;
+    padding-right: 0;
+    
+}
+
+.add_cal_len1 { /*第二种日期框高度*/
+    height: 226px;
+}
+
+.add_cal_len2 {
+    height: 223px;
+}
+
+.add_cal_len3 {
+    height: 248px;
+}
+
+.calendar_title_containter { /*标题容器*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    height: 26px;
+    background-color: #EBF2FA;
+    overflow: hidden;
+    border-bottom: 1px solid #76ABD3;
+    /*padding-left:3px;*/
+    /*border: 1px solid blue;*/
+}
+
+    .calendar_title_containter span {
+        cursor: pointer;
+    }
+
+    .calendar_title_containter .disabled {
+        filter: alpha(opacity=20);
+        opacity: 0.2;
+        cursor: default;
+    }
+
+.calendar_last_year,
+.calendar_last_month,
+.calendar_title_date,
+.calendar_title_month,
+.calendar_next_year,
+.calendar_next_month { /*标题按钮*/
+    /*border: 1px solid red;*/
+    /*border-top:1px solid red;*/
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    overflow: hidden;
+    float: left;
+}
+
+.last_year, .last_month, .next_year, .next_month { 
+    display: inline-block;
+}
+
+.calendar_last_year, .calendar_next_year {
+    width: 30px;
+}
+
+.calendar_last_month, .calendar_next_month {
+    width: 23px;
+}
+
+.calendar_last_year .disabled:hover {
+    background-position: -72px 0;
+}
+
+.last_year {
+    /*border:1px solid red;*/
+    width: 25px;
+    height: 22px;
+    background-position: -72px 0;
+}
+
+    .last_year:hover {
+        background-position: -72px -20px;
+    }
+
+.last_month {
+    /*border:1px solid red;*/
+    width: 20px;
+    height: 22px;
+    background-position: -54px 0;
+}
+
+    .last_month:hover {
+        background-position: -54px -20px;
+    }
+
+.calendar_last_month .disabled:hover {
+    background-position: -54px 0;
+}
+
+.calendar_title_date { /*标题按钮*/
+    width: 90px;
+    padding: 0 3px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.calendar_next_month .disabled:hover {
+    background-position: -27px 0;
+}
+
+.next_month {
+    /*border: 1px solid red;*/
+    width: 20px;
+    height: 22px;
+    background-position: -27px 0;
+}
+
+    .next_month:hover {
+        background-position: -27px -20px;
+    }
+
+.calendar_next_year .disabled:hover {
+    background-position: -5px 0;
+}
+
+.next_year {
+    display: inline-block;
+    /*border:1px solid red;*/
+    width: 25px;
+    height: 22px;
+    background-position: -5px 0;
+}
+
+    .next_year:hover {
+        background-position: -5px -20px;
+    }
+
+.calendar_maindata_containter { /*主数据容器（周数据+天数据）*/
+    border: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 27px;
+    bottom: 0;
+    height: 173px; /*+25*/
+    background-color: #fff;
+    /*height:198px;*/
+    /*overflow:hidden;*/
+    /*border: 1px solid red;*/
+    /*display: none;*/
+}
+
+.add_main_date_len1 { /*第二种日期数据容器高度*/
+    height: 198px;
+}
+
+.calendar_week_container { /*周容器*/
+    /*position: absolute;
+    top:26px;*/
+    border-bottom: 1px solid #ccc;
+    /*border: 1px solid red;*/
+}
+
+.calendar_week { /*周*/
+    height: 25px;
+    line-height: 25px;
+    background-color: #fff;
+    padding: 0 2px;
+    /*overflow:hidden;*/
+}
+
+    .calendar_week div { /*单个周样式*/
+        float: left;
+        display: inline-block;
+        text-align: center;
+        width: 25px;
+        margin-left: 3px;
+        /*border-bottom: 1px solid red;*/
+    }
+
+.calendar_data_containter { /*数据容器*/
+    /*background-color:#ccc;*/
+    width: 198px;
+    position: absolute;
+    padding: 0 2px;
+    left: 0;
+    /*border: 1px solid red;*/
+}
+
+    .calendar_data_containter .day {
+        background-color: #ccc;
+        /*border-radius:12.5px;*/
+    }
+
+        .calendar_data_containter .day:hover {
+            background-color: #bbb;
+        }
+
+    .calendar_data_containter .weekend {
+        color: #666;
+    }
+
+        .calendar_data_containter .weekend:hover {
+            background-color: #ccc;
+        }
+
+    .calendar_data_containter .today {
+        background-color: #FF9999;
+    }
+
+        .calendar_data_containter .today:hover {
+            background-color: #FF6666;
+        }
+
+    .calendar_data_containter div, .calendar_data_containter span { /*单个日期*/
+        float: left;
+        display: inline-block;
+        text-align: center;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        margin-left: 3px;
+        margin-top: 3px;
+    }
+
+        .calendar_data_containter div:hover {
+            cursor: pointer;
+            background-color: #48B8E0;
+            /*border-radius:12.5px;*/
+        }
+
+    .calendar_data_containter .disabled {
+        color: #bbb;
+    }
+
+        .calendar_data_containter .disabled:hover {
+            cursor: default;
+            background-color: transparent;
+        }
+
+.calendar_mainyear_containter { /*年份容器*/
+    /*border: 1px solid red;*/
+    position: absolute;
+    background-color: #fff;
+    /*top:27px;*/
+    height: 173px;
+    top: -173px;
+    width: 199px;
+    padding: 0 2px;
+    /*overflow: hidden;*/
+    z-index: 1;
+    /*display:none;*/
+}
+
+.mainyear_height1 {
+    height: 198px; /*+22*/
+    top: -198px;
+}
+
+.calendar_mainyear_containter div {
+    /*border-top: 1px solid blue;*/
+    /*border-bottom: 1px solid blue;*/
+    display: inline-block;
+    float: left;
+    margin-left: 2px;
+    margin-top: 4px;
+    width: 45px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    border: 1px solid transparent;
+    /*border: 1px solid blue;*/
+}
+
+.calendar_mainyear_containter .disabled {
+    color: #bbb;
+}
+
+    .calendar_mainyear_containter .disabled:hover {
+        cursor: default;
+        border-color: transparent;
+    }
+
+.calendar_mainyear_containter div:hover {
+    cursor: pointer;
+    border-color: #48B8E0;
+}
+
+.calendar_mainmonth_containter { /*月份容器*/
+    /*border: 1px solid blue;*/
+    position: absolute;
+    background-color: #fff;
+    /*top: 27px;*/
+    padding: 0 2px;
+    height: 173px;
+    top: -173px;
+    width: 199px;
+    overflow: hidden;
+    z-index: 1;
+    /*display: none;*/
+}
+
+.mainmonth_height1 {
+    height: 198px; /*+22*/
+    top: -198px;
+}
+
+
+.calendar_mainmonth_containter div { /*单个月样式*/
+    display: inline-block;
+    float: left;
+    margin-left: 10px;
+    margin-top: 4px;
+    width: 50px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+.calendar_mainmonth_containter .disabled {
+    color: #bbb;
+}
+
+    .calendar_mainmonth_containter .disabled:hover {
+        cursor: default;
+        border-color: transparent;
+    }
+
+.calendar_mainmonth_containter .currMonth {
+    border-color: #48B8E0;
+}
+
+    .calendar_mainmonth_containter .currMonth:hover {
+        cursor: default;
+    }
+
+.calendar_mainmonth_containter div:hover {
+    cursor: pointer;
+    border-color: #48B8E0;
+}
+/*时间部分*/
+.calendar_time {
+    position: absolute;
+    border-top: 1px solid #76ABD3;
+    background-color: #EBF2FA;
+    width: 203px;
+    position: absolute;
+    bottom: 0px;
+    height: 22px;
+    line-height: 20px;
+    /*overflow:hidden;*/
+    z-index: 10000;
+    text-align: center;
+}
+
+    .calendar_time span {
+        display: inline-block;
+        width: 25px;
+    }
+
+    .calendar_time .time_txt {
+        width: 25px;
+        text-align: center;
+        border: 0px;
+        outline: none;
+        margin: 0;
+        padding: 0;
+        background-color: #EBF2FA;
+    }
+
+    .calendar_time span:hover {
+        cursor: pointer;
+    }
+
+.hover_containter { /*小时容器*/
+    position: absolute;
+    height: 173px;
+    padding: 0 1px;
+    width: 200px;
+    background-color: #fff;
+    bottom: -176px;
+    z-index: 1000;
+    /*display: none;*/
+    /*border: 1px solid red;*/
+}
+
+    .hover_containter div {
+        border: 1px solid transparent;
+        display: inline-block;
+        float: left;
+        margin-left: 6px;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        margin-top: 12px;
+    }
+
+        .hover_containter div:hover {
+            cursor: pointer;
+            border-color: #48B8E0;
+        }
+
+    .hover_containter .disabled {
+        color: #bbb;
+    }
+
+        .hover_containter .disabled:hover {
+            cursor: default;
+            border-color: transparent;
+        }
+
+.minute_containter {
+    position: absolute;
+    height: 173px;
+    width: 200px;
+    padding: 0 1px;
+    background-color: #fff;
+    bottom: -176px;
+    z-index: 1000;
+    /*border:1px solid red;*/
+    /*display: none;*/
+}
+
+    .minute_containter div {
+        border: 1px solid transparent;
+        display: inline-block;
+        float: left;
+        margin-left: 10px;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+        .minute_containter div:hover {
+            cursor: pointer;
+            border-color: #48B8E0;
+        }
+
+    .minute_containter .disabled {
+        color: #bbb;
+    }
+
+        .minute_containter .disabled:hover {
+            cursor: default;
+            border-color: transparent;
+        }

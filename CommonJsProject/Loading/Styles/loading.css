@@ -1,0 +1,194 @@
+﻿
+/*******************************公用效果******************************************/
+.loading-background {
+    position: absolute;
+    background-color: rgba(217,217,217,0.15);
+}
+
+.loading {
+    position: absolute;
+    display: inline-block;
+}
+/***************************方块加载效果********************************/
+.throbber-loader-con {
+    display: inline-block;
+}
+
+    .throbber-loader-con > div {
+        display: inline-block;
+        width: 0.4em;
+        height: 0.4em;
+        background: #dde2e7;
+		margin-left:5px;
+		margin-bottom:3px;
+    }
+
+.throbber-loader1 {
+    animation: throbber-loader 1000ms 100ms infinite;
+    -webkit-animation: throbber-loader 1000ms 100ms infinite;
+}
+
+.throbber-loader2 {
+    animation: throbber-loader 1000ms 300ms infinite;
+    -webkit-animation: throbber-loader 1000ms 300ms infinite;
+}
+
+.throbber-loader3 {
+    animation: throbber-loader 1000ms 500ms infinite;
+    -webkit-animation: throbber-loader 1000ms 500ms infinite;
+}
+
+.throbber-loader4 {
+    animation: throbber-loader 1000ms 900ms infinite;
+    -webkit-animation: throbber-loader 1000ms 900ms infinite;
+}
+
+.throbber-loader5 {
+    animation: throbber-loader 1000ms 700ms infinite;
+    -webkit-animation: throbber-loader 1000ms 700ms infinite;
+}
+
+@keyframes throbber-loader {
+    0% {
+       background-color: rgba(0,0,0,0.94);
+    }
+
+    50% {
+        background-color: rgba(221,226,231,0.75);
+    }
+
+    100% {
+        background-color: rgba(0,0,0,0.94);
+    }
+}
+
+@-webkit-keyframes throbber-loader {
+    0% {
+        background-color: rgba(0,0,0,0.94);
+    }
+
+    50% {
+        background-color: rgba(221,226,231,0.75);
+    }
+
+    100% {
+        background-color: rgba(0,0,0,0.94);
+    }
+}
+/***************************转动加载效果********************************/
+.rotate-loader-con {
+    position: relative;
+    display: inline-block;
+    width:15px;
+	height:19px;
+}
+
+    .rotate-loader-con > div {
+        width:2px;
+	    height:6px;
+        position: absolute;
+        background-color: rgba(221,226,231,0.75);
+        border-radius: 3px 3px 0 0;
+        animation: rotate-loader 700ms infinite normal;
+        -webkit-animation: rotate-loader 700ms infinite normal;
+    }
+
+    .rotate-loader-con > .rotate-loader1 {
+        left:0;
+	    top:7px;
+        transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg); /* IE 9 */
+        -webkit-transform: rotate(-90deg); /* Safari and Chrome */
+        animation-delay: 0;
+        -webkit-animation-delay: 0;
+    }
+
+    .rotate-loader-con > .rotate-loader2 {
+        left:2px;
+	top:2px;
+        transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg); /* IE 9 */
+        -webkit-transform: rotate(-45deg); /* Safari and Chrome */
+        animation-delay: 100ms;
+        -webkit-animation-delay: 100ms;
+    }
+
+    .rotate-loader-con > .rotate-loader3 {
+        left:6px;
+	top:1px;
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg); /* IE 9 */
+        -webkit-transform: rotate(0deg); /* Safari and Chrome */
+        animation-delay: 200ms;
+        -webkit-animation-delay: 200ms;
+    }
+
+    .rotate-loader-con > .rotate-loader4 {
+        right:2px;
+	top:2px;
+        transform: rotate(45deg);
+        -ms-transform: rotate(45deg); /* IE 9 */
+        -webkit-transform: rotate(45deg); /* Safari and Chrome */
+        animation-delay: 300ms;
+        -webkit-animation-delay: 300ms;
+    }
+
+    .rotate-loader-con > .rotate-loader5 {
+        right:0;
+	top:7px;
+        transform: rotate(90deg);
+        -ms-transform: rotate(90deg); /* IE 9 */
+        -webkit-transform: rotate(90deg); /* Safari and Chrome */
+        animation-delay: 400ms;
+        -webkit-animation-delay: 400ms;
+    }
+
+    .rotate-loader-con > .rotate-loader6 {
+        right:2px;
+	bottom:2px;
+        transform: rotate(135deg);
+        -ms-transform: rotate(135deg); /* IE 9 */
+        -webkit-transform: rotate(135deg); /* Safari and Chrome */
+        animation-delay: 500ms;
+        -webkit-animation-delay: 500ms;
+    }
+
+    .rotate-loader-con > .rotate-loader7 {
+        bottom:0;
+	left:6px;
+        transform: rotate(180deg);
+        -ms-transform: rotate(180deg); /* IE 9 */
+        -webkit-transform: rotate(180deg); /* Safari and Chrome */
+        animation-delay: 600ms;
+        -webkit-animation-delay: 600ms;
+    }
+
+    .rotate-loader-con > .rotate-loader8 {
+        left:2px;
+	bottom:2px;
+        transform: rotate(-135deg);
+        -ms-transform: rotate(-135deg); /* IE 9 */
+        -webkit-transform: rotate(-135deg); /* Safari and Chrome */
+        animation-delay: 700ms;
+        -webkit-animation-delay: 700ms;
+    }
+
+@keyframes rotate-loader {
+    0% {
+        background-color: rgba(0,0,0,0.94);
+    }
+
+    100% {
+        background-color: rgba(221,226,231,0.75);
+    }
+}
+
+@-webkit-keyframes rotate-loader {
+    0% {
+        background-color: rgba(0,0,0,0.94);
+    }
+
+    100% {
+        background-color: rgba(221,226,231,0.75);
+    }
+}
