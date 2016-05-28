@@ -30,11 +30,23 @@
         cursor: default;
     }
 
-.date {
+.datepicker {
     background: url(date.png) no-repeat;
     background-position: right;
     padding-right: 0;
+    padding: 5px 8px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    color: #333;
+    outline: none;
+    height: 13px;
 }
+
+    .datepicker:focus {
+        border-color: #51A7E8;
+        background-color: #fff;
+        box-shadow: 0 0 5px rgba(103, 166, 217, 0.5);
+    }
 
 .add_cal_len1 { /*第二种日期框高度*/
     height: 226px;
