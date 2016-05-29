@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="styles/file-uploader.css" rel="stylesheet" />
+    <script src="scripts/jquery-1.7.1.js"></script>
+    <script src="scripts/file-uploader.js"></script>
+
+
+</head>
+<body>
+
+    <a class="uploaderControl">上传文件</a>
+
+    <!--<div class="file">
+        <span class="filename">Tulips.jpg</span>
+        <span class="filesize">(300K)</span>
+        <span class="fileprogress">20%</span>
+        <span class="filedel"><a href="#">删除</a></span>
+    </div>-->
+    <br />
+  
+    <br />
+    <div id="txt" style="border: 1px solid red"></div>
+</body>
+</html>
+<script>
+    $(".uploaderControl").Uploader();
+
+
+    Array.prototype.removeItem = function (item) {
+        for (var i = 0; i < this.length; i++) {
+            if (this[i] == item) {
+                this.splice(i, 1);
+            }
+        }
+    }
+
+    var arr = ["a", "b", "c", "d","b","a"];
+
+    arr.removeItem("a");
+    
+</script>

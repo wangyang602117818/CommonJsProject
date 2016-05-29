@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -204,10 +205,11 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Uploader\Scripts\file-uploader.js" />
-    <Content Include="Uploader\h1.html" />
-    <Content Include="Uploader\Scripts\jquery-1.7.1.js" />
-    <Content Include="Uploader\Scripts\spark-md5.js" />
+    <Content Include="Uploader\scripts\file-uploader.js" />
+    <Content Include="Uploader\index.html" />
+    <Content Include="Uploader\scripts\jquery-1.7.1.js" />
+    <Content Include="Uploader\scripts\spark-md5.js" />
+    <Content Include="Uploader\styles\file-uploader.css" />
     <Content Include="Uploader\Uploader.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

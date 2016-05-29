@@ -1,0 +1,18 @@
+﻿.upload-file-list .uploaded .filename {
+    color: blue;
+    cursor: pointer;
+}
+
+.upload-file-list .uploaded .filedel,
+.upload-file-list .error .filedel {
+    color: blue;
+    cursor: pointer;
+}
+
+.upload-file-list .error .filename {
+    color: red;
+}
+
+.upload-file-list .error .fileprogress {
+    color: red;
+}
