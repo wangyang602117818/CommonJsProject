@@ -396,19 +396,19 @@
                 main_data_containter.append(dataEle);  //吧日期主面板加入父容器,这时连同以前一个数据面板，一共有2个数据面板
                 var containter = calendar.find(".calendar_data_containter");   //获取这2个数据面板
                 //2个面板一同移动
-                containter.filter(":[flag=1]").animate({ left: "-" + calendar_width }, dur, function () {
+                containter.filter("[flag=1]").animate({ left: "-" + calendar_width }, dur, function () {
                     $(this).remove();
                 });
-                containter.filter(":[flag=0]").animate({ left: 0 }, dur).attr("flag", "1");
+                containter.filter("[flag=0]").animate({ left: 0 }, dur).attr("flag", "1");
             }
             if (direction == "right") {
                 dataEle.css({ left: "-" + calendar_width }).attr("flag", "0");
                 main_data_containter.append(dataEle);
                 var containter = $(".calendar_data_containter");
-                containter.filter(":[flag=1]").animate({ left: calendar_width }, dur, function () {
+                containter.filter("[flag=1]").animate({ left: calendar_width }, dur, function () {
                     $(this).remove();
                 });
-                containter.filter(":[flag=0]").animate({ left: 0 }, dur).attr("flag", "1");
+                containter.filter("[flag=0]").animate({ left: 0 }, dur).attr("flag", "1");
             }
         }
         //格式化日期 time_arr=数组,往界面输出 格式化后的日期
@@ -638,20 +638,20 @@
                 calendar.append(con_year);
                 var year_containter = calendar.find(".calendar_mainyear_containter");  //获取2个year层
                 //去掉原来的
-                year_containter.filter(":[flag=1]").animate({ left: "-" + calendar.css("width") }, dur, function () {
+                year_containter.filter("[flag=1]").animate({ left: "-" + calendar.css("width") }, dur, function () {
                     $(this).unbind("click", yearSelected).remove();
                 });
                 //添加新的
-                year_containter.filter(":[flag=0]").animate({ left: 0 }, dur).attr("flag", "1");
+                year_containter.filter("[flag=0]").animate({ left: 0 }, dur).attr("flag", "1");
             } else {
                 start_disp_year -= 16;
                 con_year = createYearEle(start_disp_year).css({ "right": calendar.css("width"), "top": "26px" });
                 calendar.append(con_year);
                 var year_containter = calendar.find(".calendar_mainyear_containter");  //获取2个year层
-                year_containter.filter(":[flag=1]").animate({ right: "-" + calendar.css("width") }, dur, function () {
+                year_containter.filter("[flag=1]").animate({ right: "-" + calendar.css("width") }, dur, function () {
                     $(this).unbind("click", yearSelected).remove();
                 });
-                year_containter.filter(":[flag=0]").animate({ right: 0 }, dur).attr("flag", "1");
+                year_containter.filter("[flag=0]").animate({ right: 0 }, dur).attr("flag", "1");
             }
         }
         function isYearDisplay() {

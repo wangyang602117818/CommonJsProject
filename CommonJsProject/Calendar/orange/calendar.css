@@ -79,8 +79,8 @@
     }
 
     .calendar_title_containter .disabled {
-        filter: alpha(opacity=20);
-        opacity: 0.2;
+        filter: alpha(opacity=0);
+        opacity: 0;
         cursor: default;
     }
 
