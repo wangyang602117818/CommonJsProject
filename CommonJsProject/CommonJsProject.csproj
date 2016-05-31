@@ -176,6 +176,7 @@
     <Content Include="Calendar\default\calendar.png" />
     <Content Include="Calendar\default\date.png" />
     <Content Include="Calendar\index.html" />
+    <Content Include="Calendar\Scripts\jquery-1.10.2.js" />
     <Content Include="Calendar\Scripts\jquery-1.7.1.min.js" />
     <Content Include="Calendar\orange\calendar.css" />
     <Content Include="Calendar\orange\calendar.png" />
