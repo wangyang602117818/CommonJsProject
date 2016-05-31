@@ -8,11 +8,11 @@
     jQuery.fn.Calendar = function (options) {
         //默认配置
         var defaults = {
-            format: "dd Month yyyy",           //界面展示的格式 yyyy-MM-dd hh:mm:ss|yyyy/MM/dd hh:mm:ss|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
+            format: "dd Month yyyy",           //界面展示的格式 yyyy-MM-dd|yyyy/MM/dd|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
             start: "2000-01-01 00:00:00",      //start: new Date(),
             end: "2049-12-31 00:00:00",        //end: new Date().addYear(1)
             dateString: "",                    //字符串,默认显示的时间值,yyyy-MM-dd hh:mm:ss|yyyy/MM/dd hh:mm:ss
-            useFormat: "yyyy-MM-dd hh:mm:ss"  //与程序交互的时间格式
+            useFormat: "yyyy-MM-dd"  //与程序交互的时间格式
 
         };
         //全局参数
@@ -31,14 +31,15 @@
         },
         date = new Date(),
         curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()],  //文本框中的日期
-        text_time_arr,  //保存选中日期
+        text_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()],  //保存选中日期
         start_time_arr,
         end_time_arr,
         dur = 300,   //动画速度
         start_disp_year,  //year层的起始年
         has_time = false,     //
         that = this,
-        time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,   //仅仅用作验证文本框是否有时间
+        timeval_regex = /\d{1,2}:(\d{1,2})?(:\d{1,2})?/,  //验证文本框的日期值,是否有时间
+        time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,   //作验证日期格式是否有时间
         date_val_regex = /(\d{2,4})(?:[/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/; //提取文本框的日期,针对中国时间
         //全局对象
         var calendar,  //主日期框对象
@@ -52,15 +53,26 @@
 
         init(options);     //初始化用户配置
         that.bind("click", renderCalendar);
-        that.keypress(function (event) {
-            return false;
-        });  //禁用文本框输入
-        var dv = that.attr('dateval');
-        setDate(dv);
+        that.keypress(function (event) { return false; });  //禁用文本框输入
         return {
             setDate: setDate,
-            getDate: getDate
+            getDate: getDate,
+            getDateString: getDateString
         };
+        function init(options) {
+            defaults.dateString = that.attr('dateval');  //从后文本框取出date的值
+            options = options || {};
+            defaults.format = options.format || defaults.format;
+            defaults.start = options.start || defaults.start;
+            defaults.end = options.end || defaults.end;
+            defaults.dateString = options.dateString || defaults.dateString;
+            if (timeval_regex.test(defaults.dateString) || time_regex.test(defaults.format)) {
+                has_time = true;
+                defaults.useFormat = addTimeFormat(defaults.useFormat);
+                defaults.format = addTimeFormat(defaults.format);
+            }
+            setDate(defaults.dateString);  //显示用户设置的默认值
+        }
         function setDate(dateString) {
             if (dateString && dateString.trim()) {
                 date = inputDateConvert(dateString);
@@ -73,17 +85,34 @@
             }
         }
         function getDate() {
-            return that.attr("dateval");
+            if (!text_time_arr) return null;
+            if (has_time) {
+                return new Date(text_time_arr[0], text_time_arr[1], text_time_arr[2], text_time_arr[3], text_time_arr[4], text_time_arr[5]);
+            } else {
+                return new Date(text_time_arr[0], text_time_arr[1], text_time_arr[2], 0, 0, 0);
+            }
         }
-        function init(options) {
-            options = options || {};
-            defaults.format = options.format || defaults.format;
-            defaults.start = options.start || defaults.start;
-            defaults.end = options.end || defaults.end;
-            defaults.dateString = options.dateString || defaults.dateString;
-            if (time_regex.test(defaults.format)) has_time = true;  //标记是否有时间
-            if (!has_time) defaults.useFormat = defaults.useFormat.split(" ")[0];
-            setDate(defaults.dateString);  //显示用户设置的默认值
+        //给日期型的添加时间项
+        function addTimeFormat(format) {
+            if (!time_regex.test(format)) return format + " hh:mm:ss";
+            return format;
+        }
+        //获取日期字符串
+        function getDateString() {
+            if (!text_time_arr) return "";
+            return dateFormat(text_time_arr, defaults.useFormat);
+        }
+        ///获取ISO时间形式,已转化成utc时间
+        function getISODateString() {
+            if (!text_time_arr) return "";
+            var date = new Date(text_time_arr[0], text_time_arr[1], text_time_arr[2], text_time_arr[3], text_time_arr[4], text_time_arr[5]);
+            var isoDate = date.getUTCFullYear() + "-" + monthFormat(date.getUTCMonth() + 1, 2) + "-" + monthFormat(date.getUTCDate(), 2);
+            if (has_time) {
+                isoDate += "T" + date.getUTCHours() + ":" + date.getMinutes() + ":" + date.getUTCSeconds() + "Z";
+            } else {
+                isoDate += "T00:00:00Z";
+            }
+            return isoDate;
         }
         //显示日期层
         function renderCalendar() {
@@ -181,9 +210,18 @@
             con_hour.bind("click", hourSelected);
             con_minute.bind("click", minuteSelected);
             con_second.bind("click", secondSelected);
-            calendar_time.find("#hover_txt").bind("click", showHoverDiv);
-            calendar_time.find("#minute_txt").bind("click", showMinuteDiv);
-            calendar_time.find("#second_txt").bind("click", showSecondDiv);
+            calendar_time.find("#hover_txt").bind("click", showHoverDiv).bind("input propertychange", function () {
+                curr_time_arr[3] = $(this).find("input").val();
+                writeDate();
+            });
+            calendar_time.find("#minute_txt").bind("click", showMinuteDiv).bind("input propertychange", function () {
+                curr_time_arr[4] = $(this).find("input").val();
+                writeDate();
+            });
+            calendar_time.find("#second_txt").bind("click", showSecondDiv).bind("input propertychange", function () {
+                curr_time_arr[5] = $(this).find("input").val();
+                writeDate();
+            });;
         }
         //将文本框中的日期字符串转成日期对象,供默认选中用
         function inputDateConvert(str) {
@@ -567,6 +605,7 @@
                 }
                 calendar.find(".title_year").text(txt + commonlang[lang].title[0]);
                 showYearDiv();
+                writeDate();
             }
         }
         function monthSelected(event) {
@@ -585,6 +624,7 @@
                     }
                     calendar.find(".title_month").text(commonlang[lang].month[i] + commonlang[lang].title[3]);
                     showMonthDiv();
+                    writeDate();
                     return;
                 }
             }
@@ -595,41 +635,42 @@
             var day = srcElement.text();
             if (day <= 31 && day > 0) {
                 curr_time_arr[2] = day;
-                if (has_time) {
-                    curr_time_arr[3] = calendar_time.find("#hour").val();
-                    curr_time_arr[4] = calendar_time.find("#minute").val();
-                    curr_time_arr[5] = calendar_time.find("#second").val();
-                }
-                var usedate = dateFormat(curr_time_arr, defaults.useFormat);
-                setDate(usedate);
                 calendar.hide();
+                writeDate();
             }
         }
-
         function hourSelected(event) {
             var srcElement = $(event.target);
             if (srcElement.hasClass("disabled")) return false;
             var txt = srcElement.text();
             if (txt >= 0 && txt <= 23) {
                 calendar_time.find("#hour").val(txt);
+                curr_time_arr[3] = txt;
                 showHoverDiv();
-                showMinuteDiv();
+                writeDate();
             }
         }
         function minuteSelected(event) {
             var txt = $(event.target).text();
             if (txt >= 0 && txt <= 55) {
                 calendar_time.find("#minute").val(txt);
+                curr_time_arr[4] = txt;
                 showMinuteDiv();
-                showSecondDiv();
+                writeDate();
             }
         }
         function secondSelected(event) {
             var txt = $(event.target).text();
             if (txt >= 0 && txt <= 55) {
                 calendar_time.find("#second").val(txt);
+                curr_time_arr[5] = txt;
                 showSecondDiv();
+                writeDate();
             }
+        }
+        function writeDate() {
+            var usedate = dateFormat(curr_time_arr, defaults.useFormat);
+            setDate(usedate);
         }
         function nextYearDiv(direction) {
             if (direction == "left") {
@@ -732,8 +773,6 @@
             if (weekday == 6 || weekday == 0) return true;
             return false;
         }
-
-
     }
     //Date方法扩展,方便客户端调用
     win.Date.prototype.addYear = function (year) {
