@@ -31,7 +31,7 @@
         },
         date = new Date(),
         curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()],  //文本框中的日期
-        text_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()],  //保存选中日期
+        text_time_arr,  //保存选中日期
         start_time_arr,
         end_time_arr,
         dur = 300,   //动画速度
@@ -669,6 +669,9 @@
             }
         }
         function writeDate() {
+            if (!curr_time_arr) {
+                curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
+            }
             var usedate = dateFormat(curr_time_arr, defaults.useFormat);
             setDate(usedate);
         }
