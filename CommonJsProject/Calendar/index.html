@@ -15,13 +15,13 @@
             var txt1 = $("#txt1").Calendar();
             var txt2 = $("#txt2").Calendar({ format: "dd Month yyyy hh:mm:ss" });
             var txt3 = $("#txt3").Calendar({ dateString: "2014-01-01" });
-            var txt4 = $("#txt4").Calendar({ format: "dd Month yyyy hh:mm:ss" });
-            $("#btn4").click(function () {
-
-                alert(txt4.getDate());
-                //alert(txt4.getDateString());
+            var txt4 = $("#txt4").Calendar();
+            $("#btn4-1").click(function () {  //日期值
+                alert(txt4.getDateString());
             });
-
+            $("#btn4-2").click(function () {  //日期值
+                alert(txt4.getDate());   //日期对象
+            });
             $("#txt5").Calendar({ start: new Date().addMonth(1), end: new Date().addYear(1).addMonth(1).addDay(1) });
             $("#txt6").Calendar({ start: "2014-01-01 00:00:00", end: "2018-01-01 00:00:00" });
 
@@ -59,9 +59,12 @@
     <br />
     用法四:获取文本框的日期值 2种方式<br />
     &nbsp;方式一: var txt4 = $("#txt4").Calendar();<br />
-    &nbsp;alert(txt4.getDate()) //日期值 <br>
+    &nbsp;alert(txt4.getDateString()) //日期值 <br />
+    &nbsp;alert(txt4.getDate()) //日期对象 <br>
     &nbsp;方式二: $("#txt4").attr("dateval")  //日期值<br />
-    <input type="text" id="txt4" class="datepicker" /> <input type="button" value="get" id="btn4" />
+    <input type="text" id="txt4" class="datepicker" />
+    <input type="button" value="获取日期值" id="btn4-1" />
+    <input type="button" value="获取日期对象" id="btn4-2" />
     <br />
     <br />
     <br />

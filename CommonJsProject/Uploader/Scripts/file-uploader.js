@@ -208,19 +208,20 @@
             fileDom.attr("index", i + 1);
         }
     }
-    Array.prototype.removeItem = function (item) {
+    Array.prototype.removeItem = function(item) {
         for (var i = 0; i < this.length; i++) {
             if (this[i] == item) {
                 this.splice(i, 1);
             }
         }
-    }
-    Array.prototype.contains = function (fileObject) {
+    };
+    Array.prototype.contains = function(fileObject) {
         for (var i = 0; i < this.length; i++) {
             if (this[i].file.name === fileObject.file.name) {
                 return true;
             }
         }
-    }
+        return false;
+    };
 
 })(window, jQuery)
