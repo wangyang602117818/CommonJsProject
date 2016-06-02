@@ -1,4 +1,5 @@
-﻿.upload-file-list .uploaded .filename {
+﻿/*上传*/
+.upload-file-list .uploaded .filename {
     color: blue;
     cursor: pointer;
 }
@@ -15,4 +16,10 @@
 
 .upload-file-list .error .fileprogress {
     color: red;
+}
+
+.shake {
+    background-color: #FF5300;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
 }

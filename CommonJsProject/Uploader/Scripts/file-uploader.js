@@ -23,6 +23,13 @@
                     defaults: defaults
                 },
                 showFiles);
+        },
+        shake: function (times) {
+            var times = times || 2, i = 0, that = this;
+            var interval = setInterval(function () {
+                i % 2 === 0 ? that.addClass("shake") : that.removeClass("shake");
+                if (i++ >= times * 2) clearInterval(interval);
+            }, 200);
         }
     });
 
@@ -38,10 +45,9 @@
         });
         return fileInput;
     }
-    //在界面上显示已选择的文件
     function showFiles(event) {
         var fileInput = event.data.fileInput[0],
-            fileList = event.data.fileList, //内存中的文件列表
+            fileList = event.data.fileList, //内存中的文件列表,与界面上展示的文件列表一致
             uploadedFileIds = event.data.uploadedFileIds,  //上传完成后的文件id
             uploaderControl = event.data.uploaderControl,
             defaults = event.data.defaults,
@@ -59,17 +65,22 @@
             if (file.size > defaults.maxSize) {
                 fileObject.maxLength = true;
             }
-            if (!fileList.contains(fileObject)) {
+            var fileRes = fileList.findItem(fileObject);
+            if (!fileRes.exist) {
                 fileList.push(fileObject);
                 var uploadTip = fileObject.maxLength ?
                     "文件大小超过" + (defaults.maxSize / 1024 / 1024) + "M" :
                     "等待上传";
                 filesDiv += "<div class=\"file uploading\" index=\"" + fileList.length + "\">" +
-                                "<a class=\"filename\">" + file.name + "</a> " +
-                                "<span class=\"filesize\">(" + (file.size / 1024 / 1024).toFixed(2) + "M)</span> " +
-                                "<span class=\"fileprogress\">" + uploadTip + "</span> " +
-                                "<a class=\"filedel\">删除</a>" +
-                            "</div>";
+                    "<a class=\"filename\">" + file.name + "</a> " +
+                    "<span class=\"filesize\">(" + (file.size / 1024 / 1024).toFixed(2) + "M)</span> " +
+                    "<span class=\"fileprogress\">" + uploadTip + "</span> " +
+                    "<a class=\"filedel\">删除</a>" +
+                    "</div>";
+            } else {
+                var index = fileRes.index;
+                var fileItem = filesWarp.find(".file:eq(" + index + ")");
+                fileItem.shake(2);
             }
         }
         filesWarp.append(filesDiv);
@@ -87,7 +98,6 @@
         showFileList(fileList); //测试
 
     }
-
     function showFileList(fileList) {
         $("#txt").html("");
         for (var i = 0; i < fileList.length; i++) {
@@ -95,7 +105,6 @@
             $("#txt").append(fileObject.file.name + "." + fileObject.upload + "<br>");
         }
     }
-    //上传
     function fileUpload(fileList, uploadedFileIds, filesWarp, defaults) {
         for (var i = 0; i < fileList.length; i++) {
             //文件过大
@@ -133,12 +142,10 @@
             }
         }
     }
-    //上传进度
     function onProgress(loaded, total, fileDom) {
         var percent = (loaded / total * 100).toFixed() + "%";
         $(fileDom).children(".fileprogress").html(percent);
     }
-    //上传完成
     function onComplete(response, fileDom, uploadedFileIds) {
         var $file = $(fileDom);  //界面上的文件对象
         $file.removeClass("uploading");
@@ -152,12 +159,10 @@
             $file.find(".fileprogress").html(response.msg);
         }
     }
-    //上传失败
     function onError(fileDom) {
         var $file = $(fileDom);  //界面上的文件对象
         $file.removeClass("uploading").addClass("error").find(".fileprogress").html("文件上传失败,网络异常!");
     }
-    //删除文件
     function delFile(event) {
         var fileList = event.data.fileList,
             uploadedFileIds = event.data.uploadedFileIds,
@@ -208,20 +213,26 @@
             fileDom.attr("index", i + 1);
         }
     }
-    Array.prototype.removeItem = function(item) {
+    Array.prototype.removeItem = function (item) {
         for (var i = 0; i < this.length; i++) {
             if (this[i] == item) {
                 this.splice(i, 1);
             }
         }
     };
-    Array.prototype.contains = function(fileObject) {
+    Array.prototype.findItem = function (fileObject) {
         for (var i = 0; i < this.length; i++) {
             if (this[i].file.name === fileObject.file.name) {
-                return true;
+                return {
+                    exist: true,
+                    index: i
+                };
             }
         }
-        return false;
+        return {
+            exist: false,
+            index: null
+        };
     };
 
 })(window, jQuery)
