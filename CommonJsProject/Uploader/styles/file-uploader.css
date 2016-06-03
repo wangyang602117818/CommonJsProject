@@ -1,25 +1,52 @@
-﻿/*上传*/
-.upload-file-list .uploaded .filename {
+﻿/*正在上传的文件样式*/
+.upload-file-list .uploading .filename { /*文件名称*/
+}
+
+.upload-file-list .uploading .filesize { /*文件大小*/
+}
+
+.upload-file-list .uploading .fileprogress { /*进度样式*/
+}
+
+.upload-file-list .uploading .filedel { /*删除样式*/
+}
+/*上传完成后的文件样式*/
+.upload-file-list .uploaded .filename { 
     color: blue;
     cursor: pointer;
 }
 
-.upload-file-list .uploaded .filedel,
-.upload-file-list .error .filedel {
+.upload-file-list .uploaded .filesize { 
+}
+
+.upload-file-list .uploaded .fileprogress { 
+}
+
+.upload-file-list .uploaded .filedel {
+    color: blue;
+    cursor: pointer;
+}
+/*上传 失败|出错 后的文件样式*/
+.upload-file-list .error .filename { 
+    color: red;
+    cursor: pointer;
+}
+
+.upload-file-list .error .filesize { 
+}
+
+.upload-file-list .error .fileprogress { 
+    color: red;
+}
+
+.upload-file-list .error .filedel { 
     color: blue;
     cursor: pointer;
 }
 
-.upload-file-list .error .filename {
-    color: red;
-}
-
-.upload-file-list .error .fileprogress {
-    color: red;
-}
-
-.shake {
-    background-color: #FF5300;
-    opacity: 0.5;
-    filter: alpha(opacity=50);
+/*提示样式*/
+.upload-file-list .shake .filename {
+    background-color: red;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
 }

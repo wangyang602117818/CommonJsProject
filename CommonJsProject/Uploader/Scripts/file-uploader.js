@@ -10,9 +10,12 @@
             };
             options = options || {};
             defaults.maxSize = options.maxSize || defaults.maxSize;
+            defaults.url = options.url || defaults.url;
+            defaults.delurl = options.delurl || defaults.delurl;
+
             var fileList = [],     //保存文件列表
                 uploadedFileIds = [],  //上传完成后的文件id
-                uploaderControl = $(this),
+                uploaderControl = this,
                 fileInput = initFileInput(uploaderControl);
             fileInput.change(
                 {
@@ -25,10 +28,12 @@
                 showFiles);
         },
         shake: function (times) {
-            var times = times || 2, i = 0, that = this;
+            var times = (times || 2) * 2,  //默认2次
+                that = this;
             var interval = setInterval(function () {
-                i % 2 === 0 ? that.addClass("shake") : that.removeClass("shake");
-                if (i++ >= times * 2) clearInterval(interval);
+                that.toggleClass("shake");
+                times--;
+                if (times === 0) clearInterval(interval);
             }, 200);
         }
     });
@@ -52,8 +57,9 @@
             uploaderControl = event.data.uploaderControl,
             defaults = event.data.defaults,
             filesWarp = uploaderControl.siblings(".upload-file-list");
+
         if (filesWarp.length === 0) {
-            filesWarp = $("<div class=\"upload-file-list\" ><input type=\"hidden\" name=\"uploadedFiles\" id=\"uploadedFiles\"/></div>");
+            filesWarp = $("<div class=\"upload-file-list\" ><input type=\"hidden\" name=\"uploadedFiles\"/></div>");
             uploaderControl.after(filesWarp);
         }
         var filesDiv = "";
@@ -95,10 +101,10 @@
 
         fileUpload(fileList, uploadedFileIds, filesWarp, defaults);
         fileInput.value = "";  //清空界面上fileInput对象的值
-        showFileList(fileList); //测试
+        //showMemoryFileList(fileList); //测试
 
     }
-    function showFileList(fileList) {
+    function showMemoryFileList(fileList) {
         $("#txt").html("");
         for (var i = 0; i < fileList.length; i++) {
             var fileObject = fileList[i];
@@ -151,7 +157,7 @@
         $file.removeClass("uploading");
         if (response.code == 0) { //上传成功
             uploadedFileIds.push(response.result);
-            $file.parent().find("#uploadedFiles").val(uploadedFileIds);
+            $file.parent().find("input[name='uploadedFiles']").val(uploadedFileIds);
             $file.attr("fileid", response.result).addClass("uploaded");
             $file.find(".fileprogress").html("");
         } else {
@@ -182,7 +188,7 @@
                 if (JSON.parse(target.responseText).code == 0) {
                     uploadedFileIds.removeItem(fileid);
                     //修改文本框的值
-                    delFileDom.parent().find("#uploadedFiles").val(uploadedFileIds);
+                    delFileDom.parent().find("input[name='uploadedFiles']").val(uploadedFileIds);
                     //删除内存中文件对象
                     fileList.splice(delIndex - 1, 1);
                     //删除dom节点
@@ -192,7 +198,7 @@
                 } else {
                     delFileDom.find(".fileprogress").html(JSON.parse(target.responseText).msg);
                 }
-                showFileList(fileList); //测试
+                //showMemoryFileList(fileList); //测试
             }
             xhr.onerror = function (event) {
                 delFileDom.find(".fileprogress").html("删除失败,网络错误!");
@@ -203,7 +209,7 @@
             fileList.splice(delIndex - 1, 1); //删除内存中文件对象
             delFileDom.remove(); //删除dom节点
             reSortFileList(filesWarp); //重建dom节点的顺序
-            showFileList(fileList); //测试
+            //showMemoryFileList(fileList); //测试
         }
     }
     function reSortFileList(filesWarp) {
