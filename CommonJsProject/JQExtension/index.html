@@ -3,18 +3,38 @@
 <head>
     <title></title>
     <script src="jquery-1.10.2.min.js"></script>
-    <script src="JQExtensions.js"></script>
+    <script src="JQExtension.js"></script>
     <style>
-        .shake {
-            background-color: red;
-            opacity: 0.2
-        }
     </style>
 </head>
 <body>
     <div id="dv1" style="width: 100px; height: 100px; border:1px solid red"></div>
+    <div id="dv2" style="width: 100px; height: 100px; border:1px solid red"></div>
 </body>
 </html>
 <script>
-    $("#dv1").shake(2);
+    $.fn.Calendar = function (options) {
+
+    }
+
+    
+    function Person(name, age, job) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.friends = ["Shelby", "Court"];
+    }
+    Person.prototype = {
+        constructor: Person,
+        sayName: function () {
+            alert(this.name);
+        }
+    }
+    var person1 = new Person("Nicholas", 29, "Software Engineer");
+    var person2 = new Person("Greg", 27, "Doctor");
+    person1.friends.push("Van");
+    alert(person1.friends); //"Shelby,Count,Van"
+    alert(person2.friends); //"Shelby,Count"
+    alert(person1.friends === person2.friends); //false
+    alert(person1.sayName === person2.sayName); //true
 </script>
