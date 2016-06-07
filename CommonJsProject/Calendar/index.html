@@ -12,18 +12,21 @@
         //var data=new Date("2015-09-30 11:07:18");
         //alert(data.getMonth());
         $(function () {
-            var txt1 = $("#txt1").Calendar();
-            var txt2 = $("#txt2").Calendar({ format: "dd Month yyyy hh:mm:ss" });
-            var txt3 = $("#txt3").Calendar({ dateString: "2014-01-01" });
-            var txt4 = $("#txt4").Calendar();
-            $("#btn4-1").click(function () {  //日期值
+            $("#txt1").Calendar();
+            $("#txt2").Calendar({ format: "dd Month yyyy hh:mm:ss" });
+            //$("#txt3").Calendar({ dateString: "2014-01-01" });
+            $("#txt3").Calendar().setDate("2014-01-01");
+            $("#txt4").Calendar();
+            var txt4 = $("#txt5").Calendar();
+            $("#btn5-1").click(function () {  //日期值
                 alert(txt4.getDateString());
             });
-            $("#btn4-2").click(function () {  //日期值
+            $("#btn5-2").click(function () {  //日期值
                 alert(txt4.getDate());   //日期对象
             });
-            $("#txt5").Calendar({ start: new Date().addMonth(1), end: new Date().addYear(1).addMonth(1).addDay(1) });
-            $("#txt6").Calendar({ start: "2014-01-01 00:00:00", end: "2018-01-01 00:00:00" });
+
+            $("#txt001").Calendar({ start: new Date().addMonth(1), end: new Date().addYear(1).addMonth(1).addDay(1) });
+            $("#txt002").Calendar({ start: "2014-01-01 00:00:00", end: "2018-01-01 00:00:00" });
 
 
         });
@@ -41,7 +44,7 @@
 <body style="padding: 30px;">
     用法一:入门用法:  <br />
     &nbsp; $("#txt1").Calendar();<br />
-    <input type="text" id="txt1" class="datepicker" dateval="2015-01-06 12:00:00" value="" />
+    <input type="text" id="txt1" class="datepicker" value="" />
     <br />
     <br />
     用法二:设置要展示的时间格式,<br />
@@ -50,23 +53,30 @@
     <input type="text" id="txt2" class="datepicker" />
     <br />
     <br />
-    用法三:设置文本框的默认值 2种方式<br />
+    用法三:初始化文本框的默认值(使用javascript初始化)<br />
     &nbsp; 方式一: $("#txt3").Calendar({dateString:"2014-01-01"})<br />
     &nbsp; 方式二: $("#txt3").Calendar().setDate("2014-01-01");<br />
     &nbsp; 注: dateString只能有2种格式(yyyy-MM-dd hh:mm:ss | yyyy/MM/dd hh:mm:ss)<br />
     <input type="text" id="txt3" class="datepicker" />
     <br />
     <br />
-    用法四:获取文本框的日期值 2种方式<br />
-    &nbsp;方式一: var txt4 = $("#txt4").Calendar();<br />
-    &nbsp;alert(txt4.getDateString()) //日期值 <br />
-    &nbsp;alert(txt4.getDate()) //日期对象 <br>
-    &nbsp;方式二: $("#txt4").attr("dateval")  //日期值<br />
-    <input type="text" id="txt4" class="datepicker" />
-    <input type="button" value="获取日期值" id="btn4-1" />
-    <input type="button" value="获取日期对象" id="btn4-2" />
+    用法四:初始化文本框的默认值(设置表单元素的自定义属性(dateval))<br />
+    &nbsp; $("#txt4").Calendar(); <font color="#57A64A">//程序会自动查找input元素的dateval属性,并以相应的格式展现到界面</font><br />
+    <input type="text" id="txt4" class="datepicker" dateval="2015-01-06 12:00:00" />
+
     <br />
     <br />
+    用法五:获取文本框的日期值 2种方式<br />
+    &nbsp;方式一: var txt5 = $("#txt5").Calendar();<br />
+    &nbsp;alert(txt5.getDateString()) //日期值 <br />
+    &nbsp;alert(txt5.getDate()) //日期对象 <br>
+    &nbsp;方式二: $("#txt5").attr("dateval")  //日期值<br />
+    <input type="text" id="txt5" class="datepicker" />
+    <input type="button" value="获取日期值" id="btn5-1" />
+    <input type="button" value="获取日期对象" id="btn5-2" />
+    <br />
+    <br />
+    <font color="#57A64A">注意:真正与程序交互的日期值是元素的自定义属性 dateval 的值,而你看到的仅仅是value值</font>
     <br />
     <br />
     <font color="red">=======================特殊需求=====================================</font>
@@ -74,13 +84,13 @@
     技巧一：时间范围限制:<br />
     start:开始时间（今天）： new Date()<br />
     end:结束时间在（在今天的基础上加一年零一个月零一天）： new Date().addYear(1).addMonth(1).addDay(1)<br />
-    $("#txt3").Calendar({ start: new Date(), end: new Date().addYear(1).addMonth(1).addDay(1) }});<br />
-    <input type="text" id="txt5" />
+    $("#txt001").Calendar({ start: new Date(), end: new Date().addYear(1).addMonth(1).addDay(1) }});<br />
+    <input type="text" id="txt001" class="datepicker" />
     <br />
     <br />
     技巧二：绝对时间范围限制：<br />
-    $("#txt4").Calendar({ start: "2014-01-01 00:00:00", end: "2018-01-01 00:00:00" });<br />
-    <input type="text" id="txt6" />
+    $("#txt002").Calendar({ start: "2014-01-01 00:00:00", end: "2018-01-01 00:00:00" });<br />
+    <input type="text" id="txt002" class="datepicker" />
     <br />
     <br />
 </body>

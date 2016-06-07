@@ -171,6 +171,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Calendar01\jquery-1.10.2.min.js" />
     <Content Include="Calendar\Scripts\calendar.js" />
     <Content Include="Calendar\default\calendar.css" />
     <Content Include="Calendar\default\calendar.png" />
@@ -186,8 +187,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="JQExtension\calendar.js" />
-    <Content Include="JQExtension\index.html" />
+    <Content Include="Calendar01\calendar.css" />
+    <Content Include="Calendar01\calendar.js" />
+    <Content Include="Calendar01\calendar.png" />
+    <Content Include="Calendar01\date.png" />
+    <Content Include="Calendar01\index.html" />
     <Content Include="JQExtension\JQExtension.js" />
     <Content Include="JQExtension\jquery-1.10.2.min.js" />
     <Content Include="Loading\index.html" />
