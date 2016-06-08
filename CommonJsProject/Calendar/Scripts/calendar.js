@@ -11,7 +11,6 @@
             format: "dd Month yyyy",           //界面展示的格式 yyyy-MM-dd|yyyy/MM/dd|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
             start: "2000-01-01 00:00:00",      //start: new Date(),
             end: "2049-12-31 00:00:00",        //end: new Date().addYear(1)
-            dateString: "",                    //字符串,默认显示的时间值,yyyy-MM-dd hh:mm:ss|yyyy/MM/dd hh:mm:ss
             useFormat: "yyyy-MM-dd"  //与程序交互的时间格式
 
         };
@@ -36,7 +35,8 @@
         end_time_arr,
         dur = 300,   //动画速度
         start_disp_year,  //year层的起始年
-        has_time = false,     //
+        has_time = false,     //,
+        user_set_format = false,  //标记用户设置了格式没有
         that = this,
         timeval_regex = /\d{1,2}:(\d{1,2})?(:\d{1,2})?/,  //验证文本框的日期值,是否有时间
         time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,   //作验证日期格式是否有时间
@@ -60,29 +60,39 @@
             getDateString: getDateString
         };
         function init(options) {
-            defaults.dateString = that.attr('dateval');  //从后文本框取出date的值
             options = options || {};
-            defaults.format = options.format || defaults.format;
+            var attributeFormat = that.attr("format");
+            if (attributeFormat) defaults.format = attributeFormat;  //用户在标签上设置的值初始化一下
+            defaults.format = options.format || defaults.format;  //以用户设置的格式为准
+            if (options.format || attributeFormat) {
+                user_set_format = true;
+            }
+            if (time_regex.test(defaults.format)) {
+                has_time = true;
+                defaults.useFormat = addTimeFormat(defaults.useFormat); //发生一次时间格式同步
+            }
             defaults.start = options.start || defaults.start;
             defaults.end = options.end || defaults.end;
-            defaults.dateString = options.dateString || defaults.dateString;
-            if (timeval_regex.test(defaults.dateString) || time_regex.test(defaults.format)) {
+            defaults.dateString = that.attr('dateval');  //在标签中设置的值
+
+            setDate(defaults.dateString);  //显示用户设置的默认值
+        }
+        function setDate(dateString) {
+            if (!dateString) return;
+            date = inputDateConvert(dateString);
+            curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
+            text_time_arr = curr_time_arr.slice(0);
+
+            if (!user_set_format && timeval_regex.test(dateString)) {
                 has_time = true;
                 defaults.useFormat = addTimeFormat(defaults.useFormat);
                 defaults.format = addTimeFormat(defaults.format);
             }
-            setDate(defaults.dateString);  //显示用户设置的默认值
-        }
-        function setDate(dateString) {
-            if (dateString && dateString.trim()) {
-                date = inputDateConvert(dateString);
-                curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
-                text_time_arr = curr_time_arr.slice(0);
-                var showdate = dateFormat(curr_time_arr, defaults.format);
-                var usedate = dateFormat(curr_time_arr, defaults.useFormat);
-                that.val(showdate);
-                that.attr("dateval", usedate);
-            }
+            var showdate = dateFormat(curr_time_arr, defaults.format);
+            var usedate = dateFormat(curr_time_arr, defaults.useFormat);
+
+            that.val(showdate);
+            that.attr("dateval", usedate);
         }
         function getDate() {
             if (!text_time_arr) return null;
@@ -229,9 +239,9 @@
             var year = result[1] || new Date().getFullYear(),
                 month = result[2] > 0 ? (result[2] - 1) : new Date().getMonth(),
                 day = result[3] > 0 ? result[3] : new Date().getDate(),
-                hour = result[4] >= 0 ? result[4] : new Date().getHours(),
-                minute = result[5] >= 0 ? result[5] : new Date().getMinutes(),
-                second = result[6] >= 0 ? result[6] : new Date().getSeconds();
+                hour = result[4] >= 0 ? result[4] : 0,
+                minute = result[5] >= 0 ? result[5] : 0,
+                second = result[6] >= 0 ? result[6] : 0;
             //转换成日期对象,这样可以消去一些不必要的格式错误
             return new Date(year, month, day, hour, minute, second);
         }

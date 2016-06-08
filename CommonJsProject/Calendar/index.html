@@ -14,8 +14,7 @@
         $(function () {
             $("#txt1").Calendar();
             $("#txt2").Calendar({ format: "dd Month yyyy hh:mm:ss" });
-            //$("#txt3").Calendar({ dateString: "2014-01-01" });
-            $("#txt3").Calendar().setDate("2014-01-01");
+            $("#txt3").Calendar();
             $("#txt4").Calendar();
             var txt4 = $("#txt5").Calendar();
             $("#btn5-1").click(function () {  //日期值
@@ -48,25 +47,20 @@
     <br />
     <br />
     用法二:设置要展示的时间格式,<br />
-    &nbsp; $("#txt2").Calendar({format:"dd Month yyyy hh:mm:ss"})<br />
-    &nbsp; 可用的格式:(yyyy-MM-dd hh:mm:ss | yyyy/MM/dd hh:mm:ss | dd Month yyyy hh:mm:ss),默认的展示格式:dd Month yyyy,(如用法一)<br />
+    &nbsp;方式一: $("#txt2").Calendar({format:"dd Month yyyy hh:mm:ss"})<br />
+    &nbsp;方式二: 设置表单元素的 format 属性值(format="dd Month yyyy hh:mm:ss") <font color="#57A64A">//程序自动查找 format 属性值,并应用到代码</font><br />
+    &nbsp;可用的格式: (yyyy-MM-dd hh:mm:ss | yyyy/MM/dd hh:mm:ss | dd Month yyyy hh:mm:ss),默认的展示格式:dd Month yyyy,(如用法一)<br />
     <input type="text" id="txt2" class="datepicker" />
     <br />
     <br />
-    用法三:初始化文本框的默认值(使用javascript初始化)<br />
-    &nbsp; 方式一: $("#txt3").Calendar({dateString:"2014-01-01"})<br />
-    &nbsp; 方式二: $("#txt3").Calendar().setDate("2014-01-01");<br />
-    &nbsp; 注: dateString只能有2种格式(yyyy-MM-dd hh:mm:ss | yyyy/MM/dd hh:mm:ss)<br />
-    <input type="text" id="txt3" class="datepicker" />
+    用法三:初始化文本框的默认值<br />
+    &nbsp;方式一: $("#txt3").Calendar().setDate("2014-01-01"); <br />
+    &nbsp;方式二: 设置表单元素的 dateval 属性值(dateval="2015-01-06") <font color="#57A64A">//程序自动查找 dateval 属性值,并应用到代码</font><br />
+    &nbsp;可用的格式: (yyyy-MM-dd hh:mm:ss | yyyy/MM/dd hh:mm:ss)<br />
+    <input type="text" id="txt3" class="datepicker"/>
     <br />
     <br />
-    用法四:初始化文本框的默认值(设置表单元素的自定义属性(dateval))<br />
-    &nbsp; $("#txt4").Calendar(); <font color="#57A64A">//程序会自动查找input元素的dateval属性,并以相应的格式展现到界面</font><br />
-    <input type="text" id="txt4" class="datepicker" dateval="2015-01-06 12:00:00" />
-
-    <br />
-    <br />
-    用法五:获取文本框的日期值 2种方式<br />
+    用法四:获取文本框的日期值 2种方式<br />
     &nbsp;方式一: var txt5 = $("#txt5").Calendar();<br />
     &nbsp;alert(txt5.getDateString()) //日期值 <br />
     &nbsp;alert(txt5.getDate()) //日期对象 <br>
