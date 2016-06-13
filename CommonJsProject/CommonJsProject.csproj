@@ -172,16 +172,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Calendar01\jquery-1.10.2.min.js" />
-    <Content Include="Calendar\Scripts\calendar.js" />
-    <Content Include="Calendar\default\calendar.css" />
-    <Content Include="Calendar\default\calendar.png" />
-    <Content Include="Calendar\default\date.png" />
+    <Content Include="Calendar\Scripts\datepicker.js" />
+    <Content Include="Calendar\default\datepicker.css" />
+    <Content Include="Calendar\default\datepicker-icon.png" />
+    <Content Include="Calendar\default\datepicker.png" />
     <Content Include="Calendar\index.html" />
     <Content Include="Calendar\Scripts\jquery-1.10.2.js" />
     <Content Include="Calendar\Scripts\jquery-1.7.1.min.js" />
-    <Content Include="Calendar\orange\calendar.css" />
-    <Content Include="Calendar\orange\calendar.png" />
-    <Content Include="Calendar\orange\date.png" />
+    <Content Include="Calendar\orange\datepicker.css" />
+    <Content Include="Calendar\orange\datepicker-icon.png" />
+    <Content Include="Calendar\orange\datepicker.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

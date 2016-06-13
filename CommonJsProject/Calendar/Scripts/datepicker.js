@@ -1,11 +1,11 @@
-﻿/// <reference path="../Scripts/jquery-1.7.1.min.js" />
+﻿
 /***************************调用说明:***********************************
 /*
 开发者:wangyang
 调用方法请参考文档
 **********************************************************************/
 (function (win, jQuery) {
-    jQuery.fn.Calendar = function (options) {
+    jQuery.fn.DatePicker = function (options) {
         //默认配置
         var defaults = {
             format: "dd Month yyyy",           //界面展示的格式 yyyy-MM-dd|yyyy/MM/dd|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
@@ -74,7 +74,7 @@
             defaults.start = options.start || defaults.start;
             defaults.end = options.end || defaults.end;
             defaults.dateString = that.attr('dateval');  //在标签中设置的值
-
+            $(document).bind("click", function () { $("#calendar").hide() });
             setDate(defaults.dateString);  //显示用户设置的默认值
         }
         function setDate(dateString) {
@@ -143,7 +143,6 @@
                 text_time_arr = curr_time_arr.slice(0);
             }
             beginCalendar();
-            $(document).bind("click", function () { $("#calendar").hide() });
             return false;
         }
         //创建日期主面板

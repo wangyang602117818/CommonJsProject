@@ -1,16 +1,20 @@
-﻿(function (window, document, $) {
+﻿
+/***************************调用说明:***********************************
+/*
+开发者:wangyang
+调用方法请参考文档
+**********************************************************************/
+(function (window, document, $) {
     $.fn.Calendar = function (options) {
         var calendar = new Calendar(this, options);
-        calendar.init();
         return calendar;
     }
     function Calendar(ele, options) {
-        this.options = options;
+        this.options = options||{};
         this.defaults = {
             format: "dd Month yyyy", //界面展示的格式 yyyy-MM-dd|yyyy/MM/dd|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
             start: "2000-01-01 00:00:00", //start: new Date(),
             end: "2049-12-31 00:00:00", //end: new Date().addYear(1)
-            dateString: "", //字符串,默认显示的时间值,yyyy-MM-dd hh:mm:ss|yyyy/MM/dd hh:mm:ss
             useFormat: "yyyy-MM-dd" //与程序交互的时间格式
         };
         this.lang = "en-us";  //界面语言 en-us|zh-cn
@@ -34,6 +38,7 @@
         this.dur = 300;  //动画速度
         this.start_disp_year = null;  //year层的起始年
         this.has_time = false;     //
+        this.user_set_format = false;
         this.ele = ele;
         this.timeval_regex = /\d{1,2}:(\d{1,2})?(:\d{1,2})?/;  //验证文本框的日期值,是否有时间
         this.time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/;   //作验证日期格式是否有时间
@@ -47,39 +52,45 @@
         this.con_hour = null;
         this.con_minute = null;
         this.con_second = null;
+        this.init();
     }
 
     Calendar.prototype = {
         constructor: Calendar,
         init: function () {
-            this.defaults.dateString = this.ele.attr('dateval'); //从文本框取出date的值
-            this.options = this.options || {};
-            this.defaults.format = this.options.format || this.defaults.format;
+            var attributeFormat = this.ele.attr("format");
+            if (attributeFormat) this.defaults.format = attributeFormat;  //用户在标签上设置的值初始化一下
+            this.defaults.format = this.options.format || this.defaults.format;  //以用户设置的格式为准
+            if (this.options.format || attributeFormat) {
+                this.user_set_format = true;
+            }
+            if (this.time_regex.test(this.defaults.format)) {
+                this.has_time = true;
+                this.defaults.useFormat = this.addTimeFormat(this.defaults.useFormat); //发生一次时间格式同步
+            }
             this.defaults.start = this.options.start || this.defaults.start;
             this.defaults.end = this.options.end || this.defaults.end;
-            this.defaults.dateString = this.options.dateString || this.defaults.dateString;
-            if (this.timeval_regex.test(this.defaults.dateString) || this.time_regex.test(this.defaults.format)) {
+            this.defaults.dateString = this.ele.attr('dateval');  //在标签中设置的值
+            $(document).bind("click", function () { $("#calendar").hide() });
+            this.setDate(this.defaults.dateString);  //显示用户设置的默认值
+        },
+
+        setDate: function (dateString) {
+            if (!dateString) return;
+            this.date = this.inputDateConvert(dateString);
+            this.curr_time_arr = [this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), this.date.getHours(), this.date.getMinutes(), this.date.getSeconds()];
+            this.text_time_arr = this.curr_time_arr.slice(0);
+
+            if (!this.user_set_format && this.timeval_regex.test(dateString)) {
                 this.has_time = true;
                 this.defaults.useFormat = this.addTimeFormat(this.defaults.useFormat);
                 this.defaults.format = this.addTimeFormat(this.defaults.format);
             }
-            this.ele.click(jQuery.proxy(this.renderCalendar, this));
-            this.ele.keypress(function (event) { return false; });  //禁用文本框输入
-            $(document).click(function () { $("#calendar").hide() });
-            this.setDate(this.defaults.dateString); //显示用户设置的默认值
+            var showdate = this.dateFormat(this.curr_time_arr, this.defaults.format);
+            var usedate = this.dateFormat(this.curr_time_arr, this.defaults.useFormat);
 
-        },
-
-        setDate: function (dateString) {
-            if (dateString && dateString.trim()) {
-                this.date = this.inputDateConvert(dateString);
-                this.curr_time_arr = [this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), this.date.getHours(), this.date.getMinutes(), this.date.getSeconds()];
-                this.text_time_arr = this.curr_time_arr.slice(0);
-                var showdate = this.dateFormat(this.curr_time_arr, this.defaults.format);
-                var usedate = this.dateFormat(this.curr_time_arr, this.defaults.useFormat);
-                this.ele.val(showdate);
-                this.ele.attr("dateval", usedate);
-            }
+            this.ele.val(showdate);
+            this.ele.attr("dateval", usedate);
         },
         getDate: function () {
             if (!this.text_time_arr) return null;
@@ -226,9 +237,9 @@
             var year = result[1] || new Date().getFullYear(),
                 month = result[2] > 0 ? (result[2] - 1) : new Date().getMonth(),
                 day = result[3] > 0 ? result[3] : new Date().getDate(),
-                hour = result[4] >= 0 ? result[4] : new Date().getHours(),
-                minute = result[5] >= 0 ? result[5] : new Date().getMinutes(),
-                second = result[6] >= 0 ? result[6] : new Date().getSeconds();
+                hour = result[4] >= 0 ? result[4] : 0,
+                minute = result[5] >= 0 ? result[5] : 0,
+                second = result[6] >= 0 ? result[6] : 0;
             //转换成日期对象,这样可以消去一些不必要的格式错误
             return new Date(year, month, day, hour, minute, second);
         },
