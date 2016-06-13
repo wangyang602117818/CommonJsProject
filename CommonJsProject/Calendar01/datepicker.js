@@ -71,6 +71,8 @@
             this.defaults.start = this.options.start || this.defaults.start;
             this.defaults.end = this.options.end || this.defaults.end;
             this.defaults.dateString = this.ele.attr('dateval');  //在标签中设置的值
+            this.ele.click(jQuery.proxy(this.renderCalendar, this));
+            this.ele.keypress(function (event) { return false; });  //禁用文本框输入
             $(document).bind("click", function () { $("#calendar").hide() });
             this.setDate(this.defaults.dateString);  //显示用户设置的默认值
         },

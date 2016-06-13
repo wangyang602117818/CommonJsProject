@@ -187,10 +187,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Calendar01\calendar.css" />
-    <Content Include="Calendar01\calendar.js" />
-    <Content Include="Calendar01\calendar.png" />
-    <Content Include="Calendar01\date.png" />
+    <Content Include="Calendar01\datepicker.css" />
+    <Content Include="Calendar01\datepicker.js" />
+    <Content Include="Calendar01\datepicker-icon.png" />
+    <Content Include="Calendar01\datepicker.png" />
     <Content Include="Calendar01\index.html" />
     <Content Include="JQExtension\JQExtension.js" />
     <Content Include="JQExtension\jquery-1.10.2.min.js" />
