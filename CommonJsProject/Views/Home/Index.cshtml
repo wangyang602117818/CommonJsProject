@@ -16,51 +16,24 @@
     </style>
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script>
-        var arr = [1, 2, 3, 4];
-        for (var i = 0; i < arr.length; i++) {
 
-        }
     </script>
 </head>
 <body>
-    @*<div id="calendar" class="calendar">
-        <div id="calendar_title_containter" class="calendar_title_containter">{data.title}</div>
-        <div id="calendar_title_containter" class="calendar_title_containter">
-            <div>{data.data}</div>
-            {{each data.msg}}
-            <div>{item.index},{item.msg1},{item.msg2}</div>
-            {{/each}}
-        </div>
-        <div id="calendar_title_containter" class="calendar_title_containter">
-            <div>{data.msg.msg1}</div>
-        </div>
-    </div>*@
+    
 </body>
 </html>
 <script>
-    var str = "<div id=\"calendar\" class=\"calendar\"> " +
-        " <div id=\"calendar_title_containter\" class=\"calendar_title_containter\">{data.title}" +
-        " </div>" +
-        " <div id=\"calendar_title_containter\" class=\"calendar_title_containter\">" +
-        "<div>{data.data}</div>" +
-        "{{each data.msg}}" +
-            "<div>{item.index},{item.msg1},{item.msg2}</div>" +
-        "{{/each}}" +
-        "</div>" +
-        "<div id=\"calendar_title_containter\" class=\"calendar_title_containter\">" +
-        "<div>{data.msg[0].msg1}</div>" +
-        "</div>" +
-        "</div>";
-
-
-    var data = { title: "mytitle", data: "mydata", msg: [{ msg1: "111", msg2: "222" }, { msg1: "m111", msg2: "m222" }] };
-
-    var res = parseHTML(str, data);
-    
-
-    $("body").append(parseHTML(str, data));
-    var s = 0;
-
+    var data = {
+        title: "mytitle",
+        data: { exist: "true", data: "data000" },
+        msg: [{ msg1: "111", msg2: "222" }, { msg1: "m111", msg2: "m222" }]
+    };
+    $.get('http://localhost:14121/template.html', function(template) {
+        var res = parseHTML(template, data);
+        $("body").append(res);
+        var s = 0;
+    });
 
     function parseHTML(html, data) {
         if (data) {
@@ -71,9 +44,13 @@
         return tmp.childNodes[0];//只允许有一个根节点
     }
     function parseTemplate(html, data) {
-        //each 块语法
+        //each 语法块
         html = html.replace(/{{each\s+(.+?)}}(.+?){{\/each}}/, function (g1, g2, g3) {
             return parseEachSyntax(eval(g2), g3);
+        });
+        //if 语法块
+        html = html.replace(/{{if\s+(.+?)}}(.+?){{else}}?(.+?){{\/if}}/, function(g1, g2, g3, g4) {
+            var s = 0;
         });
         //输出语法
         html = html.replace(/{(.+?)}/g, function (g1, g2) {
@@ -83,7 +60,7 @@
     }
     function parseEachSyntax(g2, g3) {
         var result = "";
-        g3 = g3.replace(/{(item\.)(.+?)}/g,"{data.$2}");
+        g3 = g3.replace(/{(item\.)(.+?)}/g, "{data.$2}");
         for (var i = 0; i < g2.length; i++) {
             var item = g2[i];
             item.index = i;

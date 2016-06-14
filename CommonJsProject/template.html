@@ -1,0 +1,16 @@
+﻿<div id="calendar" class="calendar">
+    <div id="calendar_title_containter" class="calendar_title_containter">{data.title} </div>
+    <div id="calendar_title_containter" class="calendar_title_containter">
+        {{if data.data.exist}}
+        <div>{data.data.exist}+":"+{data.data.data}</div>
+        {{else}}
+        <div>":"</div>
+        {{/if}}
+        {{each data.msg}}
+        <div>{item.index},{item.msg1},{item.msg2}</div>
+        {{/each}}
+    </div>
+    <div id="calendar_title_containter" class="calendar_title_containter">
+        <div>{data.msg[0].msg1}</div>
+    </div>
+</div>

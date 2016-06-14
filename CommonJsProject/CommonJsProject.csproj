@@ -171,10 +171,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Calendar01\datepicker-icon.png" />
-    <Content Include="Calendar01\datepicker.css" />
-    <Content Include="Calendar01\datepicker.png" />
-    <Content Include="Calendar01\jquery-1.10.2.min.js" />
+    <Content Include="datepicker\datepicker-icon.png" />
+    <Content Include="datepicker\datepicker.css" />
+    <Content Include="datepicker\datepicker.png" />
+    <Content Include="datepicker\jquery-1.10.2.min.js" />
     <Content Include="Calendar\Scripts\datepicker.js" />
     <Content Include="Calendar\default\datepicker.css" />
     <Content Include="Calendar\default\datepicker-icon.png" />
@@ -187,10 +187,10 @@
     <Content Include="Calendar\orange\datepicker.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="datepicker\index.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Calendar01\datepicker.js" />
     <Content Include="Calendar01\index.html" />
     <Content Include="JQExtension\JQExtension.js" />
     <Content Include="JQExtension\jquery-1.10.2.min.js" />
@@ -212,6 +212,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="template.html" />
     <Content Include="Uploader\scripts\file-uploader.js" />
     <Content Include="Uploader\index.html" />
     <Content Include="Uploader\scripts\jquery-1.7.1.js" />
