@@ -171,6 +171,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Calendar01\datepicker-icon.png" />
+    <Content Include="Calendar01\datepicker.css" />
+    <Content Include="Calendar01\datepicker.png" />
     <Content Include="Calendar01\jquery-1.10.2.min.js" />
     <Content Include="Calendar\Scripts\datepicker.js" />
     <Content Include="Calendar\default\datepicker.css" />
@@ -187,10 +190,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Calendar01\datepicker.css" />
     <Content Include="Calendar01\datepicker.js" />
-    <Content Include="Calendar01\datepicker-icon.png" />
-    <Content Include="Calendar01\datepicker.png" />
     <Content Include="Calendar01\index.html" />
     <Content Include="JQExtension\JQExtension.js" />
     <Content Include="JQExtension\jquery-1.10.2.min.js" />
@@ -226,14 +226,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\File\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
