@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        div {
+            padding: 10px;
+            border: 1px solid red;
+        }
+    </style>
+    <script src="jquery-1.10.2.js"></script>
+    <script>
+        if (window) {
+
+        } else {
+
+        }
+    </script>
+</head>
+<body>
+    template
+</body>
+</html>
+<script>
+    var data = {
+        title: "mytitle",
+        data: { exist: "true", data: "data000" },
+        msg: [{ msg1: "111", msg2: "222" }, { msg1: "m111", msg2: "m222" }]
+    };
+    $.get('http://localhost:14121/template/template.html', function (template) {
+        var res = parseHTML(template, data);
+        $("body").append(res);
+        var s = 0;
+    });
+
+    function parseHTML(html, model) {
+        if (data) {
+            html = parseTemplate(html, data);
+        }
+        var tmp = document.createElement("div");
+        tmp.innerHTML = html;
+        return tmp.childNodes[0];//只允许有一个根节点
+    }
+    function parseTemplate(html, model) {
+        html = html.replace(/[\r\n]/g, "").replace(/\"/g, "\\\"");
+        var exportTag = "@((?!if|for|switch)[\\w.\\[\\]]+)",     //输出语法
+            blockTag = "@((if|for|switch).+?[\\s\\r\\t]*.+?{)",  //块级语法
+            elseTag = "(}[\\s\\r\\t]*else[\\s\\r\\t]*{)",        //else块
+            jsTag = /^\{|\}|else|@if|@for|else|@switch|case|break/,
+            regex = new RegExp(exportTag + "|" + blockTag + "|" + elseTag + "|(})", "g"),
+            code = "var p=[];",
+            cursor = 0;
+        var match = regex.exec(html);
+        while (match) {
+            console.log(match);
+            var h = html.slice(cursor, match.index);
+            
+            code += "p.push('"+ h + "');";  //字符串部分
+            var s = match[1] || match[2] || match[3] || match[4] || match[5];
+
+            //code += jsTag.test(match[0]) ? s + '\n' : "p.push(" + s + ");\n";
+            
+            
+            if (jsTag.test(match[0])) {
+               
+                code += s + "";
+            } else {
+               
+                code += "p.push(" + s + ");";
+            }
+            
+
+            cursor = match.index + match[0].length;
+            match = regex.exec(html);
+        }
+        code += "p.push(@'\"" + html.slice(cursor) + "@\"');";
+
+
+        var fn = new Function("model", code);
+        alert(fn);
+        return fn(model);
+    }
+
+   
+</script>

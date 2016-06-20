@@ -10,63 +10,77 @@
     <title>Index</title>
     <style>
         div {
-            padding: 10px;
             border: 1px solid red;
+            padding: 5px;
         }
     </style>
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script>
+        var h = "var p=[];p.push('<div id=\"calendar\" class=\"calendar\">    <div id=\"calendar_title_containter\" class=\"calendar_title_containter\">');p.push(model.title);p.push('</div>    <div id=\"calendar_title_containter\" class=\"calendar_title_containter\">        ');if(model.data.exist == \"true\")        {p.push('        <div>');p.push(model.data.exist);p.push('+\":\" + ');p.push(model.data.data);p.push('</div>        ');}        else        {p.push('        <div>0:0</div>        ');}p.push('        ');for(var i = 0; i < model.msg.length;i++){p.push('        <div>');p.push(i);p.push(',');p.push(model.msg[i].msg1);p.push(',');p.push(model.msg[i].msg2);p.push('</div>        ');}p.push('    </div>    <div id=\"calendar_title_containter\" class=\"calendar_title_containter\">        <div>');p.push(model.msg[0].msg1);p.push('"</div>    </div></div>"');";
 
+        
+    var fn = new Function(h);
+
+    var _s = 0;
+
+    
+           
     </script>
 </head>
 <body>
-    
+
+
 </body>
 </html>
 <script>
-    var data = {
-        title: "mytitle",
-        data: { exist: "true", data: "data000" },
-        msg: [{ msg1: "111", msg2: "222" }, { msg1: "m111", msg2: "m222" }]
+
+    (function () {
+        var cache = {};
+
+    this.tmpl = function tmpl(str, data) {
+        // Figure out if we're getting a template, or if we need to
+        // load the template - and be sure to cache the result.
+        var fn = !/\W/.test(str) ?
+            cache[str] = cache[str] ||
+            tmpl(document.getElementById(str).innerHTML) :
+
+            // Generate a reusable function that will serve as a template
+            // generator (and which will be cached).
+            new Function("obj",
+                "var p=[],print=function(){p.push.apply(p,arguments);};" +
+
+                // Introduce the data as local variables using with(){}
+                "with(obj){p.push('" +
+                // Convert the template into pure JavaScript
+                str
+                .replace(/[\r\t\n]/g, " ")
+                .split("<%").join("\t")
+                .replace(/((^|%>)[^\t]*)'/g, "$1\r")
+                .replace(/\t=(.*?)%>/g, "',$1,'")
+                .split("\t").join("');")
+                .split("%>").join("p.push('")
+                .split("\r").join("\\'")
+                + "');}" + "return p.join('');");
+
+        // Provide some basic currying to the user
+        return data ? fn(data) : fn;
     };
-    $.get('http://localhost:14121/template.html', function(template) {
-        var res = parseHTML(template, data);
-        $("body").append(res);
-        var s = 0;
-    });
+    })();
 
-    function parseHTML(html, data) {
-        if (data) {
-            html = parseTemplate(html, data);
+    function M1(obj,str) {
+        var p = [],
+            print = function() { p.push.apply(p, arguments); };
+        with (obj) {
+            p.push(str
+                .replace(/[\r\t\n]/g, " ")
+                .split("<%").join("\t")
+                .replace(/((^|%>)[^\t]*)'/g, "$1\r")
+                .replace(/\t=(.*?)%>/g, "',$1,'")
+                .split("\t").join("');")
+                .split("%>").join("p.push('")
+                .split("\r").join("\\'"));
         }
-        var tmp = document.createElement("div");
-        tmp.innerHTML = html;
-        return tmp.childNodes[0];//只允许有一个根节点
+        return p.join('');
     }
-    function parseTemplate(html, data) {
-        //each 语法块
-        html = html.replace(/{{each\s+(.+?)}}(.+?){{\/each}}/, function (g1, g2, g3) {
-            return parseEachSyntax(eval(g2), g3);
-        });
-        //if 语法块
-        html = html.replace(/{{if\s+(.+?)}}(.+?){{else}}?(.+?){{\/if}}/, function(g1, g2, g3, g4) {
-            var s = 0;
-        });
-        //输出语法
-        html = html.replace(/{(.+?)}/g, function (g1, g2) {
-            return eval(g2);
-        });
-        return html;
-    }
-    function parseEachSyntax(g2, g3) {
-        var result = "";
-        g3 = g3.replace(/{(item\.)(.+?)}/g, "{data.$2}");
-        for (var i = 0; i < g2.length; i++) {
-            var item = g2[i];
-            item.index = i;
-            result += parseTemplate(g3, item);
-        }
-        return result;
-    }
-
 </script>
+

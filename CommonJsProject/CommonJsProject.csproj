@@ -191,7 +191,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Calendar01\index.html" />
+    <Content Include="JavaScript1.js" />
     <Content Include="JQExtension\JQExtension.js" />
     <Content Include="JQExtension\jquery-1.10.2.min.js" />
     <Content Include="Loading\index.html" />
@@ -212,7 +212,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="template.html" />
+    <Content Include="template\template.html" />
+    <Content Include="template\index.html" />
+    <Content Include="template\jquery-1.10.2.js" />
     <Content Include="Uploader\scripts\file-uploader.js" />
     <Content Include="Uploader\index.html" />
     <Content Include="Uploader\scripts\jquery-1.7.1.js" />
