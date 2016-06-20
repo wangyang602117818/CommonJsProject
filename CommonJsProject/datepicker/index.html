@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="datepicker.css" rel="stylesheet" />
+    <script src="jquery-1.10.2.min.js"></script>
+
+</head>
+<body>
+    <div id="calendar" class="calendar add_cal_len2" style="top: 206px; left: 30px;">
+        <div id="calendar_title_containter" class="calendar_title_containter">
+            <div class="calendar_last_year"><span class="last_year calendar_img" title="Last Year"></span></div>
+            <div class="calendar_last_month"><span class="last_month calendar_img" title="Last Month"></span></div>
+            <div class="calendar_title_date"><span class="title_month">Jun</span> <span class="title_year">2016</span></div>
+            <div class="calendar_next_month"><span class="next_month calendar_img" title="Next Month"></span></div>
+            <div class="calendar_next_year"><span class="next_year calendar_img" title="Next Year"></span></div>
+        </div>
+        <div id="calendar_maindata_containter" class="calendar_maindata_containter">
+            <div id="calendar_week_container" class="calendar_week_container">
+                <div id="calendar_week" class="calendar_week">
+                    <div>Sa</div>
+                    <div>Mo</div>
+                    <div>Tu</div>
+                    <div>We</div>
+                    <div>Th</div>
+                    <div>Fr</div>
+                    <div>Su</div>
+                </div>
+            </div>
+            <div class="calendar_data_containter" flag="1">
+                <span></span><span></span><span></span>
+                <div class="">1</div>
+                <div class="">2</div>
+                <div class="">3</div>
+                <div class="weekend ">4</div>
+                <div class="weekend ">5</div>
+                <div class="">6</div>
+                <div class="">7</div>
+                <div class="">8</div>
+                <div class="">9</div>
+                <div class="">10</div>
+                <div class="weekend ">11</div>
+                <div class="weekend ">12</div>
+                <div class="">13</div>
+                <div class="day ">14</div>
+                <div class="">15</div>
+                <div class="">16</div>
+                <div class="">17</div>
+                <div class="weekend ">18</div>
+                <div class="weekend ">19</div>
+                <div class="">20</div>
+                <div class="">21</div>
+                <div class="">22</div>
+                <div class="">23</div>
+                <div class="">24</div>
+                <div class="weekend ">25</div>
+                <div class="weekend ">26</div>
+                <div class="">27</div>
+                <div class="">28</div>
+                <div class="">29</div>
+                <div class="">30</div>
+            </div>
+        </div>
+        <div class="calendar_mainyear_containter" flag="0">
+            <div class="currItem">2016</div>
+            <div class="">2017</div>
+            <div class="">2018</div>
+            <div class="">2019</div>
+            <div class="">2020</div>
+            <div class="">2021</div>
+            <div class="">2022</div>
+            <div class="">2023</div>
+            <div class="">2024</div>
+            <div class="">2025</div>
+            <div class="">2026</div>
+            <div class="">2027</div>
+            <div class="">2028</div>
+            <div class="">2029</div>
+            <div class="">2030</div>
+            <div class="">2031</div>
+        </div>
+        <div class="calendar_mainmonth_containter" flag="0">
+            <div class="">Jan</div>
+            <div class="">Feb</div>
+            <div class="">Mar</div>
+            <div class="">Apr</div>
+            <div class="">May</div>
+            <div class="currItem">Jun</div>
+            <div class="">Jul</div>
+            <div class="">Aug</div>
+            <div class="">Sep</div>
+            <div class="">Oct</div>
+            <div class="">Nov</div>
+            <div class="">Dec</div>
+        </div>
+        <div class="hover_containter" id="hover_containter" flag="0">
+            <div class="">00</div>
+            <div class="">01</div>
+            <div class="">02</div>
+            <div class="">03</div>
+            <div class="">04</div>
+            <div class="">05</div>
+            <div class="">06</div>
+            <div class="">07</div>
+            <div class="">08</div>
+            <div class="">09</div>
+            <div class="">10</div>
+            <div class="">11</div>
+            <div class="">12</div>
+            <div class="">13</div>
+            <div class="">14</div>
+            <div class="">15</div>
+            <div class="currItem">16</div>
+            <div class="">17</div>
+            <div class="">18</div>
+            <div class="">19</div>
+            <div class="">20</div>
+            <div class="">21</div>
+            <div class="">22</div>
+            <div class="">23</div>
+        </div>
+        <div class="minute_containter" id="minute_containter" flag="0">
+            <div class="">00</div>
+            <div class="">05</div>
+            <div class="">10</div>
+            <div class="">15</div>
+            <div class="">20</div>
+            <div class="">25</div>
+            <div class="">30</div>
+            <div class="">35</div>
+            <div class="">40</div>
+            <div class="">45</div>
+            <div class="">50</div>
+            <div class="">55</div>
+        </div>
+        <div class="minute_containter" id="second_containter" flag="0">
+            <div class="">00</div>
+            <div class="">05</div>
+            <div class="">10</div>
+            <div class="">15</div>
+            <div class="">20</div>
+            <div class="">25</div>
+            <div class="">30</div>
+            <div class="">35</div>
+            <div class="">40</div>
+            <div class="">45</div>
+            <div class="">50</div>
+            <div class="">55</div>
+        </div>
+        <div id="calendar_time" class="calendar_time">
+            <span id="hover_txt"><input type="text" class="time_txt" value="16" maxlength="2" id="hour"></span>:
+            <span id="minute_txt"><input type="text" class="time_txt" value="08" maxlength="2" id="minute"></span>:
+            <span id="second_txt"><input type="text" class="time_txt" value="39" maxlength="2" id="second"></span>
+        </div>
+    </div>
+</body>
+</html>

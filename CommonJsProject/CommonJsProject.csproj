@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -171,7 +171,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Calendar01\jquery-1.10.2.min.js" />
+    <Content Include="datepicker\datepicker-icon.png" />
+    <Content Include="datepicker\datepicker.css" />
+    <Content Include="datepicker\datepicker.png" />
+    <Content Include="datepicker\jquery-1.10.2.min.js" />
     <Content Include="Calendar\Scripts\datepicker.js" />
     <Content Include="Calendar\default\datepicker.css" />
     <Content Include="Calendar\default\datepicker-icon.png" />
@@ -184,14 +187,11 @@
     <Content Include="Calendar\orange\datepicker.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="datepicker\index.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Calendar01\datepicker.css" />
-    <Content Include="Calendar01\datepicker.js" />
-    <Content Include="Calendar01\datepicker-icon.png" />
-    <Content Include="Calendar01\datepicker.png" />
-    <Content Include="Calendar01\index.html" />
+    <Content Include="JavaScript1.js" />
     <Content Include="JQExtension\JQExtension.js" />
     <Content Include="JQExtension\jquery-1.10.2.min.js" />
     <Content Include="Loading\index.html" />
@@ -212,6 +212,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="template\template.html" />
+    <Content Include="template\index.html" />
+    <Content Include="template\jquery-1.10.2.js" />
     <Content Include="Uploader\scripts\file-uploader.js" />
     <Content Include="Uploader\index.html" />
     <Content Include="Uploader\scripts\jquery-1.7.1.js" />
@@ -226,14 +229,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\File\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
