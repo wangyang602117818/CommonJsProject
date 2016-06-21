@@ -36,28 +36,29 @@
 
     function parseHTML(html, model) {
         if (data) {
-            html = parseTemplate(html, model);
+            html = parseTemplate1(html, model);
         }
         var tmp = document.createElement("div");
         tmp.innerHTML = html;
         return tmp.childNodes[0];//只允许有一个根节点
     }
     function parseTemplate(html, model) {
-        html = html.replace(/[\r\n]/g, "");
-        var exportTag = "@((?!if|for|switch)[\\w.\\[\\]]+)",     //输出语法
-            blockTag = "@((if|for|switch).+?[\\s\\r\\t]*.+?{)",  //块级语法
-            elseTag = "(}[\\s\\r\\t]*else[\\s\\r\\t]*{)",        //else块
-            jsTag = /^\}|else|@if|@for|else|@switch|case|break/,
+        html = html.replace(/[\r\n]/g, "").replace(/'/g,"\\'");
+        var exportTag = "@((?!if|for|switch)[\\w.\\[\\]]+)",     //输出语法,执行后再拼接字符串
+            blockTag = "@((if|for|switch).+?{)",     //块级语法,直接输出
+            elseTag = "(}\s*else\s*{)",          //else块,直接输出
             regex = new RegExp(exportTag + "|" + blockTag + "|" + elseTag + "|(})", "g"),
             code = "var p=[];",
             cursor = 0;
         var match = regex.exec(html);
         while (match) {
+            console.log(match);
             var preSection = html.slice(cursor, match.index),
                 value = match[1] || match[2] || match[3] || match[4] || match[5];
+
             cursor = match.index + match[0].length;
             code += "p.push('" + preSection + "');";  //字符串部分
-            code += jsTag.test(match[0]) ? value : "p.push(" + value + ");";
+            code += match[1] ? "p.push(" + value + ");":value; //代码部分
             match = regex.exec(html);
         }
         code += "p.push('" + html.slice(cursor) + "');return p.join(\'\')";
@@ -65,5 +66,52 @@
         return fn(model);
     }
 
+    function parseTemplate1(html, model) {
+        html = html.replace(/[\r\n]/g, "").replace(/'/g, "\\'");
+        var cursor = 0;
+        var code = "var p=[];\n";
+        var reg = /@/g;
+        var match = reg.exec(html);
+        while (match) {
+            var preHtml = html.slice(cursor, match.index);
+            cursor = match.index;
+            if (html.slice(match.index, match.index + 3)==="@if") {
+                cursor++  //跳过@符号;
+                code += "p.push('" + preHtml + "');\n";
+                var frag = "";
+                var word = html.slice(cursor, cursor + 1);
+                var preB = 1;
+
+                while (!preB === 0) {
+                    frag += word;
+                    cursor++;
+                    if (word === "{") preB++;
+                    if (word === "}") preB--;
+                    word = html.slice(cursor, cursor + 1);
+                    
+                }
+                code += frag;
+            }else if (html.slice(match.index, match.index + 4) === "@for") {
+
+            } else {
+                cursor++;     //跳过@符号;
+                code += "p.push('" + preHtml + "');\n";
+                var p = "";
+                var word = html.slice(cursor, cursor + 1);
+                while (/[\w.\[\]]/g.test(word)) {
+                    p += word;
+                    cursor++;
+                    word = html.slice(cursor, cursor + 1);
+                    
+                }
+                code += "p.push("+p+");\n";
+            }
+            
+            
+            match = reg.exec(html);
+            
+        }
+        console.log(code);
+    }
 
 </script>
