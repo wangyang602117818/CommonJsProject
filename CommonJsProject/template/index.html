@@ -51,6 +51,7 @@
             code = "var p=[];",
             cursor = 0;
         var match = regex.exec(html);
+
         while (match) {
             console.log(match);
             var preSection = html.slice(cursor, match.index),
@@ -79,18 +80,30 @@
                 cursor++  //跳过@符号;
                 code += "p.push('" + preHtml + "');\n";
                 var frag = "";
-                var word = html.slice(cursor, cursor + 1);
-                var preB = 1;
-                var i = 0;
-                while (true) {
+                var word = "";
+                do {
+                    word = html.slice(cursor, cursor + 1);
                     frag += word;
                     cursor++;
+                }while(word!="{")
+                var preB = 0;
+                cursor--;
+                do{
+                    word = html.slice(cursor, cursor + 1);
                     if (word === "{") preB++;
                     if (word === "}") preB--;
-                    if (preB === 0) break;
-                    word = html.slice(cursor, cursor + 1);
+                    frag += word;
+                    cursor++;
+                }while(preB!=0)
+                //while (preB!=0) {
+                //    frag += word;
+                //    cursor++;
+                //    if (word === "{") preB++;
+                //    if (word === "}") preB--;
+                //    if (preB === 0) break;
+                //    word = html.slice(cursor, cursor + 1);
                     
-                }
+                //}
                 code += frag;
             }else if (html.slice(match.index, match.index + 4) === "@for") {
 
