@@ -81,12 +81,13 @@
                 var frag = "";
                 var word = html.slice(cursor, cursor + 1);
                 var preB = 1;
-
-                while (!preB === 0) {
+                var i = 0;
+                while (true) {
                     frag += word;
                     cursor++;
                     if (word === "{") preB++;
                     if (word === "}") preB--;
+                    if (preB === 0) break;
                     word = html.slice(cursor, cursor + 1);
                     
                 }
