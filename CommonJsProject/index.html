@@ -1,29 +1,51 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
     <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular-animate.min.js"></script>
+
+    <style>
+        div {
+            transition: left 0.5s;
+            background-color: lightblue;
+            height: 100px;
+            width: 200px;
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+
+        .ng-hide {
+            left: -200px;
+        }
+        .dv1{
+            border:1px solid red;
+            display:inline-block;
+            width:100px;height:100px;
+        }
+        .dv2{
+            border:1px solid red;
+            display:inline-block;
+             width:100px;height:100px;
+        }
+    </style>
 </head>
-<body>
-    <div ng-app="myApp" ng-controller="myCtrl">
+<body ng-app="myApp">
 
-        <h1>{{carname}}</h1>
+    <h1>隐藏 DIV: <input type="checkbox" ng-model="myCheck"></h1>
 
-    </div>
-
-    <script>
-        var app = angular.module('myApp', []);
-
-        app.controller('myCtrl', function($scope) {
-            $scope.carname = "Volvo";
-        });
-    </script>
-    
+    <div ng-hide="myCheck"></div>
+    <div class="dv1">11</div>
+    <div class="dv2">22</div>
 </body>
+
+
 </html>
 <script>
-   
-    
+    var app = angular.module("myApp", ["ngAnimate"]);
+
+
 </script>
