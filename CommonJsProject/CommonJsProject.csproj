@@ -190,8 +190,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="datepicker\index.html" />
-    <Content Include="EasyUi\images\finance-logo.svg" />
-    <Content Include="EasyUi\index.html" />
+    <Content Include="EasyUi\datagrid.html" />
     <Content Include="EasyUi\js\jquery.easyui.min.js" />
     <Content Include="EasyUi\js\jquery.min.js" />
     <Content Include="EasyUi\themes\black\accordion.css" />
@@ -541,6 +540,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="EasyUi\themes\material\images\Thumbs.db" />
+    <Content Include="EasyUi\datagrid_data1.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
