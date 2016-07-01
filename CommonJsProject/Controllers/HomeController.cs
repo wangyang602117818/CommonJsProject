@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,8 +11,9 @@ namespace CommonJsProject.Controllers
     {
         public ActionResult Index()
         {
-          
-            return Json(new {name="aaa",age=23},JsonRequestBehavior.AllowGet);
+            
+            
+            return View();
         }
 
         

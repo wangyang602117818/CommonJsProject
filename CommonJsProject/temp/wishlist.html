@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="jquery-1.10.2.js"></script>
+    <script>
+        //添加cookie 方法, expiredays:保存几天
+        function setCookie(key, value, expiredays) {
+            if (value instanceof Object) {
+                value = JSON.stringify(value);   //如果value是一个对象,就序列化成字符串
+            }
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + expiredays);  //cookies过期时间
+            document.cookie = key + "=" + escape(value) +
+            ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString())
+        }
+        //获取cookies,
+        function getCookie(c_name) {
+            if (document.cookie.length > 0) {
+                c_start = document.cookie.indexOf(c_name + "=")
+                if (c_start != -1) {
+                    c_start = c_start + c_name.length + 1
+                    c_end = document.cookie.indexOf(";", c_start)
+                    if (c_end == -1) c_end = document.cookie.length;
+                    var value = document.cookie.substring(c_start, c_end);  //真正的商品列表
+                    return unescape(value);
+                }
+            }
+            return ""
+        }
+        $(function () {
+            //本例子中cookie的格式   ["商品id","商品id","商品id"]
+            //为每一个 add wish list 按钮添加点击事件
+            $("input[name=addwish").click(function () {
+                var wishlist = getCookie("wishlist");  //首先获取浏览器中保存的cookie;
+                if (!wishlist) {  //如果cookie不存在,把它初始化成一个空数组
+                    wishlist = [];
+                } else {
+                    wishlist = JSON.parse(wishlist);   //取出的cookie是字符串,解析成对象
+                }
+                var btn = $(this);   //获取当前点击的按钮
+                var obj_id = btn.parent().attr("id");    //获取商品的id
+                wishlist.push(obj_id);  //将商品id添加到数组
+                setCookie("wishlist", wishlist, 1);
+                showCookie(wishlist);   //测试一下
+            });
+        });
+
+        //显示购物车中的物品id列表,测试方法,可以不要
+        function showCookie(wishlist) {
+            $("#wishlist").html(wishlist.toString());
+        }
+    </script>
+</head>
+<body>
+    <h1>物品列表界面</h1>
+    <div id="0001">物品1 : <input type="button" value="add wish list" name="addwish"/></div>
+    <div id="0002">物品2 : <input type="button" value="add wish list" name="addwish"/></div>
+    <div id="0003">物品3 : <input type="button" value="add wish list" name="addwish"/></div>
+    <div id="0004">物品4 : <input type="button" value="add wish list" name="addwish"/></div>
+    <br />
+    <br />
+    <h1>购物车中的物品列表</h1>
+    <div id="wishlist">
+
+    </div>
+</body>
+</html>

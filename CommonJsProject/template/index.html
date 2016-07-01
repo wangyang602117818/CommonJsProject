@@ -43,7 +43,7 @@
         return tmp.childNodes[0];//只允许有一个根节点
     }
     function parseTemplate(html, model) {
-        html = html.replace(/[\r\n]/g, "").replace(/'/g,"\\'");
+        html = html.replace(/[\r\n]/g, "").replace(/'/g, "\\'");
         var exportTag = "@((?!if|for|switch)[\\w.\\[\\]]+)",     //输出语法,执行后再拼接字符串
             blockTag = "@((if|for|switch).+?{)",     //块级语法,直接输出
             elseTag = "(}\s*else\s*{)",          //else块,直接输出
@@ -59,7 +59,7 @@
 
             cursor = match.index + match[0].length;
             code += "p.push('" + preSection + "');";  //字符串部分
-            code += match[1] ? "p.push(" + value + ");":value; //代码部分
+            code += match[1] ? "p.push(" + value + ");" : value; //代码部分
             match = regex.exec(html);
         }
         code += "p.push('" + html.slice(cursor) + "');return p.join(\'\')";
@@ -76,7 +76,7 @@
         while (match) {
             var preHtml = html.slice(cursor, match.index);
             cursor = match.index;
-            if (html.slice(match.index, match.index + 3)==="@if") {
+            if (html.slice(match.index, match.index + 3) === "@if") {
                 cursor++  //跳过@符号;
                 code += "p.push('" + preHtml + "');\n";
                 var frag = "";
@@ -85,16 +85,16 @@
                     word = html.slice(cursor, cursor + 1);
                     frag += word;
                     cursor++;
-                }while(word!="{")
+                } while (word != "{")
                 var preB = 0;
                 cursor--;
-                do{
+                do {
                     word = html.slice(cursor, cursor + 1);
                     if (word === "{") preB++;
                     if (word === "}") preB--;
                     frag += word;
                     cursor++;
-                }while(preB!=0)
+                } while (preB != 0)
                 //while (preB!=0) {
                 //    frag += word;
                 //    cursor++;
@@ -102,10 +102,10 @@
                 //    if (word === "}") preB--;
                 //    if (preB === 0) break;
                 //    word = html.slice(cursor, cursor + 1);
-                    
+
                 //}
                 code += frag;
-            }else if (html.slice(match.index, match.index + 4) === "@for") {
+            } else if (html.slice(match.index, match.index + 4) === "@for") {
 
             } else {
                 cursor++;     //跳过@符号;
@@ -116,14 +116,14 @@
                     p += word;
                     cursor++;
                     word = html.slice(cursor, cursor + 1);
-                    
+
                 }
-                code += "p.push("+p+");\n";
+                code += "p.push(" + p + ");\n";
             }
-            
-            
+
+
             match = reg.exec(html);
-            
+
         }
         console.log(code);
     }
