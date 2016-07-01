@@ -12,10 +12,10 @@ namespace CommonJsProject.Controllers
         public ActionResult Index()
         {
             
-            
+
             return View();
         }
 
-        
+
     }
 }
