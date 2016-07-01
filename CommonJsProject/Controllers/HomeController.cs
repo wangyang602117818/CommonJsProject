@@ -11,8 +11,8 @@ namespace CommonJsProject.Controllers
     {
         public ActionResult Index()
         {
-            
-            return View();
+          
+            return Json(new {name="aaa",age=23},JsonRequestBehavior.AllowGet);
         }
 
         
