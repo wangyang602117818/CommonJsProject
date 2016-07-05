@@ -11,11 +11,7 @@
     </style>
     <script src="jquery-1.10.2.js"></script>
     <script>
-        if (window) {
 
-        } else {
-
-        }
     </script>
 </head>
 <body>
@@ -36,7 +32,7 @@
 
     function parseHTML(html, model) {
         if (data) {
-            html = parseTemplate1(html, model);
+            html = parseTemplate(html, model);
         }
         var tmp = document.createElement("div");
         tmp.innerHTML = html;
@@ -44,88 +40,23 @@
     }
     function parseTemplate(html, model) {
         html = html.replace(/[\r\n]/g, "").replace(/'/g, "\\'");
-        var exportTag = "@((?!if|for|switch)[\\w.\\[\\]]+)",     //输出语法,执行后再拼接字符串
-            blockTag = "@((if|for|switch).+?{)",     //块级语法,直接输出
-            elseTag = "(}\s*else\s*{)",          //else块,直接输出
-            regex = new RegExp(exportTag + "|" + blockTag + "|" + elseTag + "|(})", "g"),
-            code = "var p=[];",
+        var splitRegex = /<%=(.+?)%>|<%([^=]([^%]|\n)*)%>/g,
+            code = "var p = [] ;\n",
             cursor = 0;
-        var match = regex.exec(html);
-
+        var match = splitRegex.exec(html);
         while (match) {
-            console.log(match);
-            var preSection = html.slice(cursor, match.index),
-                value = match[1] || match[2] || match[3] || match[4] || match[5];
-
+            code += "p.push('" + html.slice(cursor, match.index) + "');\n";
             cursor = match.index + match[0].length;
-            code += "p.push('" + preSection + "');";  //字符串部分
-            code += match[1] ? "p.push(" + value + ");" : value; //代码部分
-            match = regex.exec(html);
+            if (match[1]) {  //<%=xxx%>
+                code += "p.push(" + match[1] + ");\n";
+            } else {   //<%if xxx%>
+                code += match[2] + ";\n";
+            }
+            match = splitRegex.exec(html);
         }
-        code += "p.push('" + html.slice(cursor) + "');return p.join(\'\')";
+        code += "p.push('" + html.slice(cursor) + "');\n;return p.join(\'\')";
         var fn = new Function("model", code);
         return fn(model);
-    }
-
-    function parseTemplate1(html, model) {
-        html = html.replace(/[\r\n]/g, "").replace(/'/g, "\\'");
-        var cursor = 0;
-        var code = "var p=[];\n";
-        var reg = /@/g;
-        var match = reg.exec(html);
-        while (match) {
-            var preHtml = html.slice(cursor, match.index);
-            cursor = match.index;
-            if (html.slice(match.index, match.index + 3) === "@if") {
-                cursor++  //跳过@符号;
-                code += "p.push('" + preHtml + "');\n";
-                var frag = "";
-                var word = "";
-                do {
-                    word = html.slice(cursor, cursor + 1);
-                    frag += word;
-                    cursor++;
-                } while (word != "{")
-                var preB = 0;
-                cursor--;
-                do {
-                    word = html.slice(cursor, cursor + 1);
-                    if (word === "{") preB++;
-                    if (word === "}") preB--;
-                    frag += word;
-                    cursor++;
-                } while (preB != 0)
-                //while (preB!=0) {
-                //    frag += word;
-                //    cursor++;
-                //    if (word === "{") preB++;
-                //    if (word === "}") preB--;
-                //    if (preB === 0) break;
-                //    word = html.slice(cursor, cursor + 1);
-
-                //}
-                code += frag;
-            } else if (html.slice(match.index, match.index + 4) === "@for") {
-
-            } else {
-                cursor++;     //跳过@符号;
-                code += "p.push('" + preHtml + "');\n";
-                var p = "";
-                var word = html.slice(cursor, cursor + 1);
-                while (/[\w.\[\]]/g.test(word)) {
-                    p += word;
-                    cursor++;
-                    word = html.slice(cursor, cursor + 1);
-
-                }
-                code += "p.push(" + p + ");\n";
-            }
-
-
-            match = reg.exec(html);
-
-        }
-        console.log(code);
     }
 
 </script>

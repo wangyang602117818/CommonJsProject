@@ -1,27 +1,25 @@
 ﻿<div id="calendar" class="calendar">
-    <div id="cal1" class="cal1">@model.title </div>
+    <div id="cal1" class="cal1"><%=model.title%></div>
     <div id="cal2" class='cal2'>
-        @if(model.data.exist == "true"){ 
-          var str=""; <div>@model.data.exist+"," + @model.data.data </div> 
-        }else{ 
+        <%if(model.data.exist == "true"){ 
+           var str="";
+        %>
+        <div><%=model.data.exist%>+"," + <%=model.data.data%> </div> 
+        <%}else{%> 
            <div>0:0</div> 
-        }
+        <%}%>
         
-        @for(var i = 0; i < model.msg.length;i++){  
+        <%for(var i = 0; i < model.msg.length;i++){  
            var b =12; 
            if(b=="12"){
-             <div>bb</div> 
-           }
-            else{ 
-           } 
-           <div>@i,@model.msg[i].msg1,@model.msg[i].msg2 </div>
-             
-        }
+        %>
+         <div>bb</div> 
+         <% }%> 
+           <div><%=i%>,<%=model.msg[i].msg1%>,<%=model.msg[i].msg2%> </div>
+        <%}%>
     </div>
-
-
     <div id="cal3" class="cal3">
-        <div>@model.msg[0].msg1</div>
+        <div><%=model.msg[0].msg1%></div>
     </div>
 </div>
 
