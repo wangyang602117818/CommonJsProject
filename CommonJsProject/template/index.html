@@ -42,16 +42,12 @@
         html = html.replace(/[\r\n]/g, "").replace(/'/g, "\\'");
         var splitRegex = /<%=(.+?)%>|<%([^=]([^%]|\n)*)%>/g,
             code = "var p = [] ;\n",
-            cursor = 0;
-        var match = splitRegex.exec(html);
+            cursor = 0,
+            match = splitRegex.exec(html);
         while (match) {
             code += "p.push('" + html.slice(cursor, match.index) + "');\n";
             cursor = match.index + match[0].length;
-            if (match[1]) {  //<%=xxx%>
-                code += "p.push(" + match[1] + ");\n";
-            } else {   //<%if xxx%>
-                code += match[2] + ";\n";
-            }
+            code += match[1] ? "p.push(" + match[1] + ");\n" : match[2] + ";\n";
             match = splitRegex.exec(html);
         }
         code += "p.push('" + html.slice(cursor) + "');\n;return p.join(\'\')";

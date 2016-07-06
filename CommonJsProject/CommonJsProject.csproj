@@ -176,10 +176,11 @@
   <ItemGroup>
     <Content Include="Chart\chart.html" />
     <Content Include="Chart\echarts.js" />
-    <Content Include="datepicker\datepicker-icon.png" />
-    <Content Include="datepicker\datepicker.css" />
-    <Content Include="datepicker\datepicker.png" />
-    <Content Include="datepicker\jquery-1.10.2.min.js" />
+    <Content Include="datepicker-template\datepicker.css" />
+    <Content Include="datepicker-template\datepicker.html" />
+    <Content Include="datepicker-template\datepicker-icon.png" />
+    <Content Include="datepicker-template\datepicker.png" />
+    <Content Include="datepicker-template\jquery-1.10.2.min.js" />
     <Content Include="Calendar\Scripts\datepicker.js" />
     <Content Include="Calendar\default\datepicker.css" />
     <Content Include="Calendar\default\datepicker-icon.png" />
@@ -192,7 +193,6 @@
     <Content Include="Calendar\orange\datepicker.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="datepicker\index.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
