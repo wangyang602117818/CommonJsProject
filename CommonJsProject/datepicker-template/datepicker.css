@@ -3,7 +3,7 @@
     margin: 0;
 }
 
-.calendar { /*日期框容器*/
+.datepicker { /*日期框容器*/
     position: absolute;
     z-index: 10000;
     border: 1px solid #eb8c00;
@@ -18,20 +18,8 @@
     overflow: hidden;
 }
 
-.calendar_img {
-    background: url(datepicker-icon.png) no-repeat;
-}
-
-.calendar .currItem {
-    border-color: #eb8c00;
-}
-
-    .calendar .currItem:hover {
-        cursor: default;
-    }
-
-.datepicker {
-    background: url(datepicker.png) no-repeat;
+.date {
+    background: url(date.png) no-repeat;
     background-position: right;
     padding-right: 0;
     padding: 4px 8px;
@@ -41,11 +29,23 @@
     outline: none;
 }
 
-    .datepicker:focus {
-        border-color: #51A7E8;
-        background-color: #fff;
-        box-shadow: 0 0 5px rgba(103, 166, 217, 0.5);
+.datepicker_img {
+    background: url(datepicker-icon.png) no-repeat;
+}
+
+.datepicker .currItem {
+    border-color: #eb8c00;
+}
+
+    .datepicker .currItem:hover {
+        cursor: default;
     }
+
+.datepicker:focus {
+    border-color: #51A7E8;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(103, 166, 217, 0.5);
+}
 
 .add_cal_len1 { /*第二种日期框高度*/
     height: 226px;
@@ -59,7 +59,7 @@
     height: 248px;
 }
 
-.calendar_title_containter { /*标题容器*/
+.datepicker_title_containter { /*标题容器*/
     position: absolute;
     top: 0;
     left: 0;
@@ -73,22 +73,22 @@
     /*border: 1px solid blue;*/
 }
 
-    .calendar_title_containter span {
+    .datepicker_title_containter span {
         cursor: pointer;
     }
 
-    .calendar_title_containter .disabled {
+    .datepicker_title_containter .disabled {
         filter: alpha(opacity=0);
         opacity: 0;
         cursor: default;
     }
 
-.calendar_last_year,
-.calendar_last_month,
-.calendar_title_date,
-.calendar_title_month,
-.calendar_next_year,
-.calendar_next_month { /*标题按钮*/
+.datepicker_last_year,
+.datepicker_last_month,
+.datepicker_title_date,
+.datepicker_title_month,
+.datepicker_next_year,
+.datepicker_next_month { /*标题按钮*/
     /*border: 1px solid red;*/
     /*border-top:1px solid red;*/
     display: inline-block;
@@ -103,15 +103,15 @@
     display: inline-block;
 }
 
-.calendar_last_year, .calendar_next_year {
+.datepicker_last_year, .datepicker_next_year {
     width: 30px;
 }
 
-.calendar_last_month, .calendar_next_month {
+.datepicker_last_month, .datepicker_next_month {
     width: 23px;
 }
 
-.calendar_last_year .disabled:hover {
+.datepicker_last_year .disabled:hover {
     background-position: -72px 0;
 }
 
@@ -137,18 +137,18 @@
         background-position: -54px -20px;
     }
 
-.calendar_last_month .disabled:hover {
+.datepicker_last_month .disabled:hover {
     background-position: -54px 0;
 }
 
-.calendar_title_date { /*标题按钮*/
+.datepicker_title_date { /*标题按钮*/
     width: 90px;
     padding: 0 3px;
     font-weight: 600;
     font-size: 14px;
 }
 
-.calendar_next_month .disabled:hover {
+.datepicker_next_month .disabled:hover {
     background-position: -27px 0;
 }
 
@@ -163,7 +163,7 @@
         background-position: -27px -20px;
     }
 
-.calendar_next_year .disabled:hover {
+.datepicker_next_year .disabled:hover {
     background-position: -5px 0;
 }
 
@@ -179,7 +179,7 @@
         background-position: -5px -20px;
     }
 
-.calendar_maindata_containter { /*主数据容器（周数据+天数据）*/
+.datepicker_maindata_containter { /*主数据容器（周数据+天数据）*/
     border: 0;
     position: absolute;
     left: 0;
@@ -198,22 +198,22 @@
     height: 198px;
 }
 
-.calendar_week_container { /*周容器*/
+.datepicker_week_container { /*周容器*/
     /*position: absolute;
     top:26px;*/
     border-bottom: 1px solid #ccc;
     /*border: 1px solid red;*/
 }
 
-.calendar_week { /*周*/
+.datepicker_week { /*周*/
     height: 25px;
     line-height: 25px;
     background-color: #fff;
     padding: 0 1px;
-    overflow:hidden;
+    overflow: hidden;
 }
 
-    .calendar_week div { /*单个周样式*/
+    .datepicker_week div { /*单个周样式*/
         float: left;
         display: inline-block;
         text-align: center;
@@ -222,7 +222,7 @@
         /*border-bottom: 1px solid red;*/
     }
 
-.calendar_data_containter { /*数据容器*/
+.datepicker_data_containter { /*数据容器*/
     /*background-color:#ccc;*/
     width: 200px;
     position: absolute;
@@ -230,32 +230,32 @@
     /*border: 1px solid red;*/
 }
 
-    .calendar_data_containter .day {
+    .datepicker_data_containter .day {
         background-color: #ccc;
         /*border-radius:12.5px;*/
     }
 
-        .calendar_data_containter .day:hover {
+        .datepicker_data_containter .day:hover {
             background-color: #bbb;
         }
 
-    .calendar_data_containter .weekend {
+    .datepicker_data_containter .weekend {
         color: #666;
     }
 
-        .calendar_data_containter .weekend:hover {
+        .datepicker_data_containter .weekend:hover {
             background-color: #ccc;
         }
 
-    .calendar_data_containter .today {
+    .datepicker_data_containter .today {
         background-color: #eb8c00;
     }
 
-        .calendar_data_containter .today:hover {
+        .datepicker_data_containter .today:hover {
             background-color: #DC6900;
         }
 
-    .calendar_data_containter div, .calendar_data_containter span { /*单个日期*/
+    .datepicker_data_containter div, .datepicker_data_containter span { /*单个日期*/
         float: left;
         display: inline-block;
         text-align: center;
@@ -266,22 +266,22 @@
         margin-top: 3px;
     }
 
-        .calendar_data_containter div:hover {
+        .datepicker_data_containter div:hover {
             cursor: pointer;
             background-color: #eb8c00;
             /*border-radius:12.5px;*/
         }
 
-    .calendar_data_containter .disabled {
+    .datepicker_data_containter .disabled {
         color: #bbb;
     }
 
-        .calendar_data_containter .disabled:hover {
+        .datepicker_data_containter .disabled:hover {
             cursor: default;
             background-color: transparent;
         }
 
-.calendar_mainyear_containter { /*年份容器*/
+.datepicker_mainyear_containter { /*年份容器*/
     /*border: 1px solid red;*/
     position: absolute;
     background-color: #fff;
@@ -300,7 +300,7 @@
     top: -198px;
 }
 
-.calendar_mainyear_containter div {
+.datepicker_mainyear_containter div {
     /*border-top: 1px solid blue;*/
     /*border-bottom: 1px solid blue;*/
     display: inline-block;
@@ -315,21 +315,21 @@
     /*border: 1px solid blue;*/
 }
 
-.calendar_mainyear_containter .disabled {
+.datepicker_mainyear_containter .disabled {
     color: #bbb;
 }
 
-    .calendar_mainyear_containter .disabled:hover {
+    .datepicker_mainyear_containter .disabled:hover {
         cursor: default;
         border-color: transparent;
     }
 
-.calendar_mainyear_containter div:hover {
+.datepicker_mainyear_containter div:hover {
     cursor: pointer;
     border-color: #eb8c00;
 }
 
-.calendar_mainmonth_containter { /*月份容器*/
+.datepicker_mainmonth_containter { /*月份容器*/
     /*border: 1px solid blue;*/
     position: absolute;
     background-color: #fff;
@@ -349,7 +349,7 @@
 }
 
 
-.calendar_mainmonth_containter div { /*单个月样式*/
+.datepicker_mainmonth_containter div { /*单个月样式*/
     display: inline-block;
     float: left;
     margin-left: 10px;
@@ -361,21 +361,21 @@
     border: 1px solid transparent;
 }
 
-.calendar_mainmonth_containter .disabled {
+.datepicker_mainmonth_containter .disabled {
     color: #bbb;
 }
 
-    .calendar_mainmonth_containter .disabled:hover {
+    .datepicker_mainmonth_containter .disabled:hover {
         cursor: default;
         border-color: transparent;
     }
 
-.calendar_mainmonth_containter div:hover {
+.datepicker_mainmonth_containter div:hover {
     cursor: pointer;
     border-color: #eb8c00;
 }
 /*时间部分*/
-.calendar_time {
+.datepicker_time {
     position: absolute;
     border-top: 1px solid #eb8c00;
     background-color: #f2f2f2;
@@ -389,12 +389,12 @@
     text-align: center;
 }
 
-    .calendar_time span {
+    .datepicker_time span {
         display: inline-block;
         width: 25px;
     }
 
-    .calendar_time .time_txt {
+    .datepicker_time .time_txt {
         width: 25px;
         text-align: center;
         border: 0px;
@@ -404,7 +404,7 @@
         background-color: #f2f2f2;
     }
 
-    .calendar_time span:hover {
+    .datepicker_time span:hover {
         cursor: pointer;
     }
 
