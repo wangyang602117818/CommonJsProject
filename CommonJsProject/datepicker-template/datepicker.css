@@ -281,7 +281,7 @@
             background-color: transparent;
         }
 
-.datepicker_mainyear_containter { /*年份容器*/
+.datepicker_year_layer { /*年份容器*/
     /*border: 1px solid red;*/
     position: absolute;
     background-color: #fff;
@@ -300,7 +300,7 @@
     top: -198px;
 }
 
-.datepicker_mainyear_containter div {
+.datepicker_year_layer div {
     /*border-top: 1px solid blue;*/
     /*border-bottom: 1px solid blue;*/
     display: inline-block;
@@ -315,21 +315,21 @@
     /*border: 1px solid blue;*/
 }
 
-.datepicker_mainyear_containter .disabled {
+.datepicker_year_layer .disabled {
     color: #bbb;
 }
 
-    .datepicker_mainyear_containter .disabled:hover {
+    .datepicker_year_layer .disabled:hover {
         cursor: default;
         border-color: transparent;
     }
 
-.datepicker_mainyear_containter div:hover {
+.datepicker_year_layer div:hover {
     cursor: pointer;
     border-color: #eb8c00;
 }
 
-.datepicker_mainmonth_containter { /*月份容器*/
+.datepicker_month_layer { /*月份容器*/
     /*border: 1px solid blue;*/
     position: absolute;
     background-color: #fff;
@@ -349,7 +349,7 @@
 }
 
 
-.datepicker_mainmonth_containter div { /*单个月样式*/
+.datepicker_month_layer div { /*单个月样式*/
     display: inline-block;
     float: left;
     margin-left: 10px;
@@ -361,21 +361,21 @@
     border: 1px solid transparent;
 }
 
-.datepicker_mainmonth_containter .disabled {
+.datepicker_month_layer .disabled {
     color: #bbb;
 }
 
-    .datepicker_mainmonth_containter .disabled:hover {
+    .datepicker_month_layer .disabled:hover {
         cursor: default;
         border-color: transparent;
     }
 
-.datepicker_mainmonth_containter div:hover {
+.datepicker_month_layer div:hover {
     cursor: pointer;
     border-color: #eb8c00;
 }
 /*时间部分*/
-.datepicker_time {
+.datepicker_time_containter {
     position: absolute;
     border-top: 1px solid #eb8c00;
     background-color: #f2f2f2;
@@ -389,12 +389,12 @@
     text-align: center;
 }
 
-    .datepicker_time span {
+    .datepicker_time_containter span {
         display: inline-block;
         width: 25px;
     }
 
-    .datepicker_time .time_txt {
+    .datepicker_time_containter .time_txt {
         width: 25px;
         text-align: center;
         border: 0px;
@@ -404,11 +404,11 @@
         background-color: #f2f2f2;
     }
 
-    .datepicker_time span:hover {
+    .datepicker_time_containter span:hover {
         cursor: pointer;
     }
 
-.hover_containter { /*小时容器*/
+.datepicker_hover_layer { /*小时容器*/
     position: absolute;
     height: 173px;
     padding: 0 1px;
@@ -420,7 +420,7 @@
     /*border: 1px solid red;*/
 }
 
-    .hover_containter div {
+    .datepicker_hover_layer div {
         border: 1px solid transparent;
         display: inline-block;
         float: left;
@@ -432,21 +432,21 @@
         margin-top: 12px;
     }
 
-        .hover_containter div:hover {
+        .datepicker_hover_layer div:hover {
             cursor: pointer;
             border-color: #eb8c00;
         }
 
-    .hover_containter .disabled {
+    .datepicker_hover_layer .disabled {
         color: #bbb;
     }
 
-        .hover_containter .disabled:hover {
+        .datepicker_hover_layer .disabled:hover {
             cursor: default;
             border-color: transparent;
         }
 
-.minute_containter {
+.datepicker_minute_layer {
     position: absolute;
     height: 173px;
     width: 200px;
@@ -458,7 +458,7 @@
     /*display: none;*/
 }
 
-    .minute_containter div {
+    .datepicker_minute_layer div {
         border: 1px solid transparent;
         display: inline-block;
         float: left;
@@ -470,16 +470,16 @@
         margin-top: 15px;
     }
 
-        .minute_containter div:hover {
+        .datepicker_minute_layer div:hover {
             cursor: pointer;
             border-color: #eb8c00;
         }
 
-    .minute_containter .disabled {
+    .datepicker_minute_layer .disabled {
         color: #bbb;
     }
 
-        .minute_containter .disabled:hover {
+        .datepicker_minute_layer .disabled:hover {
             cursor: default;
             border-color: transparent;
         }

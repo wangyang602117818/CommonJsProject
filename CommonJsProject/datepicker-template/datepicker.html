@@ -7,17 +7,17 @@
     <link href="datepicker.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="datepicker" class="datepicker add_cal_len2" style="top: 206px; left: 30px;">
-        <div id="datepicker_title_containter" class="datepicker_title_containter">
+    <div class="datepicker add_cal_len2" style="top: 206px; left: 30px;">
+        <div class="datepicker_title_containter">
             <div class="datepicker_last_year"><span class="last_year datepicker_img" title="Last Year"></span></div>
             <div class="datepicker_last_month"><span class="last_month datepicker_img" title="Last Month"></span></div>
             <div class="datepicker_title_date"><span class="title_month">Jun</span> <span class="title_year">2016</span></div>
             <div class="datepicker_next_month"><span class="next_month datepicker_img" title="Next Month"></span></div>
             <div class="datepicker_next_year"><span class="next_year datepicker_img" title="Next Year"></span></div>
         </div>
-        <div id="datepicker_maindata_containter" class="datepicker_maindata_containter">
-            <div id="datepicker_week_container" class="datepicker_week_container">
-                <div id="datepicker_week" class="datepicker_week">
+        <div class="datepicker_maindata_containter">
+            <div class="datepicker_week_container">
+                <div class="datepicker_week">
                     <div>Sa</div>
                     <div>Mo</div>
                     <div>Tu</div>
@@ -61,7 +61,7 @@
                 <div class="">30</div>
             </div>
         </div>
-        <div class="datepicker_mainyear_containter" flag="0">
+        <div class="datepicker_year_layer" flag="0">
             <div class="currItem">2016</div>
             <div class="">2017</div>
             <div class="">2018</div>
@@ -79,7 +79,7 @@
             <div class="">2030</div>
             <div class="">2031</div>
         </div>
-        <div class="datepicker_mainmonth_containter" flag="0">
+        <div class="datepicker_month_layer" flag="0">
             <div class="">Jan</div>
             <div class="">Feb</div>
             <div class="">Mar</div>
@@ -93,7 +93,7 @@
             <div class="">Nov</div>
             <div class="">Dec</div>
         </div>
-        <div class="hover_containter" id="hover_containter" flag="0">
+        <div class="datepicker_hover_layer" flag="0">
             <div class="">00</div>
             <div class="">01</div>
             <div class="">02</div>
@@ -119,7 +119,7 @@
             <div class="">22</div>
             <div class="">23</div>
         </div>
-        <div class="minute_containter" id="minute_containter" flag="0">
+        <div class="datepicker_minute_layer" flag="0">
             <div class="">00</div>
             <div class="">05</div>
             <div class="">10</div>
@@ -133,7 +133,7 @@
             <div class="">50</div>
             <div class="">55</div>
         </div>
-        <div class="minute_containter" id="second_containter" flag="0">
+        <div class="datepicker_minute_layer" flag="0">
             <div class="">00</div>
             <div class="">05</div>
             <div class="">10</div>
@@ -147,10 +147,10 @@
             <div class="">50</div>
             <div class="">55</div>
         </div>
-        <div id="datepicker_time" class="datepicker_time">
-            <span id="hover_txt"><input type="text" class="time_txt" value="16" maxlength="2" id="hour"></span>:
-            <span id="minute_txt"><input type="text" class="time_txt" value="08" maxlength="2" id="minute"></span>:
-            <span id="second_txt"><input type="text" class="time_txt" value="39" maxlength="2" id="second"></span>
+        <div class="datepicker_time_containter">
+            <span id="hover_txt"><input type="text" class="time_txt hour" value="16" maxlength="2" ></span>:
+            <span id="minute_txt"><input type="text" class="time_txt minute" value="08" maxlength="2"></span>:
+            <span id="second_txt"><input type="text" class="time_txt second" value="39" maxlength="2"></span>
         </div>
     </div>
 </body>
