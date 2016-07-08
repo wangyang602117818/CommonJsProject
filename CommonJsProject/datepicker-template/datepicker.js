@@ -39,24 +39,24 @@
             defaultTimeArray: [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()],
             //文本框中的日期
             currentTimeArray: null,          //保存选中日期
-            start_time_arr: null,        //时间范围限制
-            end_time_arr: null,          //时间范围限制
+            timeBoundStart: null,        //起始时间
+            timeBoundEnd: null,          //结束时间
             dur: 300,                   //动画速度
-            start_disp_year: null,     //year层的起始年
-            has_time: false,           //
-            user_set_format: false,  //标记用户设置了格式没有
+            startYear: null,           //year层的起始年
+            hasTime: false,            //
+            hasUserFormat: false,     //标记用户设置了格式没有(通过 javascript|html 标签)
             element: element
         };
         this.dataContainer = {
             datepicker: null,
-            title_containter: null,
-            time_containter: null,
-            main_data_containter: null,
-            year_layer: null,
-            month_layer: null,
-            hour_layer: null,
-            minute_layer: null,
-            second_layer: null
+            titleContainter: null,
+            timeContainter: null,
+            mainDataContainter: null,
+            yearLayer: null,
+            monthLayer: null,
+            hourLayer: null,
+            minuteLayer: null,
+            secondLayer: null
         };
     };
     DatePicker.prototype = {
