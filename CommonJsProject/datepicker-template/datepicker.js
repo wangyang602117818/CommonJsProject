@@ -1,16 +1,25 @@
 ﻿(function (window, $) {
-    var DatePicker = function (element, option) {
+    $.fn.DatePicker = function (options) {
+        $(".datepicker").each(function () {
+            var datepicker = new DatePicker();
+            datepicker.init(this, options);
+        });
+
+    }
+    function DatePicker(element, option) {
         this.defaults = {
-            format: "dd Month yyyy", //界面展示的格式 yyyy-MM-dd|yyyy/MM/dd|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
+            //界面展示的格式 yyyy-MM-dd|yyyy/MM/dd|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
+            format: "dd Month yyyy",
             start: "2000-01-01 00:00:00",  //start: new Date(),
             end: "2100-12-31 00:00:00",        //end: new Date().addYear(1)
-            useFormat: "yyyy-MM-dd",               //与程序交互的时间格式
+            //与程序交互的时间格式
+            useFormat: "yyyy-MM-dd",
             //验证文本框的日期值,是否有时间
-            timeval_regex: /\d{1,2}:(\d{1,2})?(:\d{1,2})?/,
+            valueTime: /\d{1,2}:(\d{1,2})?(:\d{1,2})?/,
             //作验证日期格式是否有时间
-            time_regex: /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,
+            formatTime: /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,
             //提取文本框的日期,针对中国时间
-            date_val_regex: /(\d{2,4})(?:[/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/,
+            dateValue: /(\d{2,4})(?:[/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/,
             lang: {
                 zh: {
                     week: ["日", "一", "二", "三", "四", "五", "六"],
@@ -26,8 +35,10 @@
         };
         this.parameters = {
             date: new Date(),
-            curr_time_arr: [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()],         //文本框中的日期
-            text_time_arr: null,          //保存选中日期
+            //面板启动时默认显示的时间
+            defaultTimeArray: [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()],
+            //文本框中的日期
+            currentTimeArray: null,          //保存选中日期
             start_time_arr: null,        //时间范围限制
             end_time_arr: null,          //时间范围限制
             dur: 300,                   //动画速度
@@ -35,7 +46,6 @@
             has_time: false,           //
             user_set_format: false,  //标记用户设置了格式没有
             element: element
-
         };
         this.dataContainer = {
             datepicker: null,
@@ -47,8 +57,13 @@
             hour_layer: null,
             minute_layer: null,
             second_layer: null
-        }
+        };
+    };
+    DatePicker.prototype = {
+        init: function (element, options) {
+
+        },
     }
 
 
-})(window, $);
+})(window, jQuery);
