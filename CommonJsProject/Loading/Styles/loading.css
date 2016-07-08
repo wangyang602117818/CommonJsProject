@@ -2,7 +2,7 @@
 /*******************************公用效果******************************************/
 .loading-background {
     position: absolute;
-    background-color: rgba(217,217,217,0.15);
+    background-color: rgba(217,217,217,0.35);
 }
 
 .loading {
