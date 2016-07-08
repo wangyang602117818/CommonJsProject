@@ -6,7 +6,7 @@
         });
 
     }
-    function DatePicker(element, option) {
+    function DatePicker() {
         this.defaults = {
             //界面展示的格式 yyyy-MM-dd|yyyy/MM/dd|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
             format: "dd Month yyyy",
@@ -45,7 +45,7 @@
             startYear: null,           //year层的起始年
             hasTime: false,            //
             hasUserFormat: false,     //标记用户设置了格式没有(通过 javascript|html 标签)
-            element: element
+            element: null
         };
         this.dataContainer = {
             datepicker: null,
