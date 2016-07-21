@@ -1,5 +1,4 @@
-﻿
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -7,27 +6,32 @@
     <meta charset="utf-8" />
     <script src="Scripts/jquery-1.10.2.js"></script>
     <script>
-        function checkPhone(input) {
-            var phone = $(input).val().trim();  //文本框的值
-            if (phone === "") {
-                $(input).attr("placeholder", "不能为空");
-                return;  //退出当前函数
-            }
-            var reg = /^(13|15|18)\d{9}$/;
-            if (!reg.test(phone)) {
-                $("#Phone").val("格式不对");  //填写错误
-                return;
-            } else {
-                $("#format-error").html("ok");  //填写正确
+        //这是函数
+        function getDateArr(str) {
+            var monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            var date = new Date(str);
+            var year = date.getFullYear(),
+                month = monthArray[date.getMonth()],
+                day = date.getDate();
+            return {
+                year: year,
+                day: day,
+                month: month
             }
         }
+        //调用方式
+        var str = "2016-05-21";   //要转换的日期字符串
+        var year = getDateArr(str).year;  // 年
+        var month = getDateArr(str).month;  // 月
+        var day = getDateArr(str).day;  // 日
+
+        var s = "";
     </script>
- 
+
 </head>
 <body>
-        手机号
-<input type="text" id="Phone" name="Phone" onblur="checkPhone(this)" placeholder="请填写电话"/><span id="format-error"></span>
-   
+
+
 </body>
 
 
