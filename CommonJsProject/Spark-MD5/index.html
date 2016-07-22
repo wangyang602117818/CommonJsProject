@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="spark-md5.js"></script>
+
+</head>
+<body>
+    <input type="file" id="file" multiple />
+    <div id="dv1"></div>
+</body>
+</html>
+<script>
+    
+    document.getElementById('file').addEventListener('change', function () {
+        var file = this.files[0];
+
+        reckonMd5(file);
+    });
+
+    function reckonMd5(file) {
+        var blobSlice = File.prototype.slice || File.prototype.mozSlice || File.prototype.webkitSlice,
+            chunkSize = 1024 * 1024 * 2,                             // Read in chunks of 2MB
+            chunks = Math.ceil(file.size / chunkSize),
+            currentChunk = 0,
+            spark = new SparkMD5.ArrayBuffer(),
+            fileReader = new FileReader();
+        fileReader.onload = function (e) {
+            spark.append(e.target.result);
+            currentChunk++;
+            progress(currentChunk, chunks);  //
+            if (currentChunk < chunks) {
+                loadNext(currentChunk);
+            } else {
+                finished(spark.end());
+            }
+        }
+        fileReader.onerror = error;
+        loadNext(currentChunk);
+        function loadNext(currentChunk) {
+            var start = currentChunk * chunkSize,
+                end = ((start + chunkSize) >= file.size) ? file.size : start + chunkSize;
+            fileReader.readAsArrayBuffer(blobSlice.call(file, start, end));
+        }
+    }
+    //计算进度,currentChunk:计算完成的块,chunks:总块数
+    function progress(currentChunk, chunks) {
+        var percent = (currentChunk / chunks * 100).toFixed(0) + "%";
+        document.getElementById("dv1").innerHTML = percent;
+    }
+    //计算完成
+    function finished(md5Code) {
+        document.getElementById("dv1").innerHTML = md5Code;
+    }
+    //计算失败
+    function error() {
+
+    }
+</script>
