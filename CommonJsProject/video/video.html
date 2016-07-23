@@ -27,7 +27,7 @@
         if (Hls.isSupported()) {
             var video = document.getElementById('video');
             var hls = new Hls();
-            hls.loadSource('/video/src/output1.m3u8');
+            hls.loadSource('/video/src/output1.m3u8');  //不能使用相对路径
             hls.attachMedia(video);
             //hls.on(Hls.Events.MANIFEST_PARSED, function () {
             //    video.play();
