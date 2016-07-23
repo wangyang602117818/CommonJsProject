@@ -230,7 +230,6 @@
     <Content Include="file-uploader\index.html" />
     <Content Include="file-uploader\scripts\jquery-1.7.1.js" />
     <Content Include="file-uploader\styles\file-uploader.css" />
-    <None Include="video\src\1.mp4" />
     <Content Include="video\video.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -243,51 +242,17 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\File\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <None Include="video\src\output1.m3u8" />
     <Content Include="video\hls.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="video\src\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="video\src\output10.ts" />
-    <None Include="video\src\output11.ts" />
-    <None Include="video\src\output110.ts" />
-    <None Include="video\src\output111.ts" />
-    <None Include="video\src\output112.ts" />
-    <None Include="video\src\output113.ts" />
-    <None Include="video\src\output114.ts" />
-    <None Include="video\src\output115.ts" />
-    <None Include="video\src\output116.ts" />
-    <None Include="video\src\output117.ts" />
-    <None Include="video\src\output118.ts" />
-    <None Include="video\src\output119.ts" />
-    <None Include="video\src\output12.ts" />
-    <None Include="video\src\output120.ts" />
-    <None Include="video\src\output121.ts" />
-    <None Include="video\src\output122.ts" />
-    <None Include="video\src\output123.ts" />
-    <None Include="video\src\output124.ts" />
-    <None Include="video\src\output125.ts" />
-    <None Include="video\src\output126.ts" />
-    <None Include="video\src\output127.ts" />
-    <None Include="video\src\output128.ts" />
-    <None Include="video\src\output129.ts" />
-    <None Include="video\src\output13.ts" />
-    <None Include="video\src\output130.ts" />
-    <None Include="video\src\output131.ts" />
-    <None Include="video\src\output14.ts" />
-    <None Include="video\src\output15.ts" />
-    <None Include="video\src\output16.ts" />
-    <None Include="video\src\output17.ts" />
-    <None Include="video\src\output18.ts" />
-    <None Include="video\src\output19.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
