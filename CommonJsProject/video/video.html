@@ -23,16 +23,17 @@
     <video controls="controls" id="video" width="400" height="400">
         <source src="/video/src/output1.m3u8" type="application/x-mpegURL" />
     </video>
-    <script>
-        if (Hls.isSupported()) {
-            var video = document.getElementById('video');
-            var hls = new Hls();
-            hls.loadSource('/video/src/output1.m3u8');  //不能使用相对路径
-            hls.attachMedia(video);
-            //hls.on(Hls.Events.MANIFEST_PARSED, function () {
-            //    video.play();
-            //});
-        }
-    </script>
+
 </body>
 </html>
+<script>
+    if (Hls.isSupported()) {
+        var video = document.getElementById('video');
+        var hls = new Hls();
+        hls.loadSource('/video/src/output1.m3u8');  //不能使用相对路径
+        hls.attachMedia(video);
+        //hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        //    video.play();
+        //});
+    }
+</script>
