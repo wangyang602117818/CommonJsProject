@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="hls.min.js"></script>
+</head>
+<body>
+    <!--纯html5的方式
+    只要是支持html5标签的浏览器基本都支持
+    优点:方便,快捷,只要嵌入 video标签就ok
+        缺点:视频缓冲,ie好像会先下载视频,性能不好
+    -->
+    <video controls="controls" width="400" height="400">
+        <source src="src/1.mp4" type="video/mp4" />
+    </video>
+    <hr />
+    <!--视频切片
+    其中application/x-mpegURL类型只有apple设置支持,
+        下面的js代码是为了兼容其他浏览器的
+    -->
+    <video controls="controls" id="video" width="400" height="400">
+        <source src="/video/src/output1.m3u8" type="application/x-mpegURL" />
+    </video>
+
+</body>
+</html>
+<script>
+    if (Hls.isSupported()) {
+        var video = document.getElementById('video');
+        var hls = new Hls();
+        hls.loadSource('/video/src/output1.m3u8');  //不能使用相对路径
+        hls.attachMedia(video);
+        //hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        //    video.play();
+        //});
+    }
+</script>
