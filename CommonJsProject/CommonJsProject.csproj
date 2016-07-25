@@ -159,6 +159,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -174,6 +176,9 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="video\v1.ashx.cs">
+      <DependentUpon>v1.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Chart\chart.html" />
@@ -242,10 +247,12 @@
     <Content Include="Views\File\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="video\hls.min.js" />
+    <Content Include="video\v1.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="video\src\" />
+    <Folder Include="Views\Video\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

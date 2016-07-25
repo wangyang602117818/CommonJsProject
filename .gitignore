@@ -29,3 +29,5 @@ _ReSharper*/
 [Ee]rror/
 [Ww]eb[Rr]esource/
 uploadfiles/
+.m3u8
+.ts
