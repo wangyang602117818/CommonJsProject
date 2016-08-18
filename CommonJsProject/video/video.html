@@ -25,7 +25,7 @@
     </video>-->
 
     <video controls="controls" id="video2" width="300" height="300">
-        <source src="/video/v1.ashx" />
+        <source src="/video/index" />
     </video>
 </body>
 </html>
@@ -40,7 +40,7 @@
         //});
         var video1 = document.getElementById('video2');
         var hls1 = new Hls();
-        hls1.loadSource('/video/v1.ashx');  //不能使用相对路径
+        hls1.loadSource('/video/index');  //不能使用相对路径
         hls1.attachMedia(video1);
 
     }

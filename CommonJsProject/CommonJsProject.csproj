@@ -234,6 +234,8 @@
     <Content Include="file-uploader\index.html" />
     <Content Include="file-uploader\scripts\jquery-1.7.1.js" />
     <Content Include="file-uploader\styles\file-uploader.css" />
+    <Content Include="video\dash.all.min.js" />
+    <Content Include="video\dash.html" />
     <Content Include="video\video.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

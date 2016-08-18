@@ -20,7 +20,7 @@ namespace CommonJsProject.Controllers
         {
             string filename = "output" + id + ".ts";
             string file = AppConfig.BasePath + @"video\src\1\output\" + filename;
-            return File(file, "video/MP2T");
+            return File(file, "video/vnd.dlna.mpeg-tts");
         }
     }
 }

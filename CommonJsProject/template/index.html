@@ -29,15 +29,16 @@
         $("body").append(res);
         var s = 0;
     });
-
+    //把html解析成dom
     function parseHTML(html, model) {
-        if (data) {
+        if (model) {
             html = parseTemplate(html, model);
         }
         var tmp = document.createElement("div");
         tmp.innerHTML = html;
         return tmp.childNodes[0];//只允许有一个根节点
     }
+    //把模板解析成字符串
     function parseTemplate(html, model) {
         html = html.replace(/[\r\n]/g, "").replace(/'/g, "\\'");
         var splitRegex = /<%=(.+?)%>|<%([^=]([^%]|\n)*)%>/g,
