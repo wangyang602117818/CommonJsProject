@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <style>
+        .dv{
+            border:1px solid red;
+            height:400px;
+            width:200px;
+        }
+    </style>
+    <script>
+
+        $(window).scroll(function () {
+            var scrollTop = $(this).scrollTop();      //滚动条被卷去的高度
+            var scrollHeight = $(document).height();  //整个documen高度,总高度
+            var windowHeight = $(this).height();  //当前窗口的高度
+
+            var scrollBottom = scrollHeight - scrollTop - windowHeight;
+        
+            console.log("scrollTop:" + scrollTop + ", scrollHeight:" + scrollHeight + ", windowHeight:" + windowHeight)
+            if (scrollBottom == 0) {
+                $("#body").append("<div class=\"dv\">i</div>");
+            }
+        });
+    </script>
+</head>
+<body id="body">
+    <div class="dv">1</div>
+    <div class="dv">2</div>
+    <div class="dv">3</div>
+    <div class="dv">4</div>
+    <div class="dv">5</div>
+    <div class="dv">6</div>
+    <div class="dv">7</div>
+    <div class="dv">8</div>
+    <div class="dv">9</div>
+</body>
+</html>
