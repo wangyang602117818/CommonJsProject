@@ -226,7 +226,6 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="scroll\index.html" />
-    <Content Include="scroll\zepto.js" />
     <Content Include="scroll\下拉加载原理.png" />
     <Content Include="spark-md5\index.html" />
     <Content Include="spark-md5\spark-md5.js" />

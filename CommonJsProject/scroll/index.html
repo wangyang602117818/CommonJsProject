@@ -2,40 +2,72 @@
 <html>
 <head>
     <title></title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
     <script src="../Scripts/jquery-1.10.2.js"></script>
     <style>
-        .dv{
-            border:1px solid red;
-            height:400px;
-            width:200px;
+        .dv {
+            border: 1px solid red;
+            height: 400px;
+            width: 200px;
+        }
+
+        .con {
+            border: 1px solid blue;
+            zoom:1;
+        }
+        #fix{
+            font-size:25px;
         }
     </style>
     <script>
+        $(function () {
+            $(window).scroll(function () {
+                var scrollTop = $(this).scrollTop();      //滚动条被卷去的高度
+                var scrollHeight = $(document).height();  //整个documen高度,总高度
+                var windowHeight = $(this).height();  //当前窗口的高度
 
-        $(window).scroll(function () {
-            var scrollTop = $(this).scrollTop();      //滚动条被卷去的高度
-            var scrollHeight = $(document).height();  //整个documen高度,总高度
-            var windowHeight = $(this).height();  //当前窗口的高度
-
-            var scrollBottom = scrollHeight - scrollTop - windowHeight;
+                var scrollBottom = scrollHeight - scrollTop - windowHeight;
+                $("#fix").html("scrollTop:" + scrollTop +
+                    ", <br>scrollHeight:" + scrollHeight +
+                    ", <br>windowHeight:" + windowHeight
+                 );
+            });
+        })
         
-            console.log("scrollTop:" + scrollTop + ", scrollHeight:" + scrollHeight + ", windowHeight:" + windowHeight)
-            if (scrollBottom == 0) {
-                $("#body").append("<div class=\"dv\">i</div>");
-            }
-        });
     </script>
 </head>
 <body id="body">
-    <div class="dv">1</div>
-    <div class="dv">2</div>
-    <div class="dv">3</div>
-    <div class="dv">4</div>
-    <div class="dv">5</div>
-    <div class="dv">6</div>
-    <div class="dv">7</div>
-    <div class="dv">8</div>
-    <div class="dv">9</div>
+    <div id="fix" style="position:fixed;border:1px solid green;width:300px;height:200px;background-color:#fff"></div>
+    <div class="con">
+        <div class="dv">1</div>
+        <div class="dv">2</div>
+        <div class="dv">3</div>
+        <div class="dv">4</div>
+        <div class="dv">5</div>
+        <div class="dv">6</div>
+        <div class="dv">7</div>
+        <div class="dv">8</div>
+        <div class="dv">9</div>
+    </div>
 </body>
 </html>
+<script>
+    //$(window).scroll(function () {
+    //    var offset = $(".con").offset();
+    //    var height = $(".con").height();
+    //    var sc=$(".con")
+    //    $("#fix").html("height:" + height + " , top:" + offset.top);
+    //});
+    $("#scrollbox").scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $("#dvOrderList").height();
+        if (scrollTop + scrollHeight > windowHeight) {
+            if ($("#hidIsLastPageIndex").val() == "1") {  //最后一条
+                $("#lastRecord").show();
+            } else {
+                loadDataByPage();
+            }
+        }
+    });
+</script>
