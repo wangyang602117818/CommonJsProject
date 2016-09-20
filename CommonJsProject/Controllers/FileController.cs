@@ -12,6 +12,7 @@ namespace CommonJsProject.Controllers
         // GET: File
         public ActionResult Index()
         {
+           
             return View();
         }
         [HttpPost]
