@@ -18,28 +18,11 @@
     
 </head>
 <body id="body">
-    60211k@qq.com
-    @for(int i = 0; i < 5; i++)
-    {
-        <div>safds  </div>
-        int a = 0;
-        @a;
-    }
-    @if(true){
-        
-    }
+    
 </body>
 </html>
 <script>
-        var data = {
-            title: "mytitle",
-            data: { exist: "true", data: "data000" },
-            msg: [{ msg1: "111", msg2: "222" }, { msg1: "m111", msg2: "m222" }]
-        };
-        var code = "var p=[];p.push('<div id=\"calendar\" class=\"calendar\">    <div id=\"calendar_title_containter\" class=\"calendar_title_containter\">');p.push(model.title);p.push('</div>    <div id=\"calendar_title_containter\" class=\"calendar_title_containter\">        ');if(model.data.exist == \"true\")        {p.push('        <div>');p.push(model.data.exist);p.push('+\",\" + ');p.push(model.data.data);p.push('</div>        ');}        else        {p.push('        <div>0:0</div>        ');}p.push('        ');for(var i = 0; i < model.msg.length;i++){p.push('        <div>');p.push(i);p.push(',');p.push(model.msg[i].msg1);p.push(',');p.push(model.msg[i].msg2);p.push('</div>        ');}p.push('    </div>    <div id=\"calendar_title_containter\" class=\"calendar_title_containter\">        <div>');p.push(model.msg[0].msg1);p.push('</div>    </div></div>');return p.join('')";
-        var fn = new Function("model", code);
-        var res = fn(data);
-        document.getElementById("body").innerHTML= res;
+        
 
 
 </script>
