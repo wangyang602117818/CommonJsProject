@@ -2,10 +2,102 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <link href="jquery.gridster.css" rel="stylesheet" />
     <script src="jquery-1.10.2.min.js"></script>
     <script src="gridster.js"></script>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            list-style: none;
+            font-weight: bold;
+            background-color: #b0e0e6
+        }
+
+        .gridster ul {
+            background-color: #ccc;
+        }
+
+        .gridster li {
+            font-size: 1em;
+            font-weight: bold;
+            text-align: center;
+            line-height: 100%;
+        }
+
+    </style>
 </head>
 <body>
+    <div class="gridster">
+        <ul>
+            <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
+                <header>|||</header>
+                0
+            </li>
+            <li data-row="1" data-col="3" data-sizex="1" data-sizey="2">
+                <header>|||</header>
+                1
+            </li>
+            <li data-row="1" data-col="4" data-sizex="1" data-sizey="1">
+                <header>|||</header>
+                2
+            </li>
+            <li data-row="3" data-col="2" data-sizex="3" data-sizey="1">
+                <header>|||</header>
+                3
+            </li>
+
+            <li data-row="4" data-col="1" data-sizex="1" data-sizey="1">
+                <header>|||</header>
+                4
+            </li>
+            <li data-row="3" data-col="1" data-sizex="1" data-sizey="1">
+                <header>|||</header>
+                5
+            </li>
+            <li data-row="4" data-col="2" data-sizex="1" data-sizey="1">
+                <header>|||</header>
+                6
+            </li>
+            <li data-row="5" data-col="2" data-sizex="1" data-sizey="1">
+                <header>|||</header>
+                7
+            </li>
+            <li data-row="4" data-col="4" data-sizex="1" data-sizey="1">
+                <header>|||</header>
+                8
+            </li>
+
+            <li data-row="1" data-col="5" data-sizex="1" data-sizey="3">
+                <header>|||</header>
+                9
+            </li>
+        </ul>
+    </div>
 
 </body>
 </html>
+<script type="text/javascript" id="code">
+    var gridster;
+
+    $(function () {
+        gridster = $(".gridster > ul").gridster({
+            widget_margins: [5, 5],
+            widget_base_dimensions: ['auto', 100],
+            resize: {
+                enabled: true
+            },
+            min_cols: 1,
+            max_cols: 24,
+            //shift_widgets_up: false,
+            shift_larger_widgets_down: false,
+            
+           
+
+        }).data('gridster');
+        $('.gridster  ul').css({ 'padding': '0' })
+
+    });
+</script>
