@@ -3,7 +3,7 @@
 <head>
     <title></title>
     <meta charset="utf-8" />
-    <script src="../Scripts/jquery-1.10.2.js"></script>
+    <script src="jquery-1.10.2.min.js"></script>
     <style>
         .dv {
             border: 1px solid red;
@@ -23,13 +23,17 @@
         $(function () {
             $(window).scroll(function () {
                 var scrollTop = $(this).scrollTop();      //滚动条被卷去的高度
-                var scrollHeight = $(document).height();  //整个documen高度,总高度
+                var documentHeight = $(document).height();  //整个documen高度,总高度
                 var windowHeight = $(this).height();  //当前窗口的高度
 
-                var scrollBottom = scrollHeight - scrollTop - windowHeight;
+                var scrollBottom = documentHeight - scrollTop - windowHeight;
+
+                var reachBottom = scrollBottom <= 1;
                 $("#fix").html("scrollTop:" + scrollTop +
-                    ", <br>scrollHeight:" + scrollHeight +
-                    ", <br>windowHeight:" + windowHeight
+                    ", <br>documentHeight:" + documentHeight +
+                    ", <br>windowHeight:" + windowHeight+
+                    ",<br>Bottom:" + scrollBottom +
+                    ",<br>reachedBottom:" + reachBottom
                  );
             });
         })
