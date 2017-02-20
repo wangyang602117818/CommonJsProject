@@ -89,6 +89,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="datepicker-template-v2\date.png" />
+    <Content Include="datepicker-template-v2\datepicker-icon.png" />
+    <Content Include="datepicker-template-v2\datepicker.css" />
+    <Content Include="datepicker-template-v2\datepicker.js" />
+    <Content Include="datepicker-template-v2\index.html" />
+    <Content Include="datepicker-template-v2\jquery-1.10.2.min.js" />
+    <Content Include="datepicker-template-v2\datepicker.html" />
     <Content Include="datepicker-template\datepicker.css" />
     <Content Include="datepicker-template\datepicker.html" />
     <Content Include="datepicker-template\datepicker-icon.png" />

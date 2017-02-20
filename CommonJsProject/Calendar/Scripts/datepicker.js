@@ -42,7 +42,7 @@
         time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,   //作验证日期格式是否有时间
         date_val_regex = /(\d{2,4})(?:[/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/; //提取文本框的日期,针对中国时间
         //全局对象
-        var calendar,  //主日期框对象
+        var calendar,       //主日期框对象
             calendar_time,  //时间对象
             main_data_containter,  //主数据容器对象
             con_year,
