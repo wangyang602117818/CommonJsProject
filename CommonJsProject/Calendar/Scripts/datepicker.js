@@ -23,7 +23,7 @@
                 title: ["年", "上一年", "下一年", "月", "上一月", "下一月"]
             },
             "en-us": {
-                week: ["Sa", "Mo", "Tu", "We", "Th", "Fr", "Su"],
+                week: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
                 month: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 title: ["", "Last Year", "Next Year", "", "Last Month", "Next Month"]
             }

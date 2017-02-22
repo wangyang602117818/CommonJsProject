@@ -7,38 +7,21 @@
     <script src="datepicker.js"></script>
 
     <style>
-        .datepicker_content {
-            position: absolute;
-            display: inline-block;
-            border: 1px solid red;
-            left: 50px;
-            top: 100px;
-            width: 205px;
-            height: 202px;
-        }
     </style>
     <script>
-        function getIframeWindow() {
-
-        }
-        $(function () {
-            $.get('datepicker.html', function (data) {
-                var iframe_document = $(".datepicker_content").contents();
-                iframe_document.find("head").append("<link href=\"datepicker.css\" rel=\"stylesheet\" />");
-                iframe_document.find("body").append(data);
-            });
-            
-        });
+        
     </script>
 </head>
 <body>
+    <input type="text" name="txt" id="txt" class="datepicker" />
 
-    <input type="text" name="txt" id="txt" class="datepicker" date-val="2016-02-06 12:01:03" date-show-format="dd Month yyyy"/>
-    <iframe src="" class="datepicker_content" scrolling="no"></iframe>
+    <input type="text" name="txt" id="txt" class="datepicker" date-val="2017-07-06"/>
+
 
     <input type="text" name="txt1" id="txt1" class="datepicker" date-val="2015-02-06 12:01:03" date-lang="en-us" date-show-format="dd Month yyyy hh:mm:ss" date-start="2000-01-01 00:00:00" date-end="2049-12-31 00:00:00" />
 
-    <input type="text" name="txt" id="txt" date-val="2016-02-06 12:01:03" date-show-format="dd Month yyyy" />
+    
+
 
 </body>
 </html>
