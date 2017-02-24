@@ -230,7 +230,7 @@
             calendar_time.find("#second_txt").bind("click", showSecondDiv).bind("input propertychange", function () {
                 curr_time_arr[5] = $(this).find("input").val();
                 writeDate();
-            });;
+            });
         }
         //将文本框中的日期字符串转成日期对象,供默认选中用
         function inputDateConvert(str) {

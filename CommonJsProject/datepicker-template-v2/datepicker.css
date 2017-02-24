@@ -47,15 +47,15 @@
     box-shadow: 0 0 5px rgba(103, 166, 217, 0.5);
 }
 
-.add_cal_len1 {       /*第二种日期框高度,无时间，但是需要加高度*/
+.add_cal_len1 { /*第二种日期框高度,无时间，但是需要加高度*/
     height: 226px;
 }
 
-.add_cal_len2 {      /*有时间，不需要加高度*/
+.add_cal_len2 { /*有时间，不需要加高度*/
     height: 223px;
 }
 
-.add_cal_len3 {      /*有时间，需要加高度*/
+.add_cal_len3 { /*有时间，需要加高度*/
     height: 248px;
 }
 
@@ -458,7 +458,7 @@
     /*display: none;*/
 }
 
-    .datepicker_minute_layer div .datepicker_second_layer div {
+    .datepicker_minute_layer div, .datepicker_second_layer div {
         border: 1px solid transparent;
         display: inline-block;
         float: left;
@@ -470,10 +470,10 @@
         margin-top: 15px;
     }
 
-    .datepicker_minute_layer div:hover, .datepicker_second_layer div:hover {
-        cursor: pointer;
-        border-color: #eb8c00;
-    }
+        .datepicker_minute_layer div:hover, .datepicker_second_layer div:hover {
+            cursor: pointer;
+            border-color: #eb8c00;
+        }
 
     .datepicker_minute_layer .disabled, datepicker_second_layer .disabled {
         color: #bbb;

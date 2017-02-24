@@ -65,7 +65,8 @@
     }
     //点击的时候，初始化数据
     function init(that) {
-        var options = defaults.clone();
+        var options = {};
+        for (var t in defaults) options[t] = defaults[t];
         has_time = false;
         var dateShowFormat = that.attr("date-show-format");
         options.showFormat = dateShowFormat || options.showFormat;
@@ -130,12 +131,213 @@
         datepicker = datepicker_iframe.contents().find(".datepicker");
         main_data_containter = datepicker.find(".datepicker_maindata_containter");
         con_year = datepicker.find(".datepicker_year_layer");
-        con_month = datepicker.find(".datepicker_month_layer");;
-        con_hour = datepicker.find(".datepicker_hover_layer");;
-        con_minute = datepicker.find(".datepicker_minute_layer");;
-        con_second = datepicker.find(".datepicker_second_layer");;
+        con_month = datepicker.find(".datepicker_month_layer");
+        con_hour = datepicker.find(".datepicker_hover_layer");
+        con_minute = datepicker.find(".datepicker_minute_layer");
+        con_second = datepicker.find(".datepicker_second_layer");
         changeHeight();
-
+        //5个div层
+        datepicker.find(".title_year").bind("click", showYearLayer);
+        datepicker.find(".title_month").bind("click", showMonthLayer);
+        datepicker.find("#hover_txt").bind("click", showHoverLayer).bind("input propertychange", function () {
+            curr_time_arr[3] = $(this).find("input").val();
+            writeDate();
+        });
+        datepicker.find("#minute_txt").bind("click", showMinuteLayer).bind("input propertychange", function () {
+            curr_time_arr[4] = $(this).find("input").val();
+            writeDate();
+        });
+        datepicker.find("#second_txt").bind("click", showSecondLayer).bind("input propertychange", function () {
+            curr_time_arr[5] = $(this).find("input").val();
+            writeDate();
+        });
+        //4个按钮
+        datepicker.find(".last_year").bind("click", lastYear);
+        datepicker.find(".next_year").bind("click", nextYear);
+        datepicker.find(".last_month").bind("click", lastMonth);
+        datepicker.find(".next_month").bind("click", nextMonth);
+    }
+    //显示年份div
+    function showYearLayer() {
+        con_year.stop(); con_month.stop();
+        //重设年份容器的年份内容
+        //con_year.html(createYearEle(curr_time_arr[0]).unbind("click", yearSelected).html());
+        //让year层在month层上面
+        con_year.css({ "z-index": getMaxZIndex() + 1 });
+        if (con_year.attr("flag") == "0") {   //flag=0;表示年div未显示
+            datepicker.find(".last_month,.next_month").addClass("disabled");
+            datepicker.find(".last_year,.next_year").removeClass("disabled");
+            con_year.animate({ top: "26px" }, dur, function () {
+                con_month.css({ top: "-" + parseInt(main_data_containter.css("height"), 10) + "px" }).attr("flag", "0");
+                hiddenTimePanel();
+                con_year.attr("flag", "1");
+            });
+        } else {
+            datepicker.find(".last_month,.next_month").removeClass("disabled");
+            con_year.animate({ top: "-" + parseInt(main_data_containter.css("height"), 10) + "px" }, dur);
+            con_year.attr("flag", "0");
+        }
+    }
+    //显示月份div
+    function showMonthLayer() {
+        con_year.stop(); con_month.stop();
+        con_month.css({ "z-index": getMaxZIndex() + 1 });  //让moth层在year层上面
+        if (con_month.attr("flag") == "0") {   //flag=0;表示月div未显示
+            datepicker.find(".last_year,.next_year,.last_month,.next_month").addClass("disabled");
+            con_month.animate({ top: "26px" }, dur, function () {
+                con_year.css({ top: "-" + parseInt(main_data_containter.css("height"), 10) + "px" }).attr("flag", "0");
+                hiddenTimePanel();
+                con_month.attr("flag", "1");
+            });
+        } else {
+            datepicker.find(".last_year,.next_year,.last_month,.next_month").removeClass("disabled");
+            con_month.animate({ top: "-" + parseInt(main_data_containter.css("height"), 10) + "px" }, dur);
+            con_month.attr("flag", "0");
+        }
+    }
+    //显示小时div
+    function showHoverLayer() {
+        con_hour.css("z-index", getMaxZIndex() + 1);
+        if (con_hour.attr("flag") == "0") {
+            datepicker.find(".last_year,.next_year,.last_month,.next_month").addClass("disabled");
+            con_hour.animate({ bottom: "21px" }, dur, function () {
+                $(this).attr("flag", "1");
+                con_minute.css("bottom", "-176px").attr("flag", "0");
+                con_second.css("bottom", "-176px").attr("flag", "0");
+                hiddenDatePanel();
+            });
+        } else {
+            datepicker.find(".last_year,.next_year,.last_month,.next_month").removeClass("disabled");
+            con_hour.animate({ bottom: "-176px" }, dur, function () { $(this).attr("flag", "0") });
+        }
+    }
+    //显示分钟div
+    function showMinuteLayer() {
+        con_minute.css("z-index", getMaxZIndex() + 1);
+        if (con_minute.attr("flag") == "0") {
+            datepicker.find(".last_year,.next_year,.last_month,.next_month").addClass("disabled");
+            con_minute.animate({ bottom: "21px" }, dur, function () {
+                $(this).attr("flag", "1");
+                con_hour.css("bottom", "-176px").attr("flag", "0");
+                con_second.css("bottom", "-176px").attr("flag", "0");
+                hiddenDatePanel();
+            });
+        } else {
+            datepicker.find(".last_year,.next_year,.last_month,.next_month").removeClass("disabled");
+            con_minute.animate({ bottom: "-176px" }, dur, function () { $(this).attr("flag", "0") });
+        }
+    }
+    function showSecondLayer() {
+        con_second.css("z-index", getMaxZIndex() + 1);
+        if (con_second.attr("flag") == "0") {
+            datepicker.find(".last_year,.next_year,.last_month,.next_month").addClass("disabled");
+            con_second.animate({ bottom: "21px" }, dur, function () {
+                $(this).attr("flag", "1");
+                con_hour.css("bottom", "-176px").attr("flag", "0");
+                con_minute.css("bottom", "-176px").attr("flag", "0");
+                hiddenDatePanel();
+            });
+        } else {
+            datepicker.find(".last_year,.next_year,.last_month,.next_month").removeClass("disabled");
+            con_second.animate({ bottom: "-176px" }, dur, function () { $(this).attr("flag", "0") });
+        }
+    }
+    //上一年
+    function lastYear() {
+        if ($(this).hasClass("disabled")) return;
+        if (isYearDisplay()) {    //year层目前在展现
+            nextYearDiv("right");
+            return false;
+        }
+        --curr_time_arr[0];
+        if (isMonthDisplay()) {   //month目前在展现
+            nextMonthDisplay("right");
+        }
+        datepicker.find(".title_year").text(curr_time_arr[0] + commonlang[defaults.lang].title[0]);
+        changeMainData("right");  //动画改变日期面板
+    }
+    //下一年
+    function nextYear() {
+        if ($(this).hasClass("disabled")) return;
+        if (isYearDisplay()) {   //year层目前在展现
+            nextYearDiv("left");
+            return false;
+        }
+        ++curr_time_arr[0];
+        if (isMonthDisplay()) {   //month目前在展现
+            nextMonthDisplay("left");
+        }
+        datepicker.find(".title_year").text(curr_time_arr[0] + commonlang[defaults.lang].title[0]);
+        changeMainData("left");  //动画改变日期面板
+    }
+    //上一月
+    function lastMonth() {
+        if ($(this).hasClass("disabled")) return;
+        --curr_time_arr[1];
+        if (curr_time_arr[1] < 0) {
+            curr_time_arr[0]--;
+            curr_time_arr[1] = 11;
+            datepicker.find(".title_year").text(curr_time_arr[0] + commonlang[defaults.lang].title[0]);
+        }
+        //if (isMonthDisplay()) nextMonthDisplay("right");
+        datepicker.find(".title_month").text(commonlang[defaults.lang].month[curr_time_arr[1]].substring(0, 6) + commonlang[defaults.lang].title[3]);
+        changeMainData("right");//动画改变日期面板
+    }
+    //下一月
+    function nextMonth() {
+        if ($(this).hasClass("disabled")) return;
+        ++curr_time_arr[1];
+        if (curr_time_arr[1] > 11) {  //该跳到下一年了
+            curr_time_arr[0]++;
+            curr_time_arr[1] = 0;
+            datepicker.find(".title_year").text(curr_time_arr[0] + commonlang[defaults.lang].title[0]);
+        }
+        //if (isMonthDisplay()) nextMonthDisplay("left");
+        datepicker.find(".title_month").text(commonlang[defaults.lang].month[curr_time_arr[1]].substring(0, 6) + commonlang[defaults.lang].title[3]);
+        changeMainData("left");
+    }
+    //改变主日期面板,direction=动画方向
+    function changeMainData(direction) {
+        var datepicker_width = datepicker.css("width");  //主日期框宽度(数据面板的偏移量)
+        var dataEle = $(createDataDiv()); //创建
+        //在改变日期数据面板时,每个月天数不一样,有可能高度发生变化
+        if (needAddHeight()) {
+            calendar.addClass("add_cal_len1");
+            if (has_time) {  //有时间
+                calendar.addClass("add_cal_len3");
+            }
+            main_data_containter.addClass("add_main_date_len1");
+            con_year.addClass("mainyear_height1");
+            con_month.addClass("mainmonth_height1");
+        } else {
+            calendar.removeClass("add_cal_len1");
+            if (has_time) {
+                calendar.removeClass("add_cal_len3");
+                calendar.addClass("add_cal_len2");
+            }
+            main_data_containter.removeClass("add_main_date_len1");
+            con_year.removeClass("mainyear_height1");
+            con_month.removeClass("mainmonth_height1");
+        }
+        if (direction == "left") {
+            dataEle.css({ left: calendar_width }).attr("flag", "0");  //创建日期数据主面板element
+            main_data_containter.append(dataEle);  //吧日期主面板加入父容器,这时连同以前一个数据面板，一共有2个数据面板
+            var containter = calendar.find(".calendar_data_containter");   //获取这2个数据面板
+            //2个面板一同移动
+            containter.filter("[flag=1]").animate({ left: "-" + calendar_width }, dur, function () {
+                $(this).remove();
+            });
+            containter.filter("[flag=0]").animate({ left: 0 }, dur).attr("flag", "1");
+        }
+        if (direction == "right") {
+            dataEle.css({ left: "-" + calendar_width }).attr("flag", "0");
+            main_data_containter.append(dataEle);
+            var containter = $(".calendar_data_containter");
+            containter.filter("[flag=1]").animate({ left: calendar_width }, dur, function () {
+                $(this).remove();
+            });
+            containter.filter("[flag=0]").animate({ left: 0 }, dur).attr("flag", "1");
+        }
     }
     function changeHeight() {
         if (needAddHeight()) {
@@ -146,18 +348,17 @@
             main_data_containter.addClass("add_main_date_len1");
             con_year.addClass("mainyear_height1");
             con_month.addClass("mainmonth_height1");
-        }else{
+        } else {
             datepicker.removeClass("add_cal_len1");
             if (has_time) {
                 datepicker.removeClass("add_cal_len3");
-                datepicker.addClass("add_cal_len2");  
+                datepicker.addClass("add_cal_len2");
             }
             main_data_containter.removeClass("add_main_date_len1");
             con_year.removeClass("mainyear_height1");
             con_month.removeClass("mainmonth_height1");
         }
-        datepicker_iframe.height(datepicker.height()+2);
-        
+        datepicker_iframe.height(datepicker.height() + 2);
     }
     function getTemplate() {
         if (template != "") return template;
@@ -171,12 +372,32 @@
         });
         return template;
     }
+    function getMaxZIndex() {
+        var zindex = 0;
+        if (parseInt(con_month.css("z-index"), 10) > zindex) zindex = parseInt(con_month.css("z-index"), 10);
+        if (parseInt(con_year.css("z-index"), 10) > zindex) zindex = parseInt(con_year.css("z-index"), 10);
+        if (con_hour && parseInt(con_hour.css("z-index"), 10) > zindex) zindex = parseInt(con_hour.css("z-index"), 10);
+        if (con_minute && parseInt(con_minute.css("z-index"), 10) > zindex) zindex = parseInt(con_minute.css("z-index"), 10);
+        if (con_second && parseInt(con_second.css("z-index"), 10) > zindex) zindex = parseInt(con_second.css("z-index"), 10);
+        return zindex;
+    }
     //是否需要增加日期框高度
     function needAddHeight() {
         var days_week_obj = getMonthDays(curr_time_arr[0], curr_time_arr[1]);  //对象包含当月的天数，第一天周几？
         if (days_week_obj.days == 30 && days_week_obj.first_day_week == 6) return true;
         if (days_week_obj.days == 31 && (days_week_obj.first_day_week == 5 || days_week_obj.first_day_week == 6)) return true;
         return false;
+    }
+    //影藏时间面板
+    function hiddenTimePanel() {
+        if (con_hour) con_hour.css("bottom", "-176px").attr("flag", "0");
+        if (con_minute) con_minute.css("bottom", "-176px").attr("flag", "0");
+        if (con_second) con_second.css("bottom", "-176px").attr("flag", "0");
+    }
+    //隐藏年月面板
+    function hiddenDatePanel() {
+        con_year.css({ top: "-" + parseInt(main_data_containter.css("height"), 10) + "px" }).attr("flag", "0");
+        con_month.css({ top: "-" + parseInt(main_data_containter.css("height"), 10) + "px" }).attr("flag", "0");
     }
     function dateFormat(time_arr, format) {                //格式化日期 time_arr=数组,往界面输出 格式化后的日期
         var realMonth = time_arr[1];
@@ -250,6 +471,26 @@
         var days = new Date(year, month + 1, 0).getDate();  //当前月的天数
         var first_day_week = new Date(year, month, 1).getDay();   //第一天周几
         return { days: days, first_day_week: first_day_week };
+    }
+    function isYearDisplay() {
+        if (con_year.attr("flag") == "1") return true;
+        return false;
+    }
+    function isMonthDisplay() {
+        if (con_month.attr("flag") == "1") return true;
+        return false;
+    }
+    function isHoverDisplay() {
+        if (con_hour.attr("flag") == "1") return true;
+        return false;
+    }
+    function isMinuteDisplay() {
+        if (con_minute.attr("flag") == "1") return true;
+        return false;
+    }
+    function isSecondDisplay() {
+        if (con_second.attr("flag") == "1") return true;
+        return false;
     }
     //判断给定的天是否今天,忽略年月,(只要天相等,都加上灰色背景)
     function isDay(day) {
@@ -327,9 +568,4 @@
         var fn = new Function("model", code);
         return fn(model);
     }
-    Object.prototype.clone = function () {
-        var obj = {};
-        for (var t in this) obj[t] = this[t];
-        return obj;
-    };
 })(window, jQuery);
