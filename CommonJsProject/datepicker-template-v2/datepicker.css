@@ -226,7 +226,7 @@
     /*background-color:#ccc;*/
     width: 203px;
     position: absolute;
-    left: 0;
+    padding-left:1px;
     /*border: 1px solid red;*/
 }
 

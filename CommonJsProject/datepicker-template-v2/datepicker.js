@@ -30,6 +30,10 @@
     start_disp_year,  //year层的起始年
     has_time = false,     //,
     template = "",
+    template_data = "",
+    template_year = "",
+    template_data_regex = /<!--data_containter_start-->((.|\n|\r)*)<!--data_containter_end-->/,
+    template_year_regex = /<!--year_containter_start-->((.|\n|\r)*)<!--year_containter_end-->/,
     timeval_regex = /\d{1,2}:(\d{1,2})?(:\d{1,2})?/,  //验证文本框的日期值,是否有时间
     time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,   //作验证日期格式是否有时间
     date_val_regex = /(\d{2,4})(?:[/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/; //提取文本框的日期,针对中国时间
@@ -44,6 +48,7 @@
         con_hour,
         con_minute,
         con_second;
+    var model = {};
     $(function () {
         $("body").append("<iframe class=\"datepicker_iframe\" scrolling=\"no\" style=\"position:absolute;display:none;border:1px solid red;left:50px;top:100px;width:205px;height:203px\"></iframe>");
         datepicker_iframe = $(".datepicker_iframe");
@@ -106,8 +111,7 @@
     function render(that, options) {
         var top = that.offset().top + that.outerHeight(),
             left = that.offset().left;
-        var days_and_firstweek = getMonthDays(curr_time_arr[0], curr_time_arr[1]);
-        var model = {
+        model = {
             defaults: options,
             commonlang: commonlang,
             curr_time_arr: curr_time_arr,
@@ -115,7 +119,7 @@
             end_time_arr: end_time_arr,
             start_disp_year: start_disp_year,
             has_time: has_time,
-            days_and_firstweek: days_and_firstweek,
+            getMonthDays: getMonthDays,
             isDateDay: isDateDay,
             isWeekend: isWeekend,
             isDateToday: isDateToday,
@@ -160,14 +164,12 @@
     //显示年份div
     function showYearLayer() {
         con_year.stop(); con_month.stop();
-        //重设年份容器的年份内容
-        //con_year.html(createYearEle(curr_time_arr[0]).unbind("click", yearSelected).html());
         //让year层在month层上面
         con_year.css({ "z-index": getMaxZIndex() + 1 });
         if (con_year.attr("flag") == "0") {   //flag=0;表示年div未显示
             datepicker.find(".last_month,.next_month").addClass("disabled");
             datepicker.find(".last_year,.next_year").removeClass("disabled");
-            con_year.animate({ top: "26px" }, dur, function () {
+            con_year.animate({ top: "27px" }, dur, function () {
                 con_month.css({ top: "-" + parseInt(main_data_containter.css("height"), 10) + "px" }).attr("flag", "0");
                 hiddenTimePanel();
                 con_year.attr("flag", "1");
@@ -184,7 +186,7 @@
         con_month.css({ "z-index": getMaxZIndex() + 1 });  //让moth层在year层上面
         if (con_month.attr("flag") == "0") {   //flag=0;表示月div未显示
             datepicker.find(".last_year,.next_year,.last_month,.next_month").addClass("disabled");
-            con_month.animate({ top: "26px" }, dur, function () {
+            con_month.animate({ top: "27px" }, dur, function () {
                 con_year.css({ top: "-" + parseInt(main_data_containter.css("height"), 10) + "px" }).attr("flag", "0");
                 hiddenTimePanel();
                 con_month.attr("flag", "1");
@@ -246,13 +248,10 @@
     function lastYear() {
         if ($(this).hasClass("disabled")) return;
         if (isYearDisplay()) {    //year层目前在展现
-            nextYearDiv("right");
+            showNextYear("right");
             return false;
         }
         --curr_time_arr[0];
-        if (isMonthDisplay()) {   //month目前在展现
-            nextMonthDisplay("right");
-        }
         datepicker.find(".title_year").text(curr_time_arr[0] + commonlang[defaults.lang].title[0]);
         changeMainData("right");  //动画改变日期面板
     }
@@ -260,13 +259,10 @@
     function nextYear() {
         if ($(this).hasClass("disabled")) return;
         if (isYearDisplay()) {   //year层目前在展现
-            nextYearDiv("left");
+            showNextYear("left");
             return false;
         }
         ++curr_time_arr[0];
-        if (isMonthDisplay()) {   //month目前在展现
-            nextMonthDisplay("left");
-        }
         datepicker.find(".title_year").text(curr_time_arr[0] + commonlang[defaults.lang].title[0]);
         changeMainData("left");  //动画改变日期面板
     }
@@ -296,44 +292,52 @@
         datepicker.find(".title_month").text(commonlang[defaults.lang].month[curr_time_arr[1]].substring(0, 6) + commonlang[defaults.lang].title[3]);
         changeMainData("left");
     }
+    function showNextYear(direction) {
+        if (direction == "left") {
+            model.start_disp_year += 16;
+            con_year = $(parseTemplate(template_year, model)).css({ "left": datepicker.css("width"), "top": "27px" });
+            if (needAddHeight()) con_year.addClass("mainyear_height1");
+            datepicker.append(con_year);
+            var year_containter = datepicker.find(".datepicker_year_layer");  //获取2个year层
+            //去掉原来的
+            year_containter.filter("[flag=1]").animate({ left: "-" + datepicker.css("width") }, dur, function () {
+                $(this).remove();
+            });
+            //添加新的
+            year_containter.filter("[flag=0]").animate({ left: 0 }, dur).attr("flag", "1");
+        } else {
+            model.start_disp_year -= 16;
+            con_year = $(parseTemplate(template_year, model)).css({ "right": datepicker.css("width"), "top": "27px" });
+            if (needAddHeight()) con_year.addClass("mainyear_height1");
+            datepicker.append(con_year);
+            var year_containter = datepicker.find(".datepicker_year_layer");  //获取2个year层
+            year_containter.filter("[flag=1]").animate({ right: "-" + datepicker.css("width") }, dur, function () {
+                $(this).remove();
+            });
+            year_containter.filter("[flag=0]").animate({ right: 0 }, dur).attr("flag", "1");
+        }
+    }
     //改变主日期面板,direction=动画方向
     function changeMainData(direction) {
         var datepicker_width = datepicker.css("width");  //主日期框宽度(数据面板的偏移量)
-        var dataEle = $(createDataDiv()); //创建
+        var dataEle = $(parseTemplate(template_data, model)); //创建
         //在改变日期数据面板时,每个月天数不一样,有可能高度发生变化
-        if (needAddHeight()) {
-            calendar.addClass("add_cal_len1");
-            if (has_time) {  //有时间
-                calendar.addClass("add_cal_len3");
-            }
-            main_data_containter.addClass("add_main_date_len1");
-            con_year.addClass("mainyear_height1");
-            con_month.addClass("mainmonth_height1");
-        } else {
-            calendar.removeClass("add_cal_len1");
-            if (has_time) {
-                calendar.removeClass("add_cal_len3");
-                calendar.addClass("add_cal_len2");
-            }
-            main_data_containter.removeClass("add_main_date_len1");
-            con_year.removeClass("mainyear_height1");
-            con_month.removeClass("mainmonth_height1");
-        }
+        changeHeight();
         if (direction == "left") {
-            dataEle.css({ left: calendar_width }).attr("flag", "0");  //创建日期数据主面板element
+            dataEle.css({ left: datepicker_width }).attr("flag", "0");  //创建日期数据主面板element
             main_data_containter.append(dataEle);  //吧日期主面板加入父容器,这时连同以前一个数据面板，一共有2个数据面板
-            var containter = calendar.find(".calendar_data_containter");   //获取这2个数据面板
+            var containter = datepicker.find(".datepicker_data_containter");   //获取这2个数据面板
             //2个面板一同移动
-            containter.filter("[flag=1]").animate({ left: "-" + calendar_width }, dur, function () {
+            containter.filter("[flag=1]").animate({ left: "-" + datepicker_width }, dur, function () {
                 $(this).remove();
             });
             containter.filter("[flag=0]").animate({ left: 0 }, dur).attr("flag", "1");
         }
         if (direction == "right") {
-            dataEle.css({ left: "-" + calendar_width }).attr("flag", "0");
+            dataEle.css({ left: "-" + datepicker_width }).attr("flag", "0");
             main_data_containter.append(dataEle);
-            var containter = $(".calendar_data_containter");
-            containter.filter("[flag=1]").animate({ left: calendar_width }, dur, function () {
+            var containter = datepicker.find(".datepicker_data_containter");
+            containter.filter("[flag=1]").animate({ left: datepicker_width }, dur, function () {
                 $(this).remove();
             });
             containter.filter("[flag=0]").animate({ left: 0 }, dur).attr("flag", "1");
@@ -370,6 +374,8 @@
                 template = data;
             }
         });
+        template_data = template_data_regex.exec(template)[1];
+        template_year = template_year_regex.exec(template)[1];
         return template;
     }
     function getMaxZIndex() {

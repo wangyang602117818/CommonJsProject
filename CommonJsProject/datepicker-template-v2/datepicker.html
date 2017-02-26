@@ -30,12 +30,13 @@
                 <%}%>
             </div>
         </div>
+        <!--data_containter_start-->
         <div class="datepicker_data_containter" flag="1">
-            <%for(var i = 0;i < model.days_and_firstweek.first_day_week; i++ ){%>
+            <%for(var i = 0;i < model.getMonthDays(model.curr_time_arr[0],model.curr_time_arr[1]).first_day_week; i++ ){%>
             <span></span>
             <%}%>
             <%
-            for(var i = 1; i <= model.days_and_firstweek.days; i++){
+            for(var i = 1; i <= model.getMonthDays(model.curr_time_arr[0],model.curr_time_arr[1]).days; i++){
             var selcss = "";
             if (model.isDateDay(i)) selcss += "day ";
             if (model.isWeekend(i)) selcss += "weekend ";
@@ -45,7 +46,9 @@
             <div class="<%=selcss.trim()%>"><%=i%></div>
             <%}%>
         </div>
+        <!--data_containter_end-->
     </div>
+    <!--year_containter_start-->
     <div class="datepicker_year_layer" flag="0">
         <%
         for(var i = model.start_disp_year; i < model.start_disp_year + 16; i++){
@@ -58,6 +61,7 @@
         <div class="<%=cssText.trim()%>"><%=i%></div>
         <%}%>
     </div>
+    <!--year_containter_end-->
     <div class="datepicker_month_layer" flag="0">
         <%
         for(var i = 0; i < model.commonlang[model.defaults.lang].month.length;i++){
