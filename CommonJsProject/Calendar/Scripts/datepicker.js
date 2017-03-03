@@ -15,7 +15,7 @@
 
         };
         //全局参数
-        var lang = "en-us",       //界面语言 en-us|zh-cn
+        var lang = "zh-cn",       //界面语言 en-us|zh-cn
         commonlang = {
             "zh-cn": {
                 week: ["日", "一", "二", "三", "四", "五", "六"],

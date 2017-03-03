@@ -1,14 +1,38 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
-	<meta charset="utf-8" />
-    <!--<link href="datepicker.css" rel="stylesheet" />-->
-    <script src="jquery-1.10.2.min.js"></script>
+    <meta charset="utf-8" />
+
+    <script src="../Calendar/Scripts/jquery-1.10.2.js"></script>
     <script src="datepicker.js"></script>
+    <style>
+        .tran {
+            display:inline-block;
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent ;
+            border-left: 8px solid #EB8C00;
+            border-bottom: 8px solid transparent;
+            margin-left:-1px;
+            border-radius:3px;
+        }
+       
+    </style>
+
 </head>
 <body>
-    <input type="text" class="datepicker" format="dd Month yyyy hh:mm:ss" dateval="2016-02-01 12:00:02"/>
+    <input type="text" name="txt" id="txt" class="datepicker" />
+    <input type="text" name="txt" id="txt" class="datepicker" date-val="2017-07-06" />
+    <input type="text" name="txt" id="txt" class="datepicker" date-val="2015-05-06 12:00:00" />
+    <input type="text" name="txt1" id="txt1" class="datepicker" date-val="2015-02-06 12:01:03" date-lang="en-us" date-show-format="dd Month yyyy hh:mm:ss" date-start="2000-01-01 00:00:00" date-end="2049-12-31 00:00:00" />
+    <br />
+    <br />
+    <span>
+        <span class="tran"></span><span class="tran"></span>
+    </span>
+    
+
+    <span class="tran"></span>
 </body>
 </html>
