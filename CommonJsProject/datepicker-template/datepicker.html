@@ -1,10 +1,14 @@
 ﻿<div class="datepicker">
     <div class="datepicker_title_containter">
         <div class="datepicker_last_year">
-            <span class="last_year datepicker_img" title="<%=model.commonlang[model.defaults.lang].title[1]%>"></span>
+            <span class="last_year" title="<%=model.commonlang[model.defaults.lang].title[1]%>">
+                <i class="left_icon"></i><i class="left_icon"></i>
+            </span>
         </div>
         <div class="datepicker_last_month">
-            <span class="last_month datepicker_img" title="<%=model.commonlang[model.defaults.lang].title[4]%>"></span>
+            <span class="last_month" title="<%=model.commonlang[model.defaults.lang].title[4]%>">
+                <i class="left_icon"></i>
+            </span>
         </div>
         <div class="datepicker_title_date">
             <%if(model.defaults.lang=="en-us"){%>
@@ -16,10 +20,14 @@
             <%}%>
         </div>
         <div class="datepicker_next_month">
-            <span class="next_month datepicker_img" title="<%=model.commonlang[model.defaults.lang].title[5]%>"></span>
+            <span class="next_month" title="<%=model.commonlang[model.defaults.lang].title[5]%>">
+                <i class="right_icon"></i>
+            </span>
         </div>
         <div class="datepicker_next_year">
-            <span class="next_year datepicker_img" title="<%=model.commonlang[model.defaults.lang].title[2]%>"></span>
+            <span class="next_year" title="<%=model.commonlang[model.defaults.lang].title[2]%>">
+                <i class="right_icon"></i><i class="right_icon"></i>
+            </span>
         </div>
     </div>
     <div class="datepicker_maindata_containter">

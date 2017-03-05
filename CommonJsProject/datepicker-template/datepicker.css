@@ -18,34 +18,41 @@
     overflow: hidden;
 }
 
-.date {
-    background: url(date.png) no-repeat;
-    background-position: right;
-    padding-right: 0;
-    padding: 4px 8px;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    color: #333;
-    outline: none;
-}
-
-.datepicker_img {
-    background: url(datepicker-icon.png) no-repeat;
-}
-
-.datepicker .currItem {
-    border-color: #eb8c00;
-}
-
-    .datepicker .currItem:hover {
-        cursor: default;
+    .datepicker .currItem {
+        border-color: #eb8c00;
     }
 
-.datepicker:focus {
-    border-color: #51A7E8;
-    background-color: #fff;
-    box-shadow: 0 0 5px rgba(103, 166, 217, 0.5);
-}
+        .datepicker .currItem:hover {
+            cursor: default;
+        }
+
+    .datepicker:focus {
+        border-color: #51A7E8;
+        background-color: #fff;
+        box-shadow: 0 0 5px rgba(103, 166, 217, 0.5);
+    }
+
+    .datepicker .right_icon {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-top: 8px solid transparent;
+        border-left: 8px solid #EB8C00;
+        border-bottom: 8px solid transparent;
+        margin-left: -1px;
+        border-radius: 4px;
+    }
+
+    .datepicker .left_icon {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-top: 8px solid transparent;
+        border-right: 8px solid #EB8C00;
+        border-bottom: 8px solid transparent;
+        margin-left: -1px;
+        border-radius: 4px;
+    }
 
 .add_cal_len1 { /*第二种日期框高度,无时间，但是需要加高度*/
     height: 226px;
@@ -101,44 +108,36 @@
 
 .last_year, .last_month, .next_year, .next_month {
     display: inline-block;
+    margin-top: 4px;
 }
 
 .datepicker_last_year, .datepicker_next_year {
     width: 30px;
 }
 
+    .datepicker_last_year:hover .left_icon, .datepicker_last_month:hover .left_icon {
+        border-right: 8px solid #ccc;
+    }
+
 .datepicker_last_month, .datepicker_next_month {
     width: 23px;
 }
 
-.datepicker_last_year .disabled:hover {
-    background-position: -72px 0;
-}
+    .datepicker_next_year:hover .right_icon, .datepicker_next_month:hover .right_icon {
+        border-left: 8px solid #ccc;
+    }
+
 
 .last_year {
     /*border:1px solid red;*/
     width: 25px;
     height: 22px;
-    background-position: -72px 0;
 }
-
-    .last_year:hover {
-        background-position: -72px -20px;
-    }
 
 .last_month {
     /*border:1px solid red;*/
     width: 20px;
     height: 22px;
-    background-position: -54px 0;
-}
-
-    .last_month:hover {
-        background-position: -54px -20px;
-    }
-
-.datepicker_last_month .disabled:hover {
-    background-position: -54px 0;
 }
 
 .datepicker_title_date { /*标题按钮*/
@@ -148,23 +147,10 @@
     font-size: 13px;
 }
 
-.datepicker_next_month .disabled:hover {
-    background-position: -27px 0;
-}
-
 .next_month {
     /*border: 1px solid red;*/
     width: 20px;
     height: 22px;
-    background-position: -27px 0;
-}
-
-    .next_month:hover {
-        background-position: -27px -20px;
-    }
-
-.datepicker_next_year .disabled:hover {
-    background-position: -5px 0;
 }
 
 .next_year {
@@ -172,12 +158,7 @@
     /*border:1px solid red;*/
     width: 25px;
     height: 22px;
-    background-position: -5px 0;
 }
-
-    .next_year:hover {
-        background-position: -5px -20px;
-    }
 
 .datepicker_maindata_containter { /*主数据容器（周数据+天数据）*/
     border: 0;
@@ -226,7 +207,7 @@
     /*background-color:#ccc;*/
     width: 203px;
     position: absolute;
-    padding-left:1px;
+    padding-left: 1px;
     /*border: 1px solid red;*/
 }
 
