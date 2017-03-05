@@ -8,7 +8,7 @@
         lang: "zh-cn"                    //界面语言 en-us|zh-cn,
         
     };
-    var skin= "orange";
+    var skin = "cyan";     //orange,cyan
     //全局参数
     var commonlang = {
         "zh-cn": {
