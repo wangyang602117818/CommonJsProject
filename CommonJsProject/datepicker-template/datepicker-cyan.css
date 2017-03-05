@@ -5,8 +5,7 @@
 
 .datepicker { /*日期框容器*/
     position: absolute;
-    z-index: 10000;
-    border: 1px solid #eb8c00;
+    border: 1px solid #76ABD3;
     width: 203px;
     height: 201px; /*+22*/
     /*height:226px;*/
@@ -19,25 +18,19 @@
 }
 
     .datepicker .currItem {
-        border-color: #eb8c00;
+        border-color: #76ABD3;
     }
 
         .datepicker .currItem:hover {
             cursor: default;
         }
 
-    .datepicker:focus {
-        border-color: #51A7E8;
-        background-color: #fff;
-        box-shadow: 0 0 5px rgba(103, 166, 217, 0.5);
-    }
-
     .datepicker .right_icon {
         display: inline-block;
         width: 0;
         height: 0;
         border-top: 8px solid transparent;
-        border-left: 8px solid #EB8C00;
+        border-left: 8px solid #7493A6;
         border-bottom: 8px solid transparent;
         margin-left: -1px;
         border-radius: 4px;
@@ -48,7 +41,7 @@
         width: 0;
         height: 0;
         border-top: 8px solid transparent;
-        border-right: 8px solid #EB8C00;
+        border-right: 8px solid #7493A6;
         border-bottom: 8px solid transparent;
         margin-left: -1px;
         border-radius: 4px;
@@ -73,9 +66,9 @@
     right: 0;
     z-index: 10000;
     height: 26px;
-    background-color: #f2f2f2;
+    background-color: #EBF2FA;
     overflow: hidden;
-    border-bottom: 1px solid #eb8c00;
+    border-bottom: 1px solid #76ABD3;
     /*padding-left:3px;*/
     /*border: 1px solid blue;*/
 }
@@ -116,7 +109,7 @@
 }
 
     .datepicker_last_year:hover .left_icon, .datepicker_last_month:hover .left_icon {
-        border-right: 8px solid #ccc;
+        border-right: 8px solid #81C7FF;
     }
 
 .datepicker_last_month, .datepicker_next_month {
@@ -124,7 +117,7 @@
 }
 
     .datepicker_next_year:hover .right_icon, .datepicker_next_month:hover .right_icon {
-        border-left: 8px solid #ccc;
+        border-left: 8px solid #81C7FF;
     }
 
 
@@ -229,11 +222,11 @@
         }
 
     .datepicker_data_containter .today {
-        background-color: #eb8c00;
+        background-color: #48B8E0;
     }
 
         .datepicker_data_containter .today:hover {
-            background-color: #DC6900;
+            background-color: #81C7FF;
         }
 
     .datepicker_data_containter div, .datepicker_data_containter span { /*单个日期*/
@@ -249,7 +242,7 @@
 
         .datepicker_data_containter div:hover {
             cursor: pointer;
-            background-color: #eb8c00;
+            background-color: #81C7FF;
             /*border-radius:12.5px;*/
         }
 
@@ -307,7 +300,7 @@
 
 .datepicker_year_layer div:hover {
     cursor: pointer;
-    border-color: #eb8c00;
+    border-color: #48B8E0;
 }
 
 .datepicker_month_layer { /*月份容器*/
@@ -353,13 +346,13 @@
 
 .datepicker_month_layer div:hover {
     cursor: pointer;
-    border-color: #eb8c00;
+    border-color: #48B8E0;
 }
 /*时间部分*/
 .datepicker_time_containter {
     position: absolute;
-    border-top: 1px solid #eb8c00;
-    background-color: #f2f2f2;
+    border-top: 1px solid #48B8E0;
+    background-color: #EBF2FA;
     width: 203px;
     position: absolute;
     bottom: 0px;
@@ -382,7 +375,7 @@
         outline: none;
         margin: 0;
         padding: 0;
-        background-color: #f2f2f2;
+        background-color: #EBF2FA;
     }
 
     .datepicker_time_containter span:hover {
@@ -415,7 +408,7 @@
 
         .datepicker_hover_layer div:hover {
             cursor: pointer;
-            border-color: #eb8c00;
+            border-color: #48B8E0;
         }
 
     .datepicker_hover_layer .disabled {
@@ -453,7 +446,7 @@
 
         .datepicker_minute_layer div:hover, .datepicker_second_layer div:hover {
             cursor: pointer;
-            border-color: #eb8c00;
+            border-color: #48B8E0;
         }
 
     .datepicker_minute_layer .disabled, datepicker_second_layer .disabled {

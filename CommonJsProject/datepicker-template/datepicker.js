@@ -5,9 +5,10 @@
         start: "2000-01-01 00:00:00",      //start: new Date(),
         end: "2100-12-31 00:00:00",        //end: new Date().addYear(1)
         useFormat: "yyyy-MM-dd",           //与程序交互的时间格式
-        lang: "zh-cn",                    //界面语言 en-us|zh-cn,
-
+        lang: "zh-cn"                    //界面语言 en-us|zh-cn,
+        
     };
+    var skin= "orange";
     //全局参数
     var commonlang = {
         "zh-cn": {
@@ -61,7 +62,7 @@
     $(function () {
         $("body").append("<iframe class=\"datepicker_iframe\" scrolling=\"no\" style=\"position:absolute;display:none;border:0;left:50px;top:100px;width:205px;height:203px\"></iframe>");
         datepicker_iframe = $(".datepicker_iframe");
-        datepicker_iframe.contents().find("head").append("<link href=\"datepicker.css\" rel=\"stylesheet\" />");
+        datepicker_iframe.contents().find("head").append("<link href=\"datepicker-" + skin + ".css\" rel=\"stylesheet\" />");
         $(".datepicker").each(function () { showDate($(this)); });
         $(".datepicker").click(function () { that = $(this); init(); });
         $(document).click(function (event) {
