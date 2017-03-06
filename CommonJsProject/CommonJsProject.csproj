@@ -89,12 +89,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="datepicker-template\date.png" />
-    <Content Include="datepicker-template\datepicker-cyan.css" />
-    <Content Include="datepicker-template\datepicker-orange.css" />
-    <Content Include="datepicker-template\datepicker.js" />
-    <Content Include="datepicker-template\index.html" />
-    <Content Include="datepicker-template\datepicker.html" />
+    <Content Include="datepicker\date.png" />
+    <Content Include="datepicker\core\datepicker-cyan.css" />
+    <Content Include="datepicker\core\datepicker-orange.css" />
+    <Content Include="datepicker\core\datepicker.js" />
+    <Content Include="datepicker\index.html" />
+    <Content Include="datepicker\core\datepicker.html" />
     <Content Include="Calendar\Scripts\datepicker.js" />
     <Content Include="Calendar\default\datepicker.css" />
     <Content Include="Calendar\default\datepicker-icon.png" />
@@ -105,7 +105,7 @@
     <Content Include="Calendar\orange\datepicker.css" />
     <Content Include="Calendar\orange\datepicker-icon.png" />
     <Content Include="Calendar\orange\datepicker.png" />
-    <Content Include="datepicker-template\jquery-3.1.1.min.js" />
+    <Content Include="datepicker\jquery-3.1.1.min.js" />
     <Content Include="Global.asax" />
     <Content Include="Grid\gridster.js" />
     <Content Include="Grid\index.html" />

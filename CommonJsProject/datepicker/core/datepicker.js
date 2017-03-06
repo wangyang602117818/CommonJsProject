@@ -8,7 +8,8 @@
         lang: "en-us"                    //界面语言 en-us|zh-cn,
         
     };
-    var skin = "orange";     //orange,cyan
+    var template_src = "http://localhost:7070/datepicker/core/datepicker.html";
+    var skin_src = "http://localhost:7070/datepicker/core/datepicker-orange.css";     //orange,cyan
     //全局参数
     var commonlang = {
         "zh-cn": {
@@ -60,9 +61,10 @@
     var model = {};
     var that = null;    //input
     $(function () {
+        console.log(window.location.href);
         $("body").append("<iframe class=\"datepicker_iframe\" scrolling=\"no\" style=\"position:absolute;display:none;border:0;left:50px;top:100px;width:205px;height:203px\"></iframe>");
         datepicker_iframe = $(".datepicker_iframe");
-        datepicker_iframe.contents().find("head").append("<link href=\"datepicker-" + skin + ".css\" rel=\"stylesheet\" />");
+        datepicker_iframe.contents().find("head").append("<link href=\"" + skin_src + "\" rel=\"stylesheet\" />");
         $(".datepicker").each(function () { showDate($(this)); });
         $(".datepicker").click(function () { that = $(this); init(); });
         $(document).click(function (event) {
@@ -467,7 +469,7 @@
         if (template != "") return template;
         $.ajax({
             type: "get",
-            url: "datepicker.html",
+            url: template_src,
             async: false,
             success: function (data) {
                 template = data;
