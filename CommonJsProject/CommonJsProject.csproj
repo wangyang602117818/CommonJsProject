@@ -94,7 +94,7 @@
     <Content Include="datepicker\core\datepicker-orange.css" />
     <Content Include="datepicker\core\datepicker.js" />
     <Content Include="datepicker\index.html" />
-    <Content Include="datepicker\core\datepicker.html" />
+    <Content Include="datepicker\core\datepicker-template.html" />
     <Content Include="Calendar\Scripts\datepicker.js" />
     <Content Include="Calendar\default\datepicker.css" />
     <Content Include="Calendar\default\datepicker-icon.png" />
@@ -105,7 +105,7 @@
     <Content Include="Calendar\orange\datepicker.css" />
     <Content Include="Calendar\orange\datepicker-icon.png" />
     <Content Include="Calendar\orange\datepicker.png" />
-    <Content Include="datepicker\jquery-3.1.1.min.js" />
+    <Content Include="datepicker\core\jquery-3.1.1.min.js" />
     <Content Include="Global.asax" />
     <Content Include="Grid\gridster.js" />
     <Content Include="Grid\index.html" />
@@ -147,7 +147,9 @@
     <Content Include="video\dash.html" />
     <Content Include="video\src\1.mp4" />
     <Content Include="video\video.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

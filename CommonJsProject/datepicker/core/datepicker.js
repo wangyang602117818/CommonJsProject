@@ -8,7 +8,7 @@
         lang: "en-us"                    //界面语言 en-us|zh-cn,
         
     };
-    var template_src = "http://localhost:7070/datepicker/core/datepicker.html";
+    var template_src = "http://localhost:7070/datepicker/core/datepicker-template.html";
     var skin_src = "http://localhost:7070/datepicker/core/datepicker-orange.css";     //orange,cyan
     //全局参数
     var commonlang = {
