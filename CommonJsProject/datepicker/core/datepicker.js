@@ -9,7 +9,7 @@
         
     };
     var template_src = "http://localhost:7070/datepicker/core/datepicker-template.html";
-    var skin_src = "http://localhost:7070/datepicker/core/datepicker-orange.css";     //orange,cyan
+    var css_src = "http://localhost:7070/datepicker/core/datepicker-orange.css";     //orange,cyan
     //全局参数
     var commonlang = {
         "zh-cn": {
@@ -64,7 +64,7 @@
         console.log(window.location.href);
         $("body").append("<iframe class=\"datepicker_iframe\" scrolling=\"no\" style=\"position:absolute;display:none;border:0;left:50px;top:100px;width:205px;height:203px\"></iframe>");
         datepicker_iframe = $(".datepicker_iframe");
-        datepicker_iframe.contents().find("head").append("<link href=\"" + skin_src + "\" rel=\"stylesheet\" />");
+        datepicker_iframe.contents().find("head").append("<link href=\"" + css_src + "\" rel=\"stylesheet\" />");
         $(".datepicker").each(function () { showDate($(this)); });
         $(".datepicker").click(function () { that = $(this); init(); });
         $(document).click(function (event) {
