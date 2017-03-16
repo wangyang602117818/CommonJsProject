@@ -6,6 +6,11 @@
 
     <script src="core/jquery-3.1.1.min.js"></script>
     <script src="../datepicker/core/datepicker.js"></script>
+    <script>
+        $(function () {
+            $("#txt1").attr("date-val", "2017-03-16 13:05:15").datepickerInit();
+        });
+    </script>
     <style>
         .datepicker {
             background: url(../datepicker/date.png) no-repeat;
@@ -28,10 +33,10 @@
 </head>
 <body>
 
-    <input type="text" name="txt" id="txt" class="datepicker" />
-    <input type="text" name="txt" id="txt" class="datepicker" date-val="2017-07-06" />
-    <input type="text" name="txt" id="txt" class="datepicker" date-val="2015-05-06 12:00:00" />
-    <input type="text" name="txt1" id="txt1" class="datepicker" date-val="2015-02-06 12:01:03" date-lang="en-us" date-show-format="dd Month yyyy hh:mm:ss" date-start="2000-01-01 00:00:00" date-end="2049-12-31 00:00:00" />
+    <input type="text" name="txt" id="txt1" class="datepicker" />
+    <input type="text" name="txt" id="txt2" class="datepicker" date-val="2017-07-06" />
+    <input type="text" name="txt" id="txt3" class="datepicker" date-val="2015-05-06 12:00:00" />
+    <input type="text" name="txt1" id="txt4" class="datepicker" date-val="2015-02-06 12:01:03" date-lang="en-us" date-show-format="dd Month yyyy hh:mm:ss" date-start="2000-01-01 00:00:00" date-end="2049-12-31 00:00:00" />
     <br />
     <br />
 

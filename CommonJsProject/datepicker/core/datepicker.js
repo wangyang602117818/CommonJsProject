@@ -6,7 +6,7 @@
         end: "2100-12-31 00:00:00",        //end: new Date().addYear(1)
         useFormat: "yyyy-MM-dd",           //与程序交互的时间格式
         lang: "en-us"                    //界面语言 en-us|zh-cn,
-        
+
     };
     var template_src = "http://localhost:7070/datepicker/core/datepicker-template.html";
     var css_src = "http://localhost:7070/datepicker/core/datepicker-orange.css";     //orange,cyan
@@ -61,7 +61,7 @@
     var model = {};
     var that = null;    //input
     $(function () {
-        console.log(window.location.href);
+        //console.log(window.location.href);
         $("body").append("<iframe class=\"datepicker_iframe\" scrolling=\"no\" style=\"position:absolute;display:none;border:0;left:50px;top:100px;width:205px;height:203px\"></iframe>");
         datepicker_iframe = $(".datepicker_iframe");
         datepicker_iframe.contents().find("head").append("<link href=\"" + css_src + "\" rel=\"stylesheet\" />");
@@ -71,6 +71,11 @@
             var srcElement = $(event.target);
             if (!srcElement.hasClass("datepicker")) datepicker_iframe.hide();
         });
+    });
+    $.fn.extend({
+        datepickerInit: function () {
+            this.each(function () { showDate($(this)); });
+        }
     });
     //页面加载的时候，展示日期
     function showDate(that) {
