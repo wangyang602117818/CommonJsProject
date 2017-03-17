@@ -106,6 +106,7 @@
     <Content Include="Calendar\orange\datepicker-icon.png" />
     <Content Include="Calendar\orange\datepicker.png" />
     <Content Include="datepicker\core\jquery-3.1.1.min.js" />
+    <Content Include="datepicker\design.txt" />
     <Content Include="Global.asax" />
     <Content Include="Grid\gridster.js" />
     <Content Include="Grid\index.html" />
