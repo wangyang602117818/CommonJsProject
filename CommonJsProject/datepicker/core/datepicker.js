@@ -75,6 +75,7 @@
     $.fn.extend({
         datepickerInit: function () {
             this.each(function () { showDate($(this)); });
+            return this;
         }
     });
     //页面加载的时候，展示日期
