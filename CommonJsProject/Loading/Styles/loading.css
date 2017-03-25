@@ -2,6 +2,7 @@
 /*******************************公用效果******************************************/
 .loading-background {
     position: absolute;
+    z-index: 10000;
     background-color: rgba(217,217,217,0.35);
 }
 

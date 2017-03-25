@@ -1,25 +1,25 @@
 ﻿(function (jQuery) {
     jQuery.fn.extend({
-        Loading: function (options) {
+        loading: function (options) {
             //loadType:throbber|rotate
             var defaults = { loadType: "rotate" }
             options = options || {};
             if (options.loadType) defaults.loadType = options.loadType;
             var partentObject = $(this);
-            var background = partentObject.find(".loading-background");
-            if (background.length > 0) {
-                background.remove();
+            if (partentObject.attr("loading") == "1") {
+                partentObject.attr("loading", "0");
+                partentObject.next().remove();
                 return;
             }
             partentObject.defaults = defaults;
             partentObject.bgLocation = {  //使用一个内部对象保存状态
-                bgWidth: partentObject.width(),
-                bgHeight: partentObject.height(),
-                bgLeft: partentObject.offset().left + 1,
-                bgTop: partentObject.offset().top + 1
+                bgWidth: partentObject.outerWidth(),
+                bgHeight: partentObject.outerHeight(),
+                bgLeft: partentObject.offset().left,
+                bgTop: partentObject.offset().top
             }
-            background = getLoading(partentObject);
-            partentObject.append(background);
+            var background = getLoading(partentObject);
+            partentObject.after(background).attr("loading", "1");
             var conLeft = (partentObject.bgLocation.bgWidth - partentObject.loaderCon.width()) / 2;
             var conTop = (partentObject.bgLocation.bgHeight - partentObject.loaderCon.height()) / 2;
             partentObject.loaderCon.css({ left: conLeft, top: conTop });
@@ -33,12 +33,12 @@
     function getBackground(partentObject) {
         var bg = "<div class=\"loading-background\"></div>";
         var background = $(bg).css(
-        {
-            left: partentObject.bgLocation.bgLeft,
-            top: partentObject.bgLocation.bgTop,
-            width: partentObject.bgLocation.bgWidth,
-            height: partentObject.bgLocation.bgHeight
-        });
+            {
+                left: partentObject.bgLocation.bgLeft,
+                top: partentObject.bgLocation.bgTop,
+                width: partentObject.bgLocation.bgWidth,
+                height: partentObject.bgLocation.bgHeight
+            });
         partentObject.loaderCon = getLoaderCon(partentObject);
         return background.append(partentObject.loaderCon);
     }

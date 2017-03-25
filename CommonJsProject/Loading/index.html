@@ -11,8 +11,8 @@
     <h3>css3加载效果</h3>
     使用方法:引入jquery,loading.js,loading.css<br>
     效果一 : <br>
-    &nbsp&nbsp开始加载: $("#tb1").Loading()    //tb1为要在其上显示加载效果的对象id,默认效果是转动效果<br>
-    &nbsp&nbsp结束加载: $("#tb1").Loading()    //再次调用结束
+    &nbsp&nbsp开始加载: $("#tb1").loading()    //tb1为要在其上显示加载效果的对象id,默认效果是转动效果<br>
+    &nbsp&nbsp结束加载: $("#tb1").loading()    //再次调用结束
 
     <br><br>
     <table style="border: 1px solid red;overflow: hidden" width="200px" height="100px" id="tb1">
@@ -32,11 +32,11 @@
     <br>
     <br>
     效果二: <br>
-    &nbsp&nbsp 开始加载: $("#dv1").Loading({ loadType: "throbber" }) <br>
-    &nbsp&nbsp 结束加载: $("#dv1").Loading({ loadType: "throbber" })
+    &nbsp&nbsp 开始加载: $("#dv1").loading({ loadType: "throbber" }) <br>
+    &nbsp&nbsp 结束加载: $("#dv1").loading({ loadType: "throbber" })
     <br><br>
 
-    <div style="border: 1px solid blue; height: 100px;" id="dv1">
+    <div style="border: 1px solid blue;width:800px; height: 100px;position:absolute;z-index:100;left:200px;background-color:#fff" id="dv1">
 
     </div>
     <button value="b1" id="b3">加载</button>
@@ -46,10 +46,10 @@
 <script type="text/javascript">
 
     $("#b1").click(function () {
-        $("#tb1").Loading();
+        $("#tb1").loading();
     });
 
     $("#b3").click(function () {
-        $("#dv1").Loading({ loadType: "throbber" });
+        $("#dv1").loading({ loadType: "throbber" });
     });
 </script>
