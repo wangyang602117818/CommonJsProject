@@ -34,10 +34,10 @@
         var bg = "<div class=\"loading-background\"></div>";
         var background = $(bg).css(
             {
-                left: partentObject.bgLocation.bgLeft,
-                top: partentObject.bgLocation.bgTop,
-                width: partentObject.bgLocation.bgWidth,
-                height: partentObject.bgLocation.bgHeight
+                left: partentObject.bgLocation.bgLeft + 1,
+                top: partentObject.bgLocation.bgTop + 1,
+                width: partentObject.bgLocation.bgWidth - 2,
+                height: partentObject.bgLocation.bgHeight - 2
             });
         partentObject.loaderCon = getLoaderCon(partentObject);
         return background.append(partentObject.loaderCon);
