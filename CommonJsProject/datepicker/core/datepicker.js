@@ -8,8 +8,9 @@
         lang: "en-us"                    //界面语言 en-us|zh-cn,
 
     };
-    var template_src = "http://localhost:7070/datepicker/core/datepicker-template.html";
-    var css_src = "http://localhost:7070/datepicker/core/datepicker-orange.css";     //orange,cyan
+    var scr = document.getElementsByTagName('SCRIPT');
+    var template_src = $(scr[scr.length - 1]).attr("template");
+    var css_src = $(scr[scr.length - 1]).attr("css");
     //全局参数
     var commonlang = {
         "zh-cn": {
@@ -47,7 +48,6 @@
     timeval_regex = /\d{1,2}:(\d{1,2})?(:\d{1,2})?/,  //验证文本框的日期值,是否有时间
     time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,   //作验证日期格式是否有时间
     date_val_regex = /(\d{2,4})(?:[/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/; //提取文本框的日期,针对中国时间
-
     //全局对象
     var datepicker_iframe,
         datepicker,              //主日期框对象
@@ -61,7 +61,6 @@
     var model = {};
     var that = null;    //input
     $(function () {
-        //console.log(window.location.href);
         $("body").append("<iframe class=\"datepicker_iframe\" scrolling=\"no\" style=\"position:absolute;display:none;border:0;left:50px;top:100px;width:205px;height:203px\"></iframe>");
         datepicker_iframe = $(".datepicker_iframe");
         datepicker_iframe.contents().find("head").append("<link href=\"" + css_src + "\" rel=\"stylesheet\" />");
@@ -73,8 +72,9 @@
         });
     });
     $.fn.extend({
-        datepickerInit: function () {
+        initDatePicker: function () {
             this.each(function () { showDate($(this)); });
+            return this;
         }
     });
     //页面加载的时候，展示日期

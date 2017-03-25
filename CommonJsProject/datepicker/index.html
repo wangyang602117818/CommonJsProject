@@ -5,10 +5,11 @@
     <meta charset="utf-8" />
 
     <script src="core/jquery-3.1.1.min.js"></script>
-    <script src="../datepicker/core/datepicker.js"></script>
+    <script src="core/datepicker.js" template="http://localhost:7070/datepicker/core/datepicker-template.html" css="http://localhost:7070/datepicker/core/datepicker-orange.css"></script>
+    
     <script>
         $(function () {
-            $("#txt1").attr("date-val", "2017-03-16 13:05:15").datepickerInit();
+            $("#txt1").attr("date-val", "2017-03-16 13:05:15").initDatePicker();
         });
     </script>
     <style>
