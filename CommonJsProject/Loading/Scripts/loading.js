@@ -5,27 +5,39 @@
             var defaults = { loadType: "rotate" }
             options = options || {};
             if (options.loadType) defaults.loadType = options.loadType;
-            var partentObject = $(this);
-            if (partentObject.attr("loading") == "1") {
-                partentObject.attr("loading", "0");
-                partentObject.next().remove();
+            if (this.attr("loading") == "1") {
+                this.attr("loading", "0");
+                this.next().remove();
                 return;
             }
-            partentObject.defaults = defaults;
-            partentObject.bgLocation = {  //使用一个内部对象保存状态
-                bgWidth: partentObject.outerWidth(),
-                bgHeight: partentObject.outerHeight(),
-                bgLeft: partentObject.offset().left,
-                bgTop: partentObject.offset().top
+            this.defaults = defaults;
+            var rect = getBoundingClientRect(this);
+            this.bgLocation = {  //使用一个内部对象保存状态
+                bgWidth: rect.width,
+                bgHeight: rect.height,
+                bgLeft: rect.left,
+                bgTop: rect.top
             }
-            var background = getLoading(partentObject);
-            partentObject.after(background).attr("loading", "1");
-            var conLeft = (partentObject.bgLocation.bgWidth - partentObject.loaderCon.width()) / 2;
-            var conTop = (partentObject.bgLocation.bgHeight - partentObject.loaderCon.height()) / 2;
-            partentObject.loaderCon.css({ left: conLeft, top: conTop });
+            var background = getLoading(this);
+            this.after(background).attr("loading", "1");
+            var conLeft = (this.bgLocation.bgWidth - this.loaderCon.width()) / 2;
+            var conTop = (this.bgLocation.bgHeight - this.loaderCon.height()) / 2;
+            this.loaderCon.css({ left: conLeft, top: conTop });
         }
     });
-
+    function getBoundingClientRect(element) {
+        var scrollTop = $(document).scrollTop();
+        var rect = element[0].getBoundingClientRect();
+        var offset = arguments.callee.offset;
+        return {
+            left: rect.left,
+            right: rect.right,
+            top: rect.top + scrollTop,
+            bottom: rect.bottom + scrollTop,
+            width: rect.width,
+            height: rect.height
+        };
+    }
     function getLoading(partentObject) {
         var background = getBackground(partentObject);
         return background;
