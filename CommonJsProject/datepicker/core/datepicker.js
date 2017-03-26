@@ -6,7 +6,6 @@
         end: "2100-12-31 00:00:00",        //end: new Date().addYear(1)
         useFormat: "yyyy-MM-dd",           //与程序交互的时间格式
         lang: "en-us"                    //界面语言 en-us|zh-cn,
-
     };
     var scr = document.getElementsByTagName('SCRIPT');
     var template_src = $(scr[scr.length - 1]).attr("template");
@@ -24,30 +23,30 @@
             title: ["", "Last Year", "Next Year", "", "Last Month", "Next Month"]
         }
     },
-    date = new Date(),
-    curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()],  //文本框中的日期
-    text_time_arr,    //保存选中日期
-    start_time_arr,
-    end_time_arr,
-    dur = 300,        //动画速度
-    start_disp_year,  //year层的起始年
-    has_time = false,     //,
-    template = "",
-    template_data = "",
-    template_year = "",
-    template_month = "",
-    template_hover = "",
-    template_minute = "",
-    template_second = "",
-    template_data_regex = /<!--data_containter_start-->((.|\n|\r)*)<!--data_containter_end-->/,
-    template_year_regex = /<!--year_containter_start-->((.|\n|\r)*)<!--year_containter_end-->/,
-    template_month_regex = /<!--month_containter_start-->((.|\n|\r)*)<!--month_containter_end-->/,
-    template_hover_regex = /<!--hover_containter_start-->((.|\n|\r)*)<!--hover_containter_end-->/,
-    template_minute_regex = /<!--minute_containter_start-->((.|\n|\r)*)<!--minute_containter_end-->/,
-    template_second_regex = /<!--second_containter_start-->((.|\n|\r)*)<!--second_containter_end-->/,
-    timeval_regex = /\d{1,2}:(\d{1,2})?(:\d{1,2})?/,  //验证文本框的日期值,是否有时间
-    time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,   //作验证日期格式是否有时间
-    date_val_regex = /(\d{2,4})(?:[/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/; //提取文本框的日期,针对中国时间
+        date = new Date(),
+        curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()],  //文本框中的日期
+        text_time_arr,    //保存选中日期
+        start_time_arr,
+        end_time_arr,
+        dur = 300,        //动画速度
+        start_disp_year,  //year层的起始年
+        has_time = false,     //,
+        template = "",
+        template_data = "",
+        template_year = "",
+        template_month = "",
+        template_hover = "",
+        template_minute = "",
+        template_second = "",
+        template_data_regex = /<!--data_containter_start-->((.|\n|\r)*)<!--data_containter_end-->/,
+        template_year_regex = /<!--year_containter_start-->((.|\n|\r)*)<!--year_containter_end-->/,
+        template_month_regex = /<!--month_containter_start-->((.|\n|\r)*)<!--month_containter_end-->/,
+        template_hover_regex = /<!--hover_containter_start-->((.|\n|\r)*)<!--hover_containter_end-->/,
+        template_minute_regex = /<!--minute_containter_start-->((.|\n|\r)*)<!--minute_containter_end-->/,
+        template_second_regex = /<!--second_containter_start-->((.|\n|\r)*)<!--second_containter_end-->/,
+        timeval_regex = /\d{1,2}:(\d{1,2})?(:\d{1,2})?/,  //验证文本框的日期值,是否有时间
+        time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,   //作验证日期格式是否有时间
+        date_val_regex = /(\d{2,4})(?:[/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/; //提取文本框的日期,针对中国时间
     //全局对象
     var datepicker_iframe,
         datepicker,              //主日期框对象
@@ -72,9 +71,11 @@
         });
     });
     $.fn.extend({
-        initDatePicker: function () {
-            this.each(function () { showDate($(this)); });
-            return this;
+        datepicker: {
+            initInput: function () {
+                this.each(function () { showDate($(this)); });
+                return this;
+            }
         }
     });
     //页面加载的时候，展示日期
@@ -649,8 +650,8 @@
     //判断给定的小时是否在给出的范围
     function isHourDisabled(hour) {
         var curr_hours = Number(curr_time_arr[0]) * 365 * 24 + Number(curr_time_arr[1]) * 30 * 24 + Number(curr_time_arr[2]) * 24 + hour,
-           start_hours = Number(start_time_arr[0]) * 365 * 24 + Number(start_time_arr[1]) * 30 * 24 + start_time_arr[2] * 24 + start_time_arr[3],
-           end_hours = Number(end_time_arr[0]) * 365 * 24 + Number(end_time_arr[1]) * 30 * 24 + end_time_arr[2] * 24 + end_time_arr[3];
+            start_hours = Number(start_time_arr[0]) * 365 * 24 + Number(start_time_arr[1]) * 30 * 24 + start_time_arr[2] * 24 + start_time_arr[3],
+            end_hours = Number(end_time_arr[0]) * 365 * 24 + Number(end_time_arr[1]) * 30 * 24 + end_time_arr[2] * 24 + end_time_arr[3];
 
         if (curr_hours < start_hours || curr_hours > end_hours) return true;
         return false;
@@ -659,7 +660,7 @@
     function isMinuteDisabled(minutes) {
         var curr_minutes = Number(curr_time_arr[0]) * 365 * 24 * 60 + Number(curr_time_arr[1]) * 30 * 24 * 60 + Number(curr_time_arr[2]) * 24 * 60 + curr_time_arr[3] * 60 + minutes,
             start_minutes = Number(start_time_arr[0]) * 365 * 24 * 60 + Number(start_time_arr[1]) * 30 * 24 * 60 + start_time_arr[2] * 24 * 60 + start_time_arr[3] * 60 + start_time_arr[4],
-           end_minutes = Number(end_time_arr[0]) * 365 * 24 * 60 + Number(end_time_arr[1]) * 30 * 24 * 60 + end_time_arr[2] * 24 * 60 + end_time_arr[3] * 60 + end_time_arr[4];
+            end_minutes = Number(end_time_arr[0]) * 365 * 24 * 60 + Number(end_time_arr[1]) * 30 * 24 * 60 + end_time_arr[2] * 24 * 60 + end_time_arr[3] * 60 + end_time_arr[4];
         if (curr_minutes < start_minutes || curr_minutes > end_minutes) return true;
         return false;
     }
@@ -667,7 +668,7 @@
     function isSecondDsiabled(seconds) {
         var curr_seconds = Number(curr_time_arr[0]) * 365 * 24 * 60 * 60 + Number(curr_time_arr[1]) * 30 * 24 * 60 * 60 + Number(curr_time_arr[2]) * 24 * 60 * 60 + curr_time_arr[3] * 60 * 60 + curr_time_arr[4] * 60 + seconds,
             start_seconds = Number(start_time_arr[0]) * 365 * 24 * 60 * 60 + Number(start_time_arr[1]) * 30 * 24 * 60 * 60 + start_time_arr[2] * 24 * 60 * 60 + start_time_arr[3] * 60 * 60 + start_time_arr[4] * 60 + start_time_arr[5],
-           end_seconds = Number(end_time_arr[0]) * 365 * 24 * 60 * 60 + Number(end_time_arr[1]) * 30 * 24 * 60 * 60 + end_time_arr[2] * 24 * 60 * 60 + end_time_arr[3] * 60 * 60 + end_time_arr[4] * 60 + end_time_arr[5];
+            end_seconds = Number(end_time_arr[0]) * 365 * 24 * 60 * 60 + Number(end_time_arr[1]) * 30 * 24 * 60 * 60 + end_time_arr[2] * 24 * 60 * 60 + end_time_arr[3] * 60 * 60 + end_time_arr[4] * 60 + end_time_arr[5];
         if (curr_seconds < start_seconds || curr_seconds > end_seconds) return true;
         return false;
     }
