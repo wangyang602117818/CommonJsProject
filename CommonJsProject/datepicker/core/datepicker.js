@@ -60,6 +60,15 @@
     var model = {};
     var that = null;    //input
     $(function () {
+        begin();
+    });
+    $.fn.extend({
+        datepicker: function () {
+            this.each(function () { showDate($(this)); });
+            return this;
+        }
+    });
+    function begin() {
         $("body").append("<iframe class=\"datepicker_iframe\" scrolling=\"no\" style=\"position:absolute;display:none;border:0;left:50px;top:100px;width:205px;height:203px\"></iframe>");
         datepicker_iframe = $(".datepicker_iframe");
         datepicker_iframe.contents().find("head").append("<link href=\"" + css_src + "\" rel=\"stylesheet\" />");
@@ -69,15 +78,7 @@
             var srcElement = $(event.target);
             if (!srcElement.hasClass("datepicker")) datepicker_iframe.hide();
         });
-    });
-    $.fn.extend({
-        datepicker: {
-            initInput: function () {
-                this.each(function () { showDate($(this)); });
-                return this;
-            }
-        }
-    });
+    }
     //页面加载的时候，展示日期
     function showDate(that) {
         var showFormat = that.attr("date-show-format") || defaults.showFormat;
