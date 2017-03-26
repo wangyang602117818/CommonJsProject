@@ -2,7 +2,7 @@
     //默认配置
     var defaults = {
         showFormat: "yyyy-MM-dd",       //界面展示的格式 yyyy-MM-dd|yyyy/MM/dd|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
-        start: "1700-01-01 00:00:00",      //start: new Date(),
+        start: "1900-01-01 00:00:00",      //start: new Date(),
         end: "2100-12-31 00:00:00",        //end: new Date().addYear(1)
         useFormat: "yyyy-MM-dd",           //与程序交互的时间格式
         lang: "en-us"                    //界面语言 en-us|zh-cn,
