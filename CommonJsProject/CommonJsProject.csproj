@@ -95,16 +95,6 @@
     <Content Include="datepicker\core\datepicker.js" />
     <Content Include="datepicker\index.html" />
     <Content Include="datepicker\core\datepicker-template.html" />
-    <Content Include="Calendar\Scripts\datepicker.js" />
-    <Content Include="Calendar\default\datepicker.css" />
-    <Content Include="Calendar\default\datepicker-icon.png" />
-    <Content Include="Calendar\default\datepicker.png" />
-    <Content Include="Calendar\index.html" />
-    <Content Include="Calendar\Scripts\jquery-1.10.2.js" />
-    <Content Include="Calendar\Scripts\jquery-1.7.1.min.js" />
-    <Content Include="Calendar\orange\datepicker.css" />
-    <Content Include="Calendar\orange\datepicker-icon.png" />
-    <Content Include="Calendar\orange\datepicker.png" />
     <Content Include="datepicker\core\jquery-3.1.1.min.js" />
     <Content Include="datepicker\design.txt" />
     <Content Include="Global.asax" />
