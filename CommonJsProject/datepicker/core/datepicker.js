@@ -68,16 +68,22 @@
             return this;
         }
     });
+    win.datepicker = function () {
+        begin();
+    }
     function begin() {
-        $("body").append("<iframe class=\"datepicker_iframe\" scrolling=\"no\" style=\"position:absolute;display:none;border:0;left:50px;top:100px;width:205px;height:203px\"></iframe>");
         datepicker_iframe = $(".datepicker_iframe");
-        datepicker_iframe.contents().find("head").append("<link href=\"" + css_src + "\" rel=\"stylesheet\" />");
+        if (datepicker_iframe.length == 0) {
+            $("body").append("<iframe class=\"datepicker_iframe\" scrolling=\"no\" style=\"position:absolute;display:none;border:0;left:50px;top:100px;width:205px;height:203px\"></iframe>");
+            datepicker_iframe = $(".datepicker_iframe");
+            datepicker_iframe.contents().find("head").append("<link href=\"" + css_src + "\" rel=\"stylesheet\" />");
+            $(".datepicker").click(function () { that = $(this); init(); });
+            $(document).click(function (event) {
+                var srcElement = $(event.target);
+                if (!srcElement.hasClass("datepicker")) datepicker_iframe.hide();
+            });
+        }
         $(".datepicker").each(function () { showDate($(this)); });
-        $(".datepicker").click(function () { that = $(this); init(); });
-        $(document).click(function (event) {
-            var srcElement = $(event.target);
-            if (!srcElement.hasClass("datepicker")) datepicker_iframe.hide();
-        });
     }
     //页面加载的时候，展示日期
     function showDate(that) {
