@@ -76,7 +76,9 @@
         if (datepicker_iframe.length == 0) {
             $("body").append("<iframe class=\"datepicker_iframe\" scrolling=\"no\" style=\"position:absolute;display:none;border:0;left:50px;top:100px;width:205px;height:203px\"></iframe>");
             datepicker_iframe = $(".datepicker_iframe");
-            datepicker_iframe.contents().find("head").append("<link href=\"" + css_src + "\" rel=\"stylesheet\" />");
+            setTimeout(function () {
+                datepicker_iframe.contents().find("head").html("<link type=\"text/css\" href=\"" + css_src + "\" rel=\"stylesheet\" />");
+            }, 200);
             $(document).click(function (event) {
                 var srcElement = $(event.target);
                 if (!srcElement.hasClass("datepicker")) datepicker_iframe.hide();
