@@ -1,10 +1,10 @@
 ﻿(function (win, $) {
     //默认配置
     var defaults = {
-        showFormat: "yyyy-MM-dd",       //界面展示的格式 yyyy-MM-dd|yyyy/MM/dd|19 May 2016 02:10:23(dd Month yyyy hh:mm:ss)
+        showFormat: "yyyy-MM-dd",       //界面展示的格式 yyyy-MM-dd|yyyy/MM/dd|dd Month yyyy hh:mm:ss
         start: "1900-01-01 00:00:00",      //start: new Date(),
         end: "2100-12-31 00:00:00",        //end: new Date().addYear(1)
-        useFormat: "yyyy-MM-dd",           //与程序交互的时间格式
+        useFormat: "yyyy-MM-dd",           //与程序交互的时间格式 yyyy-MM-dd|yyyy/MM/dd
         lang: "en-us"                    //界面语言 en-us|zh-cn,
     };
     var scr = document.getElementsByTagName('SCRIPT');
@@ -46,7 +46,7 @@
         template_second_regex = /<!--second_containter_start-->((.|\n|\r)*)<!--second_containter_end-->/,
         timeval_regex = /\d{1,2}:(\d{1,2})?(:\d{1,2})?/,  //验证文本框的日期值,是否有时间
         time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,   //作验证日期格式是否有时间
-        date_val_regex = /(\d{2,4})(?:[/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/; //提取文本框的日期,针对中国时间
+        date_val_regex = /(\d{2,4})([/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/; //提取文本框的日期,针对中国时间
     //全局对象
     var datepicker_iframe,
         datepicker,              //主日期框对象
@@ -89,15 +89,34 @@
     }
     //页面加载的时候，展示日期
     function showDate(that) {
-        var showFormat = that.attr("date-show-format") || defaults.showFormat;
-        var dateString = that.attr("date-val");
-        if (dateString && timeval_regex.test(dateString) && !that.attr("date-show-format")) showFormat = addTimeFormat(showFormat);
-        if (dateString && dateString != '') {
-            var date = inputDateConvert(dateString);
+        var showFormat = that.attr("date-show-format");  //显示格式
+        var useFormat = that.attr("date-use-format");    //使用时间
+        var dateVal = that.attr("date-val");
+        if (dateVal) {
+            var date = inputDateConvert(dateVal).date;
             var curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
-            var showdate = dateFormat(curr_time_arr, showFormat);
-            that.val(showdate);
+            if (showFormat) {
+                var showdate = dateFormat(curr_time_arr, showFormat);
+                that.val(showdate);
+            } else {
+                var format = getDateFormatByVal(dateVal);
+                var showdate = dateFormat(curr_time_arr, format);
+                that.val(showdate);
+            }
+            if (useFormat) {
+                var useDate = dateFormat(curr_time_arr, useFormat);
+                that.attr("date-val", useDate);
+            }
         }
+        //if (dateVal && timeval_regex.test(dateVal) && !that.attr("date-show-format")) {
+        //    showFormat = addTimeFormat(showFormat);
+        //}
+        //if (dateVal && dateVal != '') {
+        //    var date = inputDateConvert(dateVal).date;
+        //    var curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
+        //    var showdate = dateFormat(curr_time_arr, showFormat);
+        //    that.val(showdate);
+        //}
     }
     //点击的时候，初始化数据
     function init() {
@@ -105,22 +124,26 @@
         for (var t in defaults) options[t] = defaults[t];
         has_time = false;
         var dateShowFormat = that.attr("date-show-format");
+        var dateUseFormat = that.attr("date-use-format");
+        var dateVal = that.attr("date-val");
+        ////////////////////////////////////////////
+
         options.showFormat = dateShowFormat || options.showFormat;
         options.start = that.attr("date-start") || options.start;
         options.end = that.attr("date-end") || options.end;
         options.lang = that.attr("date-lang") || options.lang;
         if (time_regex.test(options.showFormat)) {
             has_time = true;
-            options.useFormat = addTimeFormat(options.useFormat);    //showFormat使用了时间，则为useFormat添加时间
+            options.useFormat = addTimeFormat(options.useFormat);    
         }
-        var dateString = that.attr("date-val");
-        if (dateString && timeval_regex.test(dateString) && !dateShowFormat) {
+        if (dateVal && timeval_regex.test(dateVal) && !dateShowFormat) {
             has_time = true;
             options.useFormat = addTimeFormat(options.useFormat);
             options.showFormat = addTimeFormat(options.showFormat);
         }
-        if (dateString && dateString != '') {
-            date = inputDateConvert(dateString);
+        ////////////////////////////
+        if (dateVal && dateVal != '') {
+            date = inputDateConvert(dateVal).date;
         } else {
             date = new Date();
         }
@@ -186,7 +209,7 @@
             curr_time_arr[5] = $(this).find("input").val();
             writeDate();
         });
-        //选中了一个
+        //选中了一个,冒泡
         datepicker.click(function (event) {
             var srcElement = $(event.target);
             if (srcElement.hasClass("disabled")) return false;
@@ -552,17 +575,62 @@
         });
         return format;
     }
+    function getDateFormatByVal(dateVal) {
+        var dateResult = inputDateConvert(dateVal);
+        var format = "";
+        if (dateResult.hasYear) format += "yyyy";
+        if (dateResult.hasMonth) format += dateResult.symbol + "MM";
+        if (dateResult.hasDay) format += dateResult.symbol + "dd";
+        if (dateResult.hasHour) format += " hh";
+        if (dateResult.hasMinute) format += ":mm";
+        if (dateResult.hasSecond) format += ":ss";
+        return format;
+    }
     //将文本框中的日期字符串转成日期对象,供默认选中用
-    function inputDateConvert(str) {
-        var result = date_val_regex.exec(str);
-        var year = result[1] || new Date().getFullYear(),
-            month = result[2] > 0 ? (result[2] - 1) : new Date().getMonth(),
-            day = result[3] > 0 ? result[3] : new Date().getDate(),
-            hour = result[4] >= 0 ? result[4] : 0,
-            minute = result[5] >= 0 ? result[5] : 0,
-            second = result[6] >= 0 ? result[6] : 0;
-        //转换成日期对象,这样可以消去一些不必要的格式错误
-        return new Date(year, month, day, hour, minute, second);
+    function inputDateConvert(dateVal) {
+        var result = date_val_regex.exec(dateVal);
+        var year = new Date().getFullYear(),
+            month = new Date().getMonth(),
+            day = new Date().getDate(),
+            hour = 0,
+            minute = 0,
+            second = 0;
+        var hasYear = false,
+            hasMonth = false,
+            hasDay = false,
+            hasHour = false,
+            hasMinute = false,
+            hasSecond = false,
+            symbol = "";
+        if (result[1]) {
+            year = result[1]; hasYear = true;
+        }
+        if (result[2]) symbol = result[2];
+        if (result[3]) {
+            month = result[3] - 1; hasMonth = true;
+        }
+        if (result[4]) {
+            day = result[4]; hasDay = true;
+        }
+        if (result[5]) {
+            hour = result[5]; hasHour = true;
+        }
+        if (result[6]) {
+            minute = result[6]; hasMinute = true;
+        }
+        if (result[7]) {
+            second = result[7]; hasSecond = true;
+        }
+        return {
+            date: new Date(year, month, day, hour, minute, second),
+            hasYear: hasYear,
+            hasMonth: hasMonth,
+            hasDay: hasDay,
+            hasHour: hasHour,
+            hasMinute: hasMinute,
+            hasSecond: hasSecond,
+            symbol: symbol
+        }
     }
     //格式化年，len=位数
     function yearFormat(year, len) {
