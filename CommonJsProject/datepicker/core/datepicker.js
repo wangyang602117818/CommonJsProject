@@ -93,7 +93,7 @@
     //页面加载的时候，展示日期
     function showDate(that) {
         var showFormat = that.attr("date-show-format");  //显示格式
-        var useFormat = that.attr("date-use-format");    //使用时间
+        var useFormat = that.attr("date-use-format");    //使用格式
         var dateVal = that.attr("date-val");
         if (dateVal) {
             var date = inputDateConvert(dateVal).date;

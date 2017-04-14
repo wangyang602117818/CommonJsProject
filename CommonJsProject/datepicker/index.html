@@ -22,7 +22,11 @@
         var stri = "2017-01-02";
         var date = new Date(stri);
         
-        console.log(date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes()+":" + date.getSeconds());
+        console.log(date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
+
+        var date_val_regex = /(\d{2,4})([/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/;
+        var time = "12 May 2017 12:02:03";
+        console.log(date_val_regex.exec(time));
     </script>
     <style>
         .datepicker {
