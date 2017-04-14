@@ -192,7 +192,6 @@
         datepicker.find(".title_month").bind("click", showMonthLayer);
         datepicker.find("#hover_txt").bind("click", showHoverLayer).bind("input propertychange", function () {
             curr_time_arr[3] = $(this).find("input").val();
-            console.log("a");
             writeDate();
         });
         datepicker.find("#minute_txt").bind("click", showMinuteLayer).bind("input propertychange", function () {
@@ -273,7 +272,7 @@
         datepicker.find(".last_month").bind("click", lastMonth);
         datepicker.find(".next_month").bind("click", nextMonth);
         that.off("input propertychange").on("input propertychange", function () {
-            var date = new Date(that.val());
+            var date = new Date(that.val());  //275
             if (!isNaN(date.getTime())) {
                 var direct = "";
                 var year = date.getFullYear(),

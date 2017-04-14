@@ -19,10 +19,10 @@
         });
         
 
-        var stri = "06 Apr 2017 12:01:03";
+        var stri = "2017-01-02";
         var date = new Date(stri);
-        console.log(date.toLocaleDateString());
         
+        console.log(date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes()+":" + date.getSeconds());
     </script>
     <style>
         .datepicker {
@@ -50,6 +50,6 @@
     <input type="text" name="txt1" id="txt4" class="datepicker" date-val="2015-02-06 12:01:03" date-lang="en-us" date-show-format="dd Month yyyy hh:mm:ss" date-start="2000-01-01 00:00:00" date-end="2049-12-31 00:00:00" />
     <br />
     <br />
-    <input type="text" name="txt" id="txt5" class="datepicker" />
+    <input type="text" name="txt" id="txt5" class="datepicker" date-show-format="dd Month yyyy hh:mm:ss"/>
 </body>
 </html>
