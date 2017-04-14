@@ -10,68 +10,19 @@
         $(function () {
             //$("#txt1").attr("date-val", "2017-03-16 13:05:15");
             //datepicker();
-
+            var datepicker = $(".datepicker")
+            datepicker.on("input propertychange", function () {
+                var val = this;
+                console.log(val);
+            });
+            
         });
         
 
-        var date_val_regex = /(\d{2,4})([/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/;
-        function getDateFormatByVal(dateVal) {
-            var dateResult = inputDateConvert(dateVal);
-            var format = "";
-            if (dateResult.hasYear) format += "yyyy";
-            if (dateResult.hasMonth) format += dateResult.symbol + "MM";
-            if (dateResult.hasDay) format += dateResult.symbol + "dd";
-            if (dateResult.hasHour) format += " hh";
-            if (dateResult.hasMinute) format += ":mm";
-            if (dateResult.hasSecond) format += ":ss";
-            return format;
-        }
-        function inputDateConvert(dateVal) {
-            var result = date_val_regex.exec(dateVal);
-            var year = new Date().getFullYear(),
-                month = new Date().getMonth(),
-                day = new Date().getDate(),
-                hour = 0,
-                minute = 0,
-                second = 0;
-            var hasYear = false,
-                hasMonth = false,
-                hasDay = false,
-                hasHour = false,
-                hasMinute = false,
-                hasSecond = false,
-                symbol = "";
-            if (result[1]) {
-                year = result[1]; hasYear = true;
-            }
-            if (result[2]) symbol = result[2];
-            if (result[3]) {
-                month = result[3] - 1; hasMonth = true;
-            }
-            if (result[4]) {
-                day = result[4]; hasDay = true;
-            }
-            if (result[5]) {
-                hour = result[5]; hasHour = true;
-            }
-            if (result[6]) {
-                minute = result[6]; hasMinute = true;
-            }
-            if (result[7]) {
-                second = result[7]; hasSecond = true;
-            }
-            return {
-                date: new Date(year, month, day, hour, minute, second),
-                hasYear: hasYear,
-                hasMonth: hasMonth,
-                hasDay: hasDay,
-                hasHour: hasHour,
-                hasMinute: hasMinute,
-                hasSecond: hasSecond,
-                symbol: symbol
-            }
-        }
-        console.log(getDateFormatByVal("2015/01/06 12:22:55"));
+        var stri = "06 Apr 2017 12:01:03";
+        var date = new Date(stri);
+        console.log(date.toLocaleDateString());
+        
     </script>
     <style>
         .datepicker {

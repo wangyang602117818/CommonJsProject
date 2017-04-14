@@ -84,8 +84,11 @@
                 if (!srcElement.hasClass("datepicker")) datepicker_iframe.hide();
             });
         }
-        $(".datepicker").off().click(function () { that = $(this); init(); });
-        $(".datepicker").each(function () { showDate($(this)); });
+        $(".datepicker")
+            .off()
+            .on("click", function () { that = $(this); init(); });
+        $(".datepicker")
+            .each(function () { showDate($(this)); });
     }
     //页面加载的时候，展示日期
     function showDate(that) {
@@ -108,40 +111,30 @@
                 that.attr("date-val", useDate);
             }
         }
-        //if (dateVal && timeval_regex.test(dateVal) && !that.attr("date-show-format")) {
-        //    showFormat = addTimeFormat(showFormat);
-        //}
-        //if (dateVal && dateVal != '') {
-        //    var date = inputDateConvert(dateVal).date;
-        //    var curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
-        //    var showdate = dateFormat(curr_time_arr, showFormat);
-        //    that.val(showdate);
-        //}
     }
     //点击的时候，初始化数据
     function init() {
         var options = {};
         for (var t in defaults) options[t] = defaults[t];
         has_time = false;
-        var dateShowFormat = that.attr("date-show-format");
-        var dateUseFormat = that.attr("date-use-format");
-        var dateVal = that.attr("date-val");
-        ////////////////////////////////////////////
-
-        options.showFormat = dateShowFormat || options.showFormat;
         options.start = that.attr("date-start") || options.start;
         options.end = that.attr("date-end") || options.end;
         options.lang = that.attr("date-lang") || options.lang;
-        if (time_regex.test(options.showFormat)) {
-            has_time = true;
-            options.useFormat = addTimeFormat(options.useFormat);    
+        var dateShowFormat = that.attr("date-show-format"),
+            dateUseFormat = that.attr("date-use-format"),
+            dateVal = that.attr("date-val");
+        if (dateVal) {
+            var format = getDateFormatByVal(dateVal);
+            if (!dateShowFormat) dateShowFormat = format;
+            if (!dateUseFormat) dateUseFormat = format;
+        } else {
+            if (!dateShowFormat && dateUseFormat) dateShowFormat = dateUseFormat;
+            if (!dateUseFormat && dateShowFormat) dateUseFormat = dateShowFormat;
         }
-        if (dateVal && timeval_regex.test(dateVal) && !dateShowFormat) {
-            has_time = true;
-            options.useFormat = addTimeFormat(options.useFormat);
-            options.showFormat = addTimeFormat(options.showFormat);
-        }
-        ////////////////////////////
+        options.showFormat = dateShowFormat || options.showFormat;
+        options.useFormat = dateUseFormat || options.useFormat;
+        if (time_regex.test(options.showFormat)) has_time = true;
+        if (time_regex.test(options.useFormat)) has_time = true;
         if (dateVal && dateVal != '') {
             date = inputDateConvert(dateVal).date;
         } else {
@@ -199,6 +192,7 @@
         datepicker.find(".title_month").bind("click", showMonthLayer);
         datepicker.find("#hover_txt").bind("click", showHoverLayer).bind("input propertychange", function () {
             curr_time_arr[3] = $(this).find("input").val();
+            console.log("a");
             writeDate();
         });
         datepicker.find("#minute_txt").bind("click", showMinuteLayer).bind("input propertychange", function () {
@@ -229,7 +223,6 @@
                 } if (data < curr_year) {
                     changeMainData("right");
                 }
-                datepicker.find(".title_year").text(data + model.commonlang[model.defaults.lang].title[0]);
                 showYearLayer();
                 writeDate();
             }
@@ -244,7 +237,6 @@
                         if (i < curr_month) {
                             changeMainData("right");
                         }
-                        datepicker.find(".title_month").text(model.commonlang[model.defaults.lang].month[i] + model.commonlang[model.defaults.lang].title[3]);
                         showMonthLayer();
                         writeDate();
                     }
@@ -280,6 +272,26 @@
         datepicker.find(".next_year").bind("click", nextYear);
         datepicker.find(".last_month").bind("click", lastMonth);
         datepicker.find(".next_month").bind("click", nextMonth);
+        that.off("input propertychange").on("input propertychange", function () {
+            var date = new Date(that.val());
+            if (!isNaN(date.getTime())) {
+                var direct = "";
+                var year = date.getFullYear(),
+                    month = date.getMonth(),
+                    day = date.getDate(),
+                    hour = date.getHours(),
+                    minuts = date.getMinutes(),
+                    second = date.getSeconds();
+                var totalDay = year * 365 + month * 30 + day;
+                if (totalDay > curr_time_arr[0] * 365 + curr_time_arr[1] * 30 + curr_time_arr[2]) direct = "left";
+                if (totalDay < curr_time_arr[0] * 365 + curr_time_arr[1] * 30 + curr_time_arr[2]) direct = "right";
+                curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()]
+                var usedate = dateFormat(curr_time_arr, model.defaults.useFormat);
+                that.attr("date-val", usedate);
+                model.curr_time_arr = text_time_arr = curr_time_arr.slice(0);
+                if (direct) changeMainData(direct);
+            }
+        });
     }
     function writeDate() {
         if (!curr_time_arr) {
@@ -391,7 +403,6 @@
             return false;
         }
         --curr_time_arr[0];
-        datepicker.find(".title_year").text(curr_time_arr[0] + model.commonlang[model.defaults.lang].title[0]);
         changeMainData("right");  //动画改变日期面板
     }
     //下一年
@@ -402,7 +413,6 @@
             return false;
         }
         ++curr_time_arr[0];
-        datepicker.find(".title_year").text(curr_time_arr[0] + model.commonlang[model.defaults.lang].title[0]);
         changeMainData("left");  //动画改变日期面板
     }
     //上一月
@@ -412,10 +422,7 @@
         if (curr_time_arr[1] < 0) {
             curr_time_arr[0]--;
             curr_time_arr[1] = 11;
-            datepicker.find(".title_year").text(curr_time_arr[0] + model.commonlang[model.defaults.lang].title[0]);
         }
-        //if (isMonthDisplay()) nextMonthDisplay("right");
-        datepicker.find(".title_month").text(model.commonlang[model.defaults.lang].month[curr_time_arr[1]].substring(0, 6) + model.commonlang[model.defaults.lang].title[3]);
         changeMainData("right");//动画改变日期面板
     }
     //下一月
@@ -425,10 +432,7 @@
         if (curr_time_arr[1] > 11) {  //该跳到下一年了
             curr_time_arr[0]++;
             curr_time_arr[1] = 0;
-            datepicker.find(".title_year").text(curr_time_arr[0] + model.commonlang[model.defaults.lang].title[0]);
         }
-        //if (isMonthDisplay()) nextMonthDisplay("left");
-        datepicker.find(".title_month").text(model.commonlang[model.defaults.lang].month[curr_time_arr[1]].substring(0, 6) + model.commonlang[model.defaults.lang].title[3]);
         changeMainData("left");
     }
     function showNextYear(direction) {
@@ -458,6 +462,8 @@
     }
     //改变主日期面板,direction=动画方向
     function changeMainData(direction) {
+        datepicker.find(".title_year").text(curr_time_arr[0] + model.commonlang[model.defaults.lang].title[0]);
+        datepicker.find(".title_month").text(model.commonlang[model.defaults.lang].month[curr_time_arr[1]].substring(0, 6) + model.commonlang[model.defaults.lang].title[3]);
         var datepicker_width = datepicker.css("width");  //主日期框宽度(数据面板的偏移量)
         var dataEle = $(parseTemplate(template_data, model)); //创建
         //在改变日期数据面板时,每个月天数不一样,有可能高度发生变化
