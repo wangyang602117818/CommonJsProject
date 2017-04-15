@@ -47,7 +47,7 @@
         timeval_regex = /\d{1,2}:(\d{1,2})?(:\d{1,2})?/,         //验证文本框的日期值,是否有时间
         time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,      //作验证日期格式是否有时间
         date_val_regex = /(\d{2,4})([-\/\.])?(\d{1,2})?(?:[-\/\.])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/,     //提取文本框的日期,针对中国时间
-        date_val_en = /(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{4})\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/;  //针对 dd Month yyyy hh:mm:ss 格式
+        date_val_en = /(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{2,4})\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/;  //针对 dd Month yyyy hh:mm:ss 格式
     //全局对象
     var datepicker_iframe,
         datepicker,              //主日期框对象
@@ -87,7 +87,11 @@
         }
         $(".datepicker")
             .off()
-            .on("click", function () { that = $(this); init(); });
+            .on("click", function () {
+                that = $(this);
+                init();      //初始化一个model
+                render(model);
+            });
         $(".datepicker")
             .each(function () { showDate($(this)); });
     }
@@ -113,7 +117,6 @@
             }
         }
     }
-    //点击的时候，初始化数据
     function init() {
         var options = {};
         for (var t in defaults) options[t] = defaults[t];
@@ -154,9 +157,6 @@
             end_time_arr = startEndDateConvert(options.end);
         }
         start_disp_year = getStartDispYear(curr_time_arr[0]);
-        render(options);
-    }
-    function render(options) {
         var top = that.offset().top + that.outerHeight(),
             left = that.offset().left;
         model = {
@@ -172,11 +172,15 @@
             isWeekend: isWeekend,
             isDateToday: isDateToday,
             isDayDisabled: isDayDisabled,
-            monthFormat: monthFormat
+            monthFormat: monthFormat,
+            top: top,
+            left: left
         };
+    }
+    function render(model) {
         var template = parseTemplate(getTemplate(), model);
         datepicker_iframe.contents().find("body").html(template);
-        datepicker_iframe.css({ top: top, left: left, display: "inline" });
+        datepicker_iframe.css({ top: model.top, left: model.left, display: "inline" });
         bindEvent();
     }
     function bindEvent() {
@@ -189,22 +193,22 @@
         con_second = datepicker.find(".datepicker_second_layer");
         changeHeight();
         //5个div层
-        datepicker.find(".title_year").bind("click", showYearLayer);
-        datepicker.find(".title_month").bind("click", showMonthLayer);
-        datepicker.find("#hover_txt").bind("click", showHoverLayer).bind("input propertychange", function () {
+        datepicker.find(".title_year").off().on("click", showYearLayer);
+        datepicker.find(".title_month").off().on("click", showMonthLayer);
+        datepicker.find("#hover_txt").off().on("click", showHoverLayer).on("input propertychange", function () {
             curr_time_arr[3] = $(this).find("input").val();
             writeDate();
         });
-        datepicker.find("#minute_txt").bind("click", showMinuteLayer).bind("input propertychange", function () {
+        datepicker.find("#minute_txt").off().on("click", showMinuteLayer).on("input propertychange", function () {
             curr_time_arr[4] = $(this).find("input").val();
             writeDate();
         });
-        datepicker.find("#second_txt").bind("click", showSecondLayer).bind("input propertychange", function () {
+        datepicker.find("#second_txt").off().on("click", showSecondLayer).on("input propertychange", function () {
             curr_time_arr[5] = $(this).find("input").val();
             writeDate();
         });
         //选中了一个,冒泡
-        datepicker.click(function (event) {
+        datepicker.off().on("click",function (event) {
             var srcElement = $(event.target);
             if (srcElement.hasClass("disabled")) return false;
             var data = srcElement.text();
@@ -270,13 +274,15 @@
             }
         });
         //4个按钮
-        datepicker.find(".last_year").bind("click", lastYear);
-        datepicker.find(".next_year").bind("click", nextYear);
-        datepicker.find(".last_month").bind("click", lastMonth);
-        datepicker.find(".next_month").bind("click", nextMonth);
+        datepicker.find(".last_year").off().on("click", lastYear);
+        datepicker.find(".next_year").off().on("click", nextYear);
+        datepicker.find(".last_month").off().on("click", lastMonth);
+        datepicker.find(".next_month").off().on("click", nextMonth);
         that.off("input propertychange").on("input propertychange", function () {
-            var date = new Date(that.val());  //275
-            if (!isNaN(date.getTime())) {
+            that = $(this);
+            init();
+            var date = inputDateConvert(that.val()).date;  //275
+            if (date && !isNaN(date.getTime())) {
                 var direct = "";
                 var year = date.getFullYear(),
                     month = date.getMonth(),
@@ -284,13 +290,15 @@
                     hour = date.getHours(),
                     minuts = date.getMinutes(),
                     second = date.getSeconds();
-                var totalDay = year * 365 + month * 30 + day;
-                if (totalDay > curr_time_arr[0] * 365 + curr_time_arr[1] * 30 + curr_time_arr[2]) direct = "left";
-                if (totalDay < curr_time_arr[0] * 365 + curr_time_arr[1] * 30 + curr_time_arr[2]) direct = "right";
+                var modifyDate = new Date(year, month, day);
+                var originDate = new Date(curr_time_arr[0], curr_time_arr[1], curr_time_arr[2]);
+                if (modifyDate > originDate) direct = "left";
+                if (modifyDate < originDate) direct = "right";
                 curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()]
                 var usedate = dateFormat(curr_time_arr, model.defaults.useFormat);
                 that.attr("date-val", usedate);
                 text_time_arr = curr_time_arr.slice(0);
+                model.curr_time_arr = curr_time_arr;
                 if (direct) changeMainData(direct);
             }
         });
@@ -684,12 +692,14 @@
         if (year.toString().length == len) return year.toString();
         if (year.toString().length == 4 && len == 2) return year.toString().substr(2, 2);
         if (year.toString().length == 2 && len == 4) return new Date().getFullYear().toString().substr(0, 2) + year;
+        return year;
     }
     //格式化月，天，小时，
     function monthFormat(month, len) {
         if (len == 1) return month;
         if (len == 2) return month.toString().length == 1 ? "0" + month : month;
         if (len == 0) return "";
+        return month;
     }
     //给日期型的添加时间项
     function addTimeFormat(format) {
