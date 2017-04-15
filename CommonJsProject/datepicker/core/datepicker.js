@@ -44,9 +44,10 @@
         template_hover_regex = /<!--hover_containter_start-->((.|\n|\r)*)<!--hover_containter_end-->/,
         template_minute_regex = /<!--minute_containter_start-->((.|\n|\r)*)<!--minute_containter_end-->/,
         template_second_regex = /<!--second_containter_start-->((.|\n|\r)*)<!--second_containter_end-->/,
-        timeval_regex = /\d{1,2}:(\d{1,2})?(:\d{1,2})?/,  //验证文本框的日期值,是否有时间
-        time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,   //作验证日期格式是否有时间
-        date_val_regex = /(\d{2,4})([/-])?(\d{1,2})?(?:[/-])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/; //提取文本框的日期,针对中国时间
+        timeval_regex = /\d{1,2}:(\d{1,2})?(:\d{1,2})?/,         //验证文本框的日期值,是否有时间
+        time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,      //作验证日期格式是否有时间
+        date_val_regex = /(\d{2,4})([-\/\.])?(\d{1,2})?(?:[-\/\.])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/,     //提取文本框的日期,针对中国时间
+        date_val_en = /(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{4})\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/;  //针对 dd Month yyyy hh:mm:ss 格式
     //全局对象
     var datepicker_iframe,
         datepicker,              //主日期框对象
@@ -217,6 +218,7 @@
             if (srcElement.hasClass("tag_year")) {
                 var curr_year = curr_time_arr[0];  //首先保存当前年
                 curr_time_arr[0] = data;   //吧全局的年份修改了
+                text_time_arr[0] = data;   //选中天
                 if (data > curr_year) {
                     changeMainData("left");
                 } if (data < curr_year) {
@@ -230,6 +232,7 @@
                     if (model.commonlang[model.defaults.lang].month[i] == data) {
                         var curr_month = curr_time_arr[1];   //保存当前的月份
                         curr_time_arr[1] = i;  //修改全局月份
+                        text_time_arr[1] = i;   //选中天
                         if (i > curr_month) {
                             changeMainData("left");
                         }
@@ -287,7 +290,7 @@
                 curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()]
                 var usedate = dateFormat(curr_time_arr, model.defaults.useFormat);
                 that.attr("date-val", usedate);
-                model.curr_time_arr = text_time_arr = curr_time_arr.slice(0);
+                text_time_arr = curr_time_arr.slice(0);
                 if (direct) changeMainData(direct);
             }
         });
@@ -583,17 +586,26 @@
     function getDateFormatByVal(dateVal) {
         var dateResult = inputDateConvert(dateVal);
         var format = "";
-        if (dateResult.hasYear) format += "yyyy";
-        if (dateResult.hasMonth) format += dateResult.symbol + "MM";
-        if (dateResult.hasDay) format += dateResult.symbol + "dd";
-        if (dateResult.hasHour) format += " hh";
-        if (dateResult.hasMinute) format += ":mm";
-        if (dateResult.hasSecond) format += ":ss";
+        if (dateResult.symbol == "month") {
+            if (dateResult.hasDay) format += "dd";;
+            if (dateResult.hasMonth) format += " Month";
+            if (dateResult.hasYear) format += " yyyy";
+            if (dateResult.hasHour) format += " hh";
+            if (dateResult.hasMinute) format += ":mm";
+            if (dateResult.hasSecond) format += ":ss";
+        } else {
+            if (dateResult.hasYear) format += "yyyy";
+            if (dateResult.hasMonth) format += dateResult.symbol + "MM";
+            if (dateResult.hasDay) format += dateResult.symbol + "dd";
+            if (dateResult.hasHour) format += " hh";
+            if (dateResult.hasMinute) format += ":mm";
+            if (dateResult.hasSecond) format += ":ss";
+        }
         return format;
     }
     //将文本框中的日期字符串转成日期对象,供默认选中用
     function inputDateConvert(dateVal) {
-        var result = date_val_regex.exec(dateVal);
+        var result = null;
         var year = new Date().getFullYear(),
             month = new Date().getMonth(),
             day = new Date().getDate(),
@@ -607,24 +619,48 @@
             hasMinute = false,
             hasSecond = false,
             symbol = "";
-        if (result[1]) {
-            year = result[1]; hasYear = true;
-        }
-        if (result[2]) symbol = result[2];
-        if (result[3]) {
-            month = result[3] - 1; hasMonth = true;
-        }
-        if (result[4]) {
-            day = result[4]; hasDay = true;
-        }
-        if (result[5]) {
-            hour = result[5]; hasHour = true;
-        }
-        if (result[6]) {
-            minute = result[6]; hasMinute = true;
-        }
-        if (result[7]) {
-            second = result[7]; hasSecond = true;
+        var resultEn = date_val_en.exec(dateVal);
+        if (resultEn) {
+            if (resultEn[1]) {
+                day = resultEn[1]; hasDay = true;
+            }
+            if (resultEn[2]) {
+                month = getMonthByString(resultEn[2]); hasMonth = true;
+            }
+            if (resultEn[3]) {
+                year = resultEn[3]; hasYear = true;
+            }
+            if (resultEn[4]) {
+                hour = resultEn[4]; hasHour = true;
+            }
+            if (resultEn[5]) {
+                minute = resultEn[5]; hasMinute = true;
+            }
+            if (resultEn[6]) {
+                second = resultEn[6]; hasSecond = true;
+            }
+            symbol = "month";
+        } else {
+            result = date_val_regex.exec(dateVal);
+            if (result[1]) {
+                year = result[1]; hasYear = true;
+            }
+            if (result[2]) symbol = result[2];
+            if (result[3]) {
+                month = result[3] - 1; hasMonth = true;
+            }
+            if (result[4]) {
+                day = result[4]; hasDay = true;
+            }
+            if (result[5]) {
+                hour = result[5]; hasHour = true;
+            }
+            if (result[6]) {
+                minute = result[6]; hasMinute = true;
+            }
+            if (result[7]) {
+                second = result[7]; hasSecond = true;
+            }
         }
         return {
             date: new Date(year, month, day, hour, minute, second),
@@ -635,6 +671,12 @@
             hasMinute: hasMinute,
             hasSecond: hasSecond,
             symbol: symbol
+        }
+    }
+    function getMonthByString(str) {
+        var monthArray = commonlang["en-us"].month;
+        for (var i = 0; i < monthArray.length; i++) {
+            if (str == monthArray[i]) return i;
         }
     }
     //格式化年，len=位数
