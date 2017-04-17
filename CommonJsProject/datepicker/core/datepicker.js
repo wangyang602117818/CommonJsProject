@@ -208,7 +208,7 @@
             writeDate();
         });
         //选中了一个,冒泡
-        datepicker.off().on("click",function (event) {
+        datepicker.off().on("click", function (event) {
             var srcElement = $(event.target);
             if (srcElement.hasClass("disabled")) return false;
             var data = srcElement.text();
@@ -286,7 +286,7 @@
     }
     //把时间从文本框，反向写入到datepicker
     function retrieveDate() {
-        var date = inputDateConvert(that.val()).date;  //275
+        var date = inputDateConvert(that.val()).date;
         if (date && !isNaN(date.getTime())) {
             var direct = "";
             var year = date.getFullYear(),
@@ -304,9 +304,9 @@
             that.attr("date-val", usedate);
             text_time_arr = curr_time_arr.slice(0);
             model.curr_time_arr = curr_time_arr;
-            datepicker.find("#hover_txt .hour").val(monthFormat(curr_time_arr[3],2));
-            datepicker.find("#minute_txt .minute").val(monthFormat(curr_time_arr[4],2));
-            datepicker.find("#second_txt .second").val(monthFormat(curr_time_arr[5],2));
+            datepicker.find("#hover_txt .hour").val(monthFormat(curr_time_arr[3], 2));
+            datepicker.find("#minute_txt .minute").val(monthFormat(curr_time_arr[4], 2));
+            datepicker.find("#second_txt .second").val(monthFormat(curr_time_arr[5], 2));
             if (direct) changeMainData(direct);
         }
     }
@@ -656,26 +656,29 @@
                 second = resultEn[6]; hasSecond = true;
             }
             symbol = "month";
-        } else {
-            result = date_val_zh.exec(dateVal);
-            if (result[1]) {
-                year = result[1]; hasYear = true;
-            }
-            if (result[2]) symbol = result[2];
-            if (result[3]) {
-                month = result[3] - 1; hasMonth = true;
-            }
-            if (result[4]) {
-                day = result[4]; hasDay = true;
-            }
-            if (result[5]) {
-                hour = result[5]; hasHour = true;
-            }
-            if (result[6]) {
-                minute = result[6]; hasMinute = true;
-            }
-            if (result[7]) {
-                second = result[7]; hasSecond = true;
+        }
+        else {
+            var result = date_val_zh.exec(dateVal);
+            if (result) {
+                if (result[1]) {
+                    year = result[1]; hasYear = true;
+                }
+                if (result[2]) symbol = result[2];
+                if (result[3]) {
+                    month = result[3] - 1; hasMonth = true;
+                }
+                if (result[4]) {
+                    day = result[4]; hasDay = true;
+                }
+                if (result[5]) {
+                    hour = result[5]; hasHour = true;
+                }
+                if (result[6]) {
+                    minute = result[6]; hasMinute = true;
+                }
+                if (result[7]) {
+                    second = result[7]; hasSecond = true;
+                }
             }
         }
         return {
