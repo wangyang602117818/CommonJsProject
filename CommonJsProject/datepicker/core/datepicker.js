@@ -46,7 +46,7 @@
         template_second_regex = /<!--second_containter_start-->((.|\n|\r)*)<!--second_containter_end-->/,
         timeval_regex = /\d{1,2}:(\d{1,2})?(:\d{1,2})?/,         //验证文本框的日期值,是否有时间
         time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,      //作验证日期格式是否有时间
-        date_val_regex = /(\d{2,4})([-\/\.])?(\d{1,2})?(?:[-\/\.])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/,     //提取文本框的日期,针对中国时间
+        date_val_zh = /(\d{2,4})([-\/\.])?(\d{1,2})?(?:[-\/\.])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/,     //提取文本框的日期,针对中国时间
         date_val_en = /(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{2,4})\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/;  //针对 dd Month yyyy hh:mm:ss 格式
     //全局对象
     var datepicker_iframe,
@@ -657,7 +657,7 @@
             }
             symbol = "month";
         } else {
-            result = date_val_regex.exec(dateVal);
+            result = date_val_zh.exec(dateVal);
             if (result[1]) {
                 year = result[1]; hasYear = true;
             }
@@ -716,7 +716,7 @@
     }
     //将给出的时间范围转成数组,以便后续的比较
     function startEndDateConvert(str) {
-        var result = date_val_regex.exec(str);
+        var result = date_val_zh.exec(str);
         var year = result[1],
             month = (result[2] - 1) < 0 ? 0 : (result[2] - 1),
             day = result[3] > 0 ? result[3] : 1,
