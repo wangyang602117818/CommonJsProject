@@ -281,28 +281,36 @@
         that.off("input propertychange").on("input propertychange", function () {
             that = $(this);
             init();
-            var date = inputDateConvert(that.val()).date;  //275
-            if (date && !isNaN(date.getTime())) {
-                var direct = "";
-                var year = date.getFullYear(),
-                    month = date.getMonth(),
-                    day = date.getDate(),
-                    hour = date.getHours(),
-                    minuts = date.getMinutes(),
-                    second = date.getSeconds();
-                var modifyDate = new Date(year, month, day);
-                var originDate = new Date(curr_time_arr[0], curr_time_arr[1], curr_time_arr[2]);
-                if (modifyDate > originDate) direct = "left";
-                if (modifyDate < originDate) direct = "right";
-                curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()]
-                var usedate = dateFormat(curr_time_arr, model.defaults.useFormat);
-                that.attr("date-val", usedate);
-                text_time_arr = curr_time_arr.slice(0);
-                model.curr_time_arr = curr_time_arr;
-                if (direct) changeMainData(direct);
-            }
+            setTimeout(retrieveDate, 200);
         });
     }
+    //把时间从文本框，反向写入到datepicker
+    function retrieveDate() {
+        var date = inputDateConvert(that.val()).date;  //275
+        if (date && !isNaN(date.getTime())) {
+            var direct = "";
+            var year = date.getFullYear(),
+                month = date.getMonth(),
+                day = date.getDate(),
+                hour = date.getHours(),
+                minuts = date.getMinutes(),
+                second = date.getSeconds();
+            var modifyDate = new Date(year, month, day);
+            var originDate = new Date(curr_time_arr[0], curr_time_arr[1], curr_time_arr[2]);
+            if (modifyDate > originDate) direct = "left";
+            if (modifyDate < originDate) direct = "right";
+            curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()]
+            var usedate = dateFormat(curr_time_arr, model.defaults.useFormat);
+            that.attr("date-val", usedate);
+            text_time_arr = curr_time_arr.slice(0);
+            model.curr_time_arr = curr_time_arr;
+            datepicker.find("#hover_txt .hour").val(monthFormat(curr_time_arr[3],2));
+            datepicker.find("#minute_txt .minute").val(monthFormat(curr_time_arr[4],2));
+            datepicker.find("#second_txt .second").val(monthFormat(curr_time_arr[5],2));
+            if (direct) changeMainData(direct);
+        }
+    }
+    //往文本框写入时间
     function writeDate() {
         if (!curr_time_arr) {
             curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
