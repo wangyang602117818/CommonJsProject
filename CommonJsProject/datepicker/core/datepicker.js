@@ -197,15 +197,15 @@
         datepicker.find(".title_month").off().on("click", showMonthLayer);
         datepicker.find("#hover_txt").off().on("click", showHoverLayer).on("input propertychange", function () {
             curr_time_arr[3] = $(this).find("input").val();
-            writeDate();
+            writeDate(curr_time_arr);
         });
         datepicker.find("#minute_txt").off().on("click", showMinuteLayer).on("input propertychange", function () {
             curr_time_arr[4] = $(this).find("input").val();
-            writeDate();
+            writeDate(curr_time_arr);
         });
         datepicker.find("#second_txt").off().on("click", showSecondLayer).on("input propertychange", function () {
             curr_time_arr[5] = $(this).find("input").val();
-            writeDate();
+            writeDate(curr_time_arr);
         });
         //选中了一个,冒泡
         datepicker.off().on("click", function (event) {
@@ -216,27 +216,27 @@
                 if (data <= 31 && data > 0) {
                     curr_time_arr[2] = data;
                     datepicker_iframe.hide();
-                    writeDate();
+                    writeDate(curr_time_arr);
                 }
             }
             if (srcElement.hasClass("tag_year")) {
                 var curr_year = curr_time_arr[0];  //首先保存当前年
                 curr_time_arr[0] = data;   //吧全局的年份修改了
-                text_time_arr[0] = data;   //选中天
+                text_time_arr[0] = data;   //选中年
                 if (data > curr_year) {
                     changeMainData("left");
                 } if (data < curr_year) {
                     changeMainData("right");
                 }
                 showYearLayer();
-                writeDate();
+                writeDate(curr_time_arr);
             }
             if (srcElement.hasClass("tag_month")) {
                 for (var i = 0; i < model.commonlang[model.defaults.lang].month.length; i++) {
                     if (model.commonlang[model.defaults.lang].month[i] == data) {
                         var curr_month = curr_time_arr[1];   //保存当前的月份
                         curr_time_arr[1] = i;  //修改全局月份
-                        text_time_arr[1] = i;   //选中天
+                        text_time_arr[1] = i;   //选中月
                         if (i > curr_month) {
                             changeMainData("left");
                         }
@@ -244,7 +244,7 @@
                             changeMainData("right");
                         }
                         showMonthLayer();
-                        writeDate();
+                        writeDate(curr_time_arr);
                     }
                 }
             }
@@ -252,24 +252,27 @@
                 if (data >= 0 && data <= 23) {
                     datepicker.find(".hour").val(data);
                     curr_time_arr[3] = data;
+                    text_time_arr[3] = data;
                     showHoverLayer();
-                    writeDate();
+                    writeDate(text_time_arr);
                 }
             }
             if (srcElement.hasClass("tag_minute")) {
                 if (data >= 0 && data <= 55) {
                     datepicker.find(".minute").val(data);
                     curr_time_arr[4] = data;
+                    text_time_arr[4] = data;
                     showMinuteLayer();
-                    writeDate();
+                    writeDate(text_time_arr);
                 }
             }
             if (srcElement.hasClass("tag_second")) {
                 if (data >= 0 && data <= 55) {
                     datepicker.find(".second").val(data);
                     curr_time_arr[5] = data;
+                    text_time_arr[5] = data;
                     showSecondLayer();
-                    writeDate();
+                    writeDate(text_time_arr);
                 }
             }
         });
@@ -310,8 +313,8 @@
             if (direct) changeMainData(direct);
         }
     }
-    //往文本框写入时间
-    function writeDate() {
+    //往文本框写入日期时间
+    function writeDate(curr_time_arr) {
         if (!curr_time_arr) {
             curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
         }

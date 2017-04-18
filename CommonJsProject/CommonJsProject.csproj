@@ -100,7 +100,6 @@
     <Content Include="Grid\gridster.js" />
     <Content Include="Grid\index.html" />
     <Content Include="Grid\jquery.gridster.css" />
-    <Content Include="HtmlPage1.html" />
     <Content Include="JQExtension\JQExtension.js" />
     <Content Include="Grid\jquery-1.10.2.min.js" />
     <Content Include="JQExtension\jquery-1.10.2.min.js" />
