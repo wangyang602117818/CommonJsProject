@@ -215,7 +215,7 @@
             if (srcElement.hasClass("tag_day")) {
                 if (data <= 31 && data > 0) {
                     curr_time_arr[2] = data;
-                    if (that[0].hasAttribute("date-double") && !srcElement.hasClass("today") && has_time) {
+                    if (that[0].hasAttribute("date-dblclick") && !srcElement.hasClass("today") && has_time) {
                         text_time_arr = curr_time_arr.slice(0);
                         main_data_containter.find(".tag_day").removeClass("today");
                         srcElement.addClass("today");
