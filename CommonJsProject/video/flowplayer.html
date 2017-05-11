@@ -1,0 +1,50 @@
+﻿<!doctype html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Flowplayer · HLS support</title>
+
+    <!-- optimize mobile versions -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Flowplayer skin -->
+    <link rel="stylesheet" href="//releases.flowplayer.org/7.0.4/skin/skin.css">
+    <style>
+        .flowplayer {
+            background-color: #bbb;
+        }
+    </style>
+
+    <!-- Flowplayer depends on jquery 1.7.2+ for video tag based installations -->
+    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- Flowplayer library -->
+    <script src="//releases.flowplayer.org/7.0.4/flowplayer.min.js"></script>
+
+
+    <script>
+        // display information about the video type
+        flowplayer(function (api) {
+            api.on("load", function (e, api, video) {
+                $("#vinfo").text(api.engine.engineName + " engine playing " + video.type);
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <div id="content" style="width:400px;height:400px;">
+        <div class="flowplayer" data-ratio="0.5625">
+            <video>
+                <source type="application/x-mpegurl" src="//edge.flowplayer.org/FlowplayerHTML5forWordPress.m3u8">
+                <source type="video/mp4" src="//edge.flowplayer.org/FlowplayerHTML5forWordPress.mp4">
+            </video>
+
+        </div>
+    </div>
+
+</body>
+</html>

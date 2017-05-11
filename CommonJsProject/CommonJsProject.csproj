@@ -103,6 +103,7 @@
     <Content Include="Grid\index.html" />
     <Content Include="Grid\jquery.gridster.css" />
     <Content Include="HtmlPage1.html" />
+    <Content Include="HtmlPage2.html" />
     <Content Include="JQExtension\JQExtension.js" />
     <Content Include="Grid\jquery-1.10.2.min.js" />
     <Content Include="JQExtension\jquery-1.10.2.min.js" />
@@ -136,8 +137,10 @@
     <Content Include="file-uploader\index.html" />
     <Content Include="file-uploader\scripts\jquery-1.7.1.js" />
     <Content Include="file-uploader\styles\file-uploader.css" />
-    <Content Include="video\dash.all.min.js" />
-    <Content Include="video\dash.html" />
+    <Content Include="video\flashlsFlowPlayer.swf" />
+    <Content Include="video\flowplayer-3.2.12.min.js" />
+    <Content Include="video\flowplayer.html" />
+    <Content Include="video\flowplayer.swf" />
     <Content Include="video\src\1.mp4" />
     <Content Include="video\video.html" />
     <Content Include="Web.config">
