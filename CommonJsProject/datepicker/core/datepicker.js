@@ -730,11 +730,11 @@
     function startEndDateConvert(str) {
         var result = date_val_zh.exec(str);
         var year = result[1],
-            month = (result[2] - 1) < 0 ? 0 : (result[2] - 1),
-            day = result[3] > 0 ? result[3] : 1,
-            hour = result[4] >= 0 ? result[4] : 0,
-            minute = result[5] >= 0 ? result[5] : 0,
-            second = result[6] >= 0 ? result[6] : 0;
+            month = (result[3] - 1) < 0 ? 0 : (result[3] - 1),
+            day = result[4] > 0 ? result[4] : 1,
+            hour = result[5] >= 0 ? result[5] : 0,
+            minute = result[6] >= 0 ? result[6] : 0,
+            second = result[7] >= 0 ? result[7] : 0;
         return [year, month, day, hour, minute, second];
     }
     //获取year层的起始
