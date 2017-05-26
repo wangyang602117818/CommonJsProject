@@ -15,10 +15,20 @@
         }
     </style>
     <script src="~/Scripts/jquery-1.10.2.js"></script>
-    
+    <script>
+        $(function () {
+            $.get('http://localhost:32688/home/t1', function (data) {
+                $("#dv1").append(data);
+            });
+        })
+    </script>
 </head>
 <body id="body">
-    Index
+    
+    <div id="dv1"></div>
+    
+
+    
 </body>
 </html>
 <script>

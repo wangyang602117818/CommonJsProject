@@ -24,7 +24,7 @@
         data: { exist: "true", data: "data000" },
         msg: [{ msg1: "111", msg2: "222" }, { msg1: "m111", msg2: "m222" }]
     };
-    $.get('http://localhost:14121/template/template.html', function (template) {
+    $.get('http://localhost:7070/template/template.html', function (template) {
         var res = parseHTML(template, data);
         $("body").append(res);
         var s = 0;
