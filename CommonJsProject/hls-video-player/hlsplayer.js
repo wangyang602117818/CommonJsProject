@@ -9,11 +9,10 @@
     $(function () {
         begin();
     });
+
     $.fn.extend({
         setPlayerSrc: function (src) {
             hlsSupported ? setHlsPlayerSrc(this[0], src) : setFlashPlayerSrc(this[0], src);
-            //setHlsPlayerSrc(this[0], src); //test
-            //setFlashPlayerSrc(this[0], src); //ie
             return this;
         }
     })
@@ -22,9 +21,6 @@
     }
     function init(video) {
         hlsSupported ? initHlsPlayer(video) : initFlashPlayer(video);
-        //initHlsPlayer(video)      //test
-        //initFlashPlayer(video);  //ie
-        
     }
     //重新设置播放源 hls
     function setHlsPlayerSrc(video, src) {
