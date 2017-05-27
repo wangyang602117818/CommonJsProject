@@ -4,44 +4,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <meta charset="utf-8" />
-    <script src="hls.min.js"></script>
+
+    <script src="../hls-video-player/jquery-1.10.2.min.js"></script>
+    <script src="../hls-video-player/hls.min.js"></script>
+    <script src="../hls-video-player/flow.min.js"></script>
+    <script src="../hls-video-player/hlsplayer.js" flowplayer="../hls-video-player/flowplayer.swf" flowplayerhls="../hls-video-player/flowplayerhls.swf"></script>
 </head>
 <body>
-    <!--纯html5的方式
-    只要是支持html5标签的浏览器基本都支持
-    优点:方便,快捷,只要嵌入 video标签就ok
-        缺点:视频缓冲,ie好像会先下载视频,性能不好
-    -->
-    <!--<video controls="controls" width="400" height="400">
-        <source src="/video/src/1.mp4" type="video/mp4" />
+    <video controls="controls" width="400" height="400">
+        <source src="../hls-video-player/video/1/output.m3u8" />
     </video>
-    <hr />-->
-    <!--视频切片
-    其中application/x-mpegURL类型只有apple设置支持,
-        下面的js代码是为了兼容其他浏览器的
-    -->
-    <!--<video controls="controls" id="video1" width="400" height="400">
-        <source src="/video/src/1/output.m3u8" type="application/x-mpegURL" />
-    </video>-->
-
-    <video controls="controls" id="video2"  width="300" height="300">
-        <source src="/video/index" /> 
-    </video>
+ 
 </body>
 </html>
-<script>
-    if (Hls.isSupported()) {
-        //var video = document.getElementById('video1');
-        //var hls = new Hls();
-        //hls.loadSource('/video/src/1/output.m3u8');  //不能使用相对路径
-        //hls.attachMedia(video);
-        //hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        //    video.play();
-        //});
-        var video1 = document.getElementById('video2');
-        var hls1 = new Hls();
-        hls1.loadSource('/video/index');  //不能使用相对路径
-        hls1.attachMedia(video1);
-
-    }
-</script>

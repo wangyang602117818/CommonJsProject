@@ -102,14 +102,14 @@
     <Content Include="Grid\gridster.js" />
     <Content Include="Grid\index.html" />
     <Content Include="Grid\jquery.gridster.css" />
-    <Content Include="HlsVideoPlayer\flashlsFlowPlayer.swf" />
-    <Content Include="HlsVideoPlayer\flowplayer-3.2.12.min.js" />
-    <Content Include="HlsVideoPlayer\flowplayer.controls.swf" />
-    <Content Include="HlsVideoPlayer\flowplayer.swf" />
-    <Content Include="HlsVideoPlayer\hls.min.js" />
-    <Content Include="HlsVideoPlayer\hlsplayer.js" />
-    <Content Include="HlsVideoPlayer\index.html" />
-    <Content Include="HlsVideoPlayer\jquery-1.10.2.min.js" />
+    <Content Include="hls-video-player\flow-hls.swf" />
+    <Content Include="hls-video-player\flow.min.js" />
+    <Content Include="hls-video-player\flowplayer.controls.swf" />
+    <Content Include="hls-video-player\flow-player.swf" />
+    <Content Include="hls-video-player\hls.min.js" />
+    <Content Include="hls-video-player\hlsplayer.js" />
+    <Content Include="hls-video-player\index.html" />
+    <Content Include="hls-video-player\jquery-1.10.2.min.js" />
     <Content Include="HtmlPage1.html" />
     <Content Include="HtmlPage2.html" />
     <Content Include="JQExtension\JQExtension.js" />
@@ -121,7 +121,7 @@
     <Content Include="Loading\Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="HlsVideoPlayer\video\1\output.m3u8" />
+    <Content Include="hls-video-player\video\1\output.m3u8" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -146,7 +146,7 @@
     <Content Include="file-uploader\index.html" />
     <Content Include="file-uploader\scripts\jquery-1.7.1.js" />
     <Content Include="file-uploader\styles\file-uploader.css" />
-    <Content Include="HlsVideoPlayer\video\1.mp4" />
+    <Content Include="hls-video-player\video\1.mp4" />
     <Content Include="video\video.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -165,7 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="HlsVideoPlayer\video\1\output\" />
+    <Folder Include="hls-video-player\video\1\output\" />
     <Folder Include="Views\Video\" />
   </ItemGroup>
   <ItemGroup>
