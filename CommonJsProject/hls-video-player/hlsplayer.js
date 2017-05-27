@@ -5,30 +5,66 @@
         flashlsFlowPlayerSrc = currentEle.attr("flowplayerhls");
     if (!flowPlayerSrc) console.log("flowplayer attr required");
     if (!flashlsFlowPlayerSrc) console.log("flowplayerhls attr required");
+    var hlsSupported = Hls.isSupported() ? true : false;
     $(function () {
-        $("video").each(function () { init(this) });
+        begin();
     });
+    $.fn.extend({
+        setPlayerSrc: function (src) {
+            hlsSupported ? setHlsPlayerSrc(this[0], src) : setFlashPlayerSrc(this[0], src);
+            //setHlsPlayerSrc(this[0], src); //test
+            //setFlashPlayerSrc(this[0], src); //ie
+            return this;
+        }
+    })
+    function begin() {
+        $("video").each(function () { init(this) });
+    }
     function init(video) {
-        if (Hls.isSupported()) {
-            hlsPlayer(video)
+        hlsSupported ? initHlsPlayer(video) : initFlashPlayer(video);
+        //initHlsPlayer(video)      //test
+        //initFlashPlayer(video);  //ie
+        
+    }
+    //重新设置播放源 hls
+    function setHlsPlayerSrc(video, src) {
+        var playing = !video.paused;  //是否正在播放
+        //var hls = new Hls({ startPosition: video.currentTime });
+        var hls = new Hls();
+        hls.loadSource(src);
+        hls.attachMedia(video);
+        if (playing) {
+            video.play();
         } else {
-            flashPlayer(video);
+            video.pause();
         }
     }
-    function hlsPlayer(video) {
+    //重新设置播放源 flash
+    function setFlashPlayerSrc(obj, src) {
+        var playing = flowplayer(obj).isPlaying();  //是否正在播放
+        var time = flowplayer(obj).getTime();    //当前播放时间
+        flowPlayer(obj, src, playing);
+    }
+    //初始化播放源 hls
+    function initHlsPlayer(video) {
         var src = video.getElementsByTagName("source")[0].src || video.src;
         var hls = new Hls();
         hls.loadSource(src);
         hls.attachMedia(video);
     }
-    function flashPlayer(video) {
+    //初始化播放源 flash
+    function initFlashPlayer(video) {
         var src = video.getElementsByTagName("source")[0].src || video.src;
         if (video.width) video.style.width = video.width + "px";
         if (video.height) video.style.height = video.height + "px";
         var ele = document.createElement("div");
         if (video.className) ele.className = video.className;
         if (video.style.cssText) ele.style.cssText = video.style.cssText;
+        if (video.id) ele.id = video.id;
         $(video).replaceWith(ele);
+        flowPlayer(ele, src, false);
+    }
+    function flowPlayer(ele, src, play) {
         flowplayer(ele, flowPlayerSrc, {
             wmode: 'direct',
             plugins: {
@@ -55,7 +91,7 @@
                 urlResolvers: "httpstreaming",
                 lang: "fr",
                 provider: "httpstreaming",
-                autoPlay: false,
+                autoPlay: play,
                 autoBuffering: true
             }
         });

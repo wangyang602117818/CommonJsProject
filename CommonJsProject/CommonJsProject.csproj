@@ -86,9 +86,6 @@
     </Compile>
     <Compile Include="ImageConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="video\v1.ashx.cs">
-      <DependentUpon>v1.ashx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="datepicker\date.png" />
@@ -102,10 +99,12 @@
     <Content Include="Grid\gridster.js" />
     <Content Include="Grid\index.html" />
     <Content Include="Grid\jquery.gridster.css" />
-    <Content Include="hls-video-player\flow-hls.swf" />
-    <Content Include="hls-video-player\flow.min.js" />
+    <Content Include="hls-video-player\flowplayer-3.2.13.js" />
+    <Content Include="hls-video-player\flowplayer-3.2.13.min.js" />
     <Content Include="hls-video-player\flowplayer.controls.swf" />
-    <Content Include="hls-video-player\flow-player.swf" />
+    <Content Include="hls-video-player\flowplayer.swf" />
+    <Content Include="hls-video-player\flowplayerhls.swf" />
+    <Content Include="hls-video-player\hls.js" />
     <Content Include="hls-video-player\hls.min.js" />
     <Content Include="hls-video-player\hlsplayer.js" />
     <Content Include="hls-video-player\index.html" />
@@ -147,7 +146,6 @@
     <Content Include="file-uploader\scripts\jquery-1.7.1.js" />
     <Content Include="file-uploader\styles\file-uploader.css" />
     <Content Include="hls-video-player\video\1.mp4" />
-    <Content Include="video\video.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -161,7 +159,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\File\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="video\v1.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

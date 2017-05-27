@@ -2,17 +2,45 @@
 <html>
 <head>
     <title></title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
     <script src="jquery-1.10.2.min.js"></script>
     <script src="hls.min.js"></script>
-    <script src="flow.min.js"></script>
+    <script src="flowplayer-3.2.13.js"></script>
     <script src="hlsplayer.js" flowplayer="flowplayer.swf" flowplayerhls="flowplayerhls.swf"></script>
 </head>
 <body>
-    <video controls="controls" width="400" height="400">
+    <video controls="controls" width="400" height="400" id="v1">
         <source src="video/1/output.m3u8" />
     </video>
 
-    
+    <input type="button" value="btn1" id="btn1" />
 </body>
 </html>
+<script>
+    $("#btn1").click(function () {
+        var video = $("#v1");
+        
+        //video[0].currentTime = 100;
+        //video[0].play();
+        video.setPlayerSrc("video/1/output.m3u8");
+
+        //video.find("source").attr("src", "http://streambox.fr/playlists/test_001/stream.m3u8");
+        //video.hlsplayer();
+
+        //flash paleyr
+        //var obj = flowplayer(video[0]);
+        //obj.seek(30);   //设置进度
+        //var play = obj.getPlay();
+        //var playList = obj.getPlaylist();
+        //var time = obj.getTime();  //获取进度
+        //var clip = obj.getClip();
+        //var pause = obj.isPaused();  //是否暂停
+        //var playing = obj.isPlaying();  //是否播放
+
+        //console.log(obj.isPlaying());
+        //============
+
+        
+    })
+    
+</script>
