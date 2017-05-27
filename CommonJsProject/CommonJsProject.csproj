@@ -102,6 +102,14 @@
     <Content Include="Grid\gridster.js" />
     <Content Include="Grid\index.html" />
     <Content Include="Grid\jquery.gridster.css" />
+    <Content Include="HlsVideoPlayer\flashlsFlowPlayer.swf" />
+    <Content Include="HlsVideoPlayer\flowplayer-3.2.12.min.js" />
+    <Content Include="HlsVideoPlayer\flowplayer.controls.swf" />
+    <Content Include="HlsVideoPlayer\flowplayer.swf" />
+    <Content Include="HlsVideoPlayer\hls.min.js" />
+    <Content Include="HlsVideoPlayer\hlsplayer.js" />
+    <Content Include="HlsVideoPlayer\index.html" />
+    <Content Include="HlsVideoPlayer\jquery-1.10.2.min.js" />
     <Content Include="HtmlPage1.html" />
     <Content Include="HtmlPage2.html" />
     <Content Include="JQExtension\JQExtension.js" />
@@ -113,6 +121,7 @@
     <Content Include="Loading\Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="HlsVideoPlayer\video\1\output.m3u8" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -137,11 +146,7 @@
     <Content Include="file-uploader\index.html" />
     <Content Include="file-uploader\scripts\jquery-1.7.1.js" />
     <Content Include="file-uploader\styles\file-uploader.css" />
-    <Content Include="video\flashlsFlowPlayer.swf" />
-    <Content Include="video\flowplayer-3.2.12.min.js" />
-    <Content Include="video\flowplayer.html" />
-    <Content Include="video\flowplayer.swf" />
-    <Content Include="video\src\1.mp4" />
+    <Content Include="HlsVideoPlayer\video\1.mp4" />
     <Content Include="video\video.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -156,13 +161,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\File\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="video\hls.min.js" />
     <Content Include="video\v1.ashx" />
-    <Content Include="video\src\1\output.m3u8" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="video\src\1\output\" />
+    <Folder Include="HlsVideoPlayer\video\1\output\" />
     <Folder Include="Views\Video\" />
   </ItemGroup>
   <ItemGroup>
