@@ -109,7 +109,6 @@
     <Content Include="hls-video-player\hlsplayer.js" />
     <Content Include="hls-video-player\index.html" />
     <Content Include="hls-video-player\jquery-1.10.2.min.js" />
-    <Content Include="HtmlPage1.html" />
     <Content Include="HtmlPage2.html" />
     <Content Include="JQExtension\JQExtension.js" />
     <Content Include="Grid\jquery-1.10.2.min.js" />
