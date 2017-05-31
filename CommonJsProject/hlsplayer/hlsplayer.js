@@ -6,6 +6,7 @@
     if (!flowPlayerSrc) console.log("flowplayer attr required");
     if (!flashlsFlowPlayerSrc) console.log("flowplayerhls attr required");
     var hlsSupported = Hls.isSupported() ? true : false;
+    hlsSupported = false;
     $(function () {
         begin();
     });
@@ -32,7 +33,6 @@
     }
     function init(video) {
         hlsSupported ? initHlsPlayer(video) : initFlashPlayer(video);
-        //initFlashPlayer(video);
     }
     //设置hls播放进度
     function setHlsPlayerTime(video, time) {

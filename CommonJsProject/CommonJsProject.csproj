@@ -101,18 +101,17 @@
     <Content Include="Grid\gridster.js" />
     <Content Include="Grid\index.html" />
     <Content Include="Grid\jquery.gridster.css" />
-    <Content Include="hls-video-player\doc.html" />
-    <Content Include="hls-video-player\flowplayer-3.2.13.js" />
-    <Content Include="hls-video-player\flowplayer-3.2.13.min.js" />
-    <Content Include="hls-video-player\flowplayer.controls.swf" />
-    <Content Include="hls-video-player\flowplayer.swf" />
-    <Content Include="hls-video-player\flowplayerhls.swf" />
-    <Content Include="hls-video-player\hls.js" />
-    <Content Include="hls-video-player\hls.min.js" />
-    <Content Include="hls-video-player\hlsplayer.js" />
-    <Content Include="hls-video-player\hlsplayer.min.js" />
-    <Content Include="hls-video-player\index.html" />
-    <Content Include="hls-video-player\jquery-1.10.2.min.js" />
+    <Content Include="hlsplayer\flowplayer-3.2.13.js" />
+    <Content Include="hlsplayer\flowplayer-3.2.13.min.js" />
+    <Content Include="hlsplayer\flowplayer.controls.swf" />
+    <Content Include="hlsplayer\flowplayer.swf" />
+    <Content Include="hlsplayer\flowplayerhls.swf" />
+    <Content Include="hlsplayer\hls.js" />
+    <Content Include="hlsplayer\hls.min.js" />
+    <Content Include="hlsplayer\hlsplayer.js" />
+    <Content Include="hlsplayer\hlsplayer.min.js" />
+    <Content Include="hlsplayer\index.html" />
+    <Content Include="hlsplayer\jquery-1.10.2.min.js" />
     <Content Include="HtmlPage2.html" />
     <Content Include="JQExtension\JQExtension.js" />
     <Content Include="Grid\jquery-1.10.2.min.js" />
@@ -123,7 +122,7 @@
     <Content Include="Loading\Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="hls-video-player\video\1\output.m3u8" />
+    <Content Include="hlsplayer\video\1\output.m3u8" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -148,7 +147,7 @@
     <Content Include="file-uploader\index.html" />
     <Content Include="file-uploader\scripts\jquery-1.7.1.js" />
     <Content Include="file-uploader\styles\file-uploader.css" />
-    <Content Include="hls-video-player\video\1.mp4" />
+    <Content Include="hlsplayer\video\1.mp4" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -165,7 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="hls-video-player\video\1\output\" />
+    <Folder Include="hlsplayer\video\1\output\" />
     <Folder Include="Views\Video\" />
   </ItemGroup>
   <ItemGroup>
