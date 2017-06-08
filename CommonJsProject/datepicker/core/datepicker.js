@@ -46,8 +46,8 @@
         template_second_regex = /<!--second_containter_start-->((.|\n|\r)*)<!--second_containter_end-->/,
         timeval_regex = /\d{1,2}:(\d{1,2})?(:\d{1,2})?/,         //验证文本框的日期值,是否有时间
         time_regex = /[Hh]{1,2}:([Mm]{1,2})?(:[Ss]{1,2})?/,      //作验证日期格式是否有时间
-        date_val_zh = /(\d{2,4})([-\/\.])?(\d{1,2})?(?:[-\/\.])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/,     //提取文本框的日期,针对中国时间
-        date_val_en = /(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{2,4})\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?/;  //针对 dd Month yyyy hh:mm:ss 格式
+        date_val_zh = /^(\d{2,4})([-\/\.])?(\d{1,2})?(?:[-\/\.])?(\d{1,2})?\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?$/,     //提取文本框的日期,针对中国时间
+        date_val_en = /^(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{2,4})\s*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?$/;  //针对 dd Month yyyy hh:mm:ss 格式
     //全局对象
     var datepicker_iframe,
         datepicker,              //主日期框对象
@@ -102,6 +102,7 @@
         var dateVal = that.attr("date-val");
         if (dateVal) {
             var date = inputDateConvert(dateVal).date;
+            if (!date) { that.addClass("datepicker-error-format"); return; }
             var curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
             if (showFormat) {
                 var showdate = dateFormat(curr_time_arr, showFormat);
@@ -144,6 +145,7 @@
         } else {
             date = new Date();
         }
+        if (!date) date = new Date();
         curr_time_arr = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
         text_time_arr = curr_time_arr.slice(0);
         if (options.start instanceof Date) {
@@ -289,6 +291,17 @@
         datepicker.find(".next_month").off().on("click", nextMonth);
         that.off("input propertychange").on("input propertychange", function () {
             that = $(this);
+            var val = that.val();
+            if (trim(val) == "") {
+                that.attr("date-val","");
+                that.removeClass("datepicker-error-format");
+            } else {
+                if (!inputDateConvert(val).date) {
+                    that.addClass("datepicker-error-format");
+                } else {
+                    that.removeClass("datepicker-error-format");
+                }
+            }
             init();
             setTimeout(retrieveDate, 200);
         });
@@ -328,6 +341,7 @@
         var showdate = dateFormat(curr_time_arr, model.defaults.showFormat);
         that.val(showdate);
         that.attr("date-val", usedate);
+        that.removeClass("datepicker-error-format");
     }
     //显示年份div
     function showYearLayer() {
@@ -690,8 +704,13 @@
                 }
             }
         }
+        if (!result && !resultEn) {  //格式不对
+            date = null;
+        } else {
+            date = new Date(year, month, day, hour, minute, second)
+        }
         return {
-            date: new Date(year, month, day, hour, minute, second),
+            date: date,
             hasYear: hasYear,
             hasMonth: hasMonth,
             hasDay: hasDay,
@@ -842,5 +861,8 @@
         code += "p.push('" + html.slice(cursor) + "');\n;return p.join(\'\')";
         var fn = new Function("model", code);
         return fn(model);
+    }
+    function trim(str) {  //首尾去空格
+        return str.replace(/(^\s*)|(\s*$)/g, "");
     }
 })(window, jQuery);
