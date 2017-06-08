@@ -5,17 +5,16 @@
     <meta charset="utf-8" />
     <script src="core/jquery-3.1.1.min.js"></script>
     <script src="core/datepicker.js" template="core/datepicker-template.html" css="core/datepicker-orange.css"></script>
-
     <script>
         $(function () {
             //$("#txt1").attr("date-val", "2017-03-16 13:05:15").datepicker();
-            
-            
-            
-        });
-        
 
-        
+
+
+        });
+
+
+
     </script>
     <style>
         .datepicker {
@@ -34,16 +33,20 @@
                 background-color: #fff;
                 box-shadow: 0 0 5px rgba(103, 166, 217, 0.5);
             }
+
+        .datepicker-error-format {
+            color:red;
+        }
     </style>
 </head>
 <body>
-    <input type="text" name="txt" id="txt1" class="datepicker" date-val="2015-07-01 12:00:00"/>
-    <input type="text" name="txt" id="txt2" class="datepicker" date-val="2017-07-06"/>
+    <input type="text" name="txt" id="txt1" class="datepicker" date-val="2015-07-01 12:00:00" />
+    <input type="text" name="txt" id="txt2" class="datepicker" date-val="2017-07-06" />
     <input type="text" name="txt" id="txt3" class="datepicker" date-val="2015-05-10 12:00:00" />
     <input type="text" name="txt1" id="txt4" class="datepicker" date-val="2015-02-06 12:01:03" date-lang="en-us" date-show-format="dd Month yyyy hh:mm:ss" date-start="2000-01-01 00:00:00" date-end="2049-12-31 00:00:00" />
     <br />
     <br />
-    <input type="text" name="txt" id="txt5" class="datepicker" date-show-format="dd Month yyyy"/>
-    <input type="text" name="txt" id="txt6" class="datepicker" date-show-format="yyyy.MM.dd hh:mm:ss" date-dblclick/>
+    <input type="text" name="txt" id="txt5" class="datepicker" date-show-format="dd Month yyyy" />
+    <input type="text" name="txt" id="txt6" class="datepicker" date-show-format="yyyy.MM.dd hh:mm:ss" date-dblclick />
 </body>
 </html>
