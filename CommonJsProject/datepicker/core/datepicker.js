@@ -74,12 +74,13 @@
     }
     function begin() {
         datepicker_iframe = $(".datepicker_iframe");
+        getTemplate();
         if (datepicker_iframe.length == 0) {
             $("body").append("<iframe class=\"datepicker_iframe\" scrolling=\"no\" style=\"position:absolute;display:none;border:0;left:50px;top:100px;width:205px;height:203px\"></iframe>");
             datepicker_iframe = $(".datepicker_iframe");
             setTimeout(function () {
                 datepicker_iframe.contents().find("head").html("<link type=\"text/css\" href=\"" + css_src + "\" rel=\"stylesheet\" />");
-            }, 200);
+            }, 100);  //ff iframe中加载css需要延迟
             $(document).click(function (event) {
                 var srcElement = $(event.target);
                 if (!srcElement.hasClass("datepicker")) datepicker_iframe.hide();
@@ -180,8 +181,8 @@
         };
     }
     function render(model) {
-        var template = parseTemplate(getTemplate(), model);
-        datepicker_iframe.contents().find("body").html(template);
+        var templateObj = parseTemplate(template, model);
+        datepicker_iframe.contents().find("body").html(templateObj);
         datepicker_iframe.css({ top: model.top, left: model.left, display: "inline" });
         bindEvent();
     }
@@ -293,7 +294,7 @@
             that = $(this);
             var val = that.val();
             if (trim(val) == "") {
-                that.attr("date-val","");
+                that.attr("date-val", "");
                 that.removeClass("datepicker-error-format");
             } else {
                 if (!inputDateConvert(val).date) {
@@ -551,22 +552,20 @@
         datepicker_iframe.height(datepicker.height() + 2);
     }
     function getTemplate() {
-        if (template != "") return template;
         $.ajax({
             type: "get",
             url: template_src,
             async: false,
             success: function (data) {
                 template = data;
+                template_data = template_data_regex.exec(template)[1];
+                template_year = template_year_regex.exec(template)[1];
+                template_month = template_month_regex.exec(template)[1];
+                template_hover = template_hover_regex.exec(template)[1];
+                template_minute = template_minute_regex.exec(template)[1];
+                template_second = template_second_regex.exec(template)[1];
             }
         });
-        template_data = template_data_regex.exec(template)[1];
-        template_year = template_year_regex.exec(template)[1];
-        template_month = template_month_regex.exec(template)[1];
-        template_hover = template_hover_regex.exec(template)[1];
-        template_minute = template_minute_regex.exec(template)[1];
-        template_second = template_second_regex.exec(template)[1];
-        return template;
     }
     function getMaxZIndex() {
         var zindex = 0;
