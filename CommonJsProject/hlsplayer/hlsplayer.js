@@ -6,14 +6,26 @@
     if (!flowPlayerSrc) console.log("flowplayer attr required");
     if (!flashlsFlowPlayerSrc) console.log("flowplayerhls attr required");
     var hlsSupported = Hls.isSupported() ? true : false;
+    hlsSupported = false;
     $(function () {
         begin();
     });
-
+    win.hlsplayer = function () {
+        begin();
+    };
     $.fn.extend({
         setPlayerSrc: function (src) {
             hlsSupported ? setHlsPlayerSrc(this[0], src) : setFlashPlayerSrc(this[0], src);
             return this;
+        },
+        setPlayerTime: function (time) {
+            hlsSupported ? setHlsPlayerTime(this[0], time) : setFlashPlayerTime(this[0], time);
+        },
+        getPlayerTime: function (time) {
+            return hlsSupported ? getHlsPlayerTime(this[0]) : getFlashPlayerTime(this[0]);
+        },
+        getTotalTime: function () {
+            return hlsSupported ? getHlsPlayerTotalTime(this[0]) : getFalshPlayerTotlaTime(this[0]);
         }
     })
     function begin() {
@@ -22,10 +34,33 @@
     function init(video) {
         hlsSupported ? initHlsPlayer(video) : initFlashPlayer(video);
     }
+    //设置hls播放进度
+    function setHlsPlayerTime(video, time) {
+        video.currentTime = time;
+    }
+    //获取hls播放进度
+    function getHlsPlayerTime(video) {
+        return video.currentTime;
+    }
+    function getHlsPlayerTotalTime(video) {
+        return video.duration;
+    }
+    function getFalshPlayerTotlaTime(video) {
+        var player = flowplayer(video);
+        return player.getPlaylist()[0].duration;
+    }
+    //flash播放进度
+    function setFlashPlayerTime(video, time) {
+        var palyer = flowplayer(video);
+        palyer.seek(time);
+    }
+    function getFlashPlayerTime(video) {
+        var palyer = flowplayer(video);
+        return palyer.getTime();
+    }
     //重新设置播放源 hls
     function setHlsPlayerSrc(video, src) {
         var playing = !video.paused;  //是否正在播放
-        //var hls = new Hls({ startPosition: video.currentTime });
         var hls = new Hls();
         hls.loadSource(src);
         hls.attachMedia(video);
