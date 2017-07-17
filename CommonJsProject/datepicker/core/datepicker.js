@@ -7,9 +7,9 @@
         useFormat: "yyyy-MM-dd",           //与程序交互的时间格式 yyyy-MM-dd|yyyy/MM/dd
         lang: "en-us"                    //界面语言 en-us|zh-cn,
     };
-    var scr = document.getElementsByTagName('SCRIPT');
-    var template_src = $(scr[scr.length - 1]).attr("template");
-    var css_src = $(scr[scr.length - 1]).attr("css");
+    var script = $("#script-datepicker");
+    var template_src = script.attr("template");
+    var css_src = script.attr("css");
     //全局参数
     var commonlang = {
         "zh-cn": {
