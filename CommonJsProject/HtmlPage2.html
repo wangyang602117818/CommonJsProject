@@ -2,24 +2,41 @@
 <html>
 <head>
     <title></title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
+    <style>
+        .con {
+            position: absolute;
+            height:30px;
+            width:40px;
+            right:20px;
+        }
+
+        .dv1 {
+            position: absolute;
+            border: 1px solid red;
+            width: 14px;
+            height: 14px;
+            text-align: center;
+            line-height: 14px;
+            color: #fff;
+            top: 1px;
+            right: 6px;
+            border-radius: 7px;
+            background-color: red;
+            font-size: 10px;
+            font-family: Tahoma !important;
+        }
+    </style>
 </head>
 <body>
-
+    <div class="con">
+        <svg viewBox="0 0 1024 1024" version="1.1" width="32" height="32">
+            <path d="M153.6 789.942857v-29.257143l80.457143-80.457143V446.171429c0-131.657143 65.828571-241.371429 197.485714-277.942858V146.285714c0-29.257143 29.257143-65.828571 65.828572-65.828571 29.257143 0 65.828571 29.257143 65.828571 65.828571v14.628572c146.285714 14.628571 212.114286 146.285714 212.114286 277.942857v226.742857l80.457143 80.457143v29.257143M497.371429 921.6c43.885714 0 80.457143-36.571429 80.457142-80.457143H409.6c0 43.885714 43.885714 80.457143 87.771429 80.457143z"></path>
+        </svg>
+        <div class="dv1">1</div>
+    </div>
 </body>
 </html>
 <script>
-    function getCookie(c_name) {
-        if (document.cookie.length > 0) {
-            c_start = document.cookie.indexOf(c_name + "=")
-            if (c_start != -1) {
-                c_start = c_start + c_name.length + 1
-                c_end = document.cookie.indexOf(";", c_start)
-                if (c_end == -1) c_end = document.cookie.length
-                return unescape(document.cookie.substring(c_start, c_end))
-            }
-        }
-        return ""
-    }
-   alert(getCookie("name"))
+
 </script>
