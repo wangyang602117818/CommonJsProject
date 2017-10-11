@@ -6,19 +6,20 @@
     <script src="jquery-1.10.2.min.js"></script>
     <script src="flowplayer-3.2.13.js"></script>
     <script src="hls.min.js"></script>
-    <script src="hlsplayer.js" flowplayer="flowplayer.swf" flowplayerhls="flowplayerhls.swf"></script>
+    <script src="hlsplayer.js" script-flowplayer="flowplayer.swf" script-flowplayerhls="flowplayerhls.swf"></script>
     <style>
         
     </style>
 </head>
 <body>
-    <video controls="controls" width="400" height="400" id="v1">
+    <video controls="controls" width="400" height="400" id="v1" class="hlsplayer">
         <source src="video/1/output.m3u8" />
     </video>
-
+    <br />
     <input type="button" value="btn1" id="btn1" />
+    <br />
     
-    <video controls="controls" width="400" height="400" id="v2">
+    <video controls="controls" width="400" height="400" id="v2" class="hlsplayer">
         <source src="http://localhost:62754/home/m3u8/5976df3295180a89fcc9d184" />
     </video>
 </body>

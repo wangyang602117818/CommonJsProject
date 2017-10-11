@@ -1,8 +1,8 @@
 ﻿(function (win, $) {
     var scripts = $("script");
-    var currentEle = $(scripts[scripts.length - 1]),
-        flowPlayerSrc = currentEle.attr("flowplayer"),
-        flashlsFlowPlayerSrc = currentEle.attr("flowplayerhls");
+    var currentEle = $("script[script-flowplayer]"),
+        flowPlayerSrc = currentEle.attr("script-flowplayer"),
+        flashlsFlowPlayerSrc = currentEle.attr("script-flowplayerhls");
     if (!flowPlayerSrc) console.log("flowplayer attr required");
     if (!flashlsFlowPlayerSrc) console.log("flowplayerhls attr required");
     var hlsSupported = Hls.isSupported() ? true : false;
@@ -21,7 +21,7 @@
         setPlayerTime: function (time) {
             hlsSupported ? setHlsPlayerTime(this[0], time) : setFlashPlayerTime(this[0], time);
         },
-        getPlayerTime: function (time) {
+        getPlayerTime: function () {
             return hlsSupported ? getHlsPlayerTime(this[0]) : getFlashPlayerTime(this[0]);
         },
         getTotalTime: function () {
@@ -29,7 +29,7 @@
         }
     })
     function begin() {
-        $("video").each(function () { init(this) });
+        $(".hlsplayer").each(function () { init(this) });
     }
     function init(video) {
         hlsSupported ? initHlsPlayer(video) : initFlashPlayer(video);
