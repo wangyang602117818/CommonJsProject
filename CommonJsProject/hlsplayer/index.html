@@ -7,6 +7,8 @@
     <script src="flowplayer-3.2.13.js"></script>
     <script src="hls.min.js"></script>
     <script src="hlsplayer.js" script-flowplayer="flowplayer.swf" script-flowplayerhls="flowplayerhls.swf"></script>
+
+    <!--<script src="hlsplayer.min.js" script-flowplayer="flowplayer.swf" script-flowplayerhls="flowplayerhls.swf"></script>-->
     <style>
         
     </style>
@@ -18,6 +20,9 @@
     <br />
     <input type="button" value="btn1" id="btn1" />
     <br />
+    <div id="dv1">
+
+    </div>
 </body>
 </html>
 <script>
@@ -27,8 +32,9 @@
         //video[0].currentTime = 100;
         //video[0].play();
         //video.setPlayerSrc("video/1/output.m3u8");
-
-        console.log(video.getPlayerTime());
+        video.videoCP(0.5, function (data) {
+            $("#dv1").html(data);
+        });
         //video.find("source").attr("src", "http://streambox.fr/playlists/test_001/stream.m3u8");
         //video.hlsplayer();
 

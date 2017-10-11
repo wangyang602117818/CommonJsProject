@@ -26,6 +26,19 @@
         },
         getTotalTime: function () {
             return hlsSupported ? getHlsPlayerTotalTime(this[0]) : getFalshPlayerTotlaTime(this[0]);
+        },
+        videoCP: function (scale, success) {
+            if (hlsSupported) {
+                var canvas = document.createElement("canvas");
+                canvas.width = this[0].videoWidth * scale;
+                canvas.height = this[0].videoHeight * scale;
+                canvas.getContext('2d').drawImage(this[0], 0, 0, canvas.width, canvas.height);
+                var img = document.createElement("img");
+                img.src = canvas.toDataURL();
+                success(img);
+            } else {
+                console.log("videoCP not supported in FlashPlayer");
+            }
         }
     })
     function begin() {
