@@ -18,10 +18,6 @@
     <br />
     <input type="button" value="btn1" id="btn1" />
     <br />
-    
-    <video controls="controls" width="400" height="400" id="v2" class="hlsplayer">
-        <source src="http://localhost:62754/home/m3u8/5976df3295180a89fcc9d184" />
-    </video>
 </body>
 </html>
 <script>
@@ -32,7 +28,7 @@
         //video[0].play();
         //video.setPlayerSrc("video/1/output.m3u8");
 
-        console.log(video.getTotalTime());
+        console.log(video.getPlayerTime());
         //video.find("source").attr("src", "http://streambox.fr/playlists/test_001/stream.m3u8");
         //video.hlsplayer();
 
