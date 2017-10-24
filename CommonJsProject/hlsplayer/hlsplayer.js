@@ -34,7 +34,7 @@
                 canvas.height = this[0].videoHeight * scale;
                 canvas.getContext('2d').drawImage(this[0], 0, 0, canvas.width, canvas.height);
                 var img = document.createElement("img");
-                img.src = canvas.toDataURL();
+                img.src = canvas.toDataURL('images/png');
                 success(img);
             } else {
                 console.log("videoCP not supported in FlashPlayer");
