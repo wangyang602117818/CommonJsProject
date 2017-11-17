@@ -4,6 +4,7 @@
     <title></title>
     <meta charset="utf-8" />
     <script src="jquery-1.10.2.min.js"></script>
+
     <!--<script src="flowplayer-3.2.13.js"></script>
     <script src="hls.min.js"></script>
     <script src="hlsplayer.js" script-flowplayer="flowplayer.swf" script-flowplayerhls="flowplayerhls.swf"></script>-->
@@ -14,6 +15,7 @@
     </script>
 </head>
 <body>
+    Video<br />
     <video controls="controls" width="400" height="400" id="v1" class="hlsplayer">
         <source src="video/1/output.m3u8" />
     </video>
@@ -28,13 +30,13 @@
 <script>
     $("#btn1").click(function () {
         var video = $("#v1");
-        
+
         //video[0].currentTime = 100;
         //video[0].play();
         //video.setPlayerSrc("video/1/output.m3u8");
-        video.videoCP(0.5, function (data) {
-            $("#dv1").html(data);
-        });
+        //video.videoCP(0.5, function (data) {
+        //    $("#dv1").html(data);
+        //});
         //video.find("source").attr("src", "http://streambox.fr/playlists/test_001/stream.m3u8");
         //video.hlsplayer();
 
@@ -51,7 +53,14 @@
         //console.log(obj.isPlaying());
         //============
 
-        
-    })
-    
+
+    });
+
+    //function initHlsPlayer(video) {
+    //    var src = video.getElementsByTagName("source")[0].src || video.src;
+    //    var hls = new Hls();
+    //    hls.loadSource(src);
+    //    hls.attachMedia(video);
+    //}
+    //initHlsPlayer($(".hlsplayer")[0]);
 </script>

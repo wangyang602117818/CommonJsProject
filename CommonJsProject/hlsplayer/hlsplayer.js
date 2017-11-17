@@ -5,7 +5,7 @@
         flashlsFlowPlayerSrc = currentEle.attr("script-flowplayerhls");
     if (!flowPlayerSrc) console.log("flowplayer attr required");
     if (!flashlsFlowPlayerSrc) console.log("flowplayerhls attr required");
-    var hlsSupported = Hls.isSupported() ? true : false;
+    var hlsSupported = (Hls.isSupported() || IsMobile()) ? true : false;
     //hlsSupported = false;
     $(function () {
         begin();
@@ -139,5 +139,15 @@
                 autoBuffering: true
             }
         });
+    }
+    function IsMobile() {
+        var userAgentInfo = navigator.userAgent;
+        var Agents = ["Android", "iPhone",
+                    "SymbianOS", "Windows Phone",
+                    "iPad", "iPod"];
+        for (var v = 0; v < Agents.length; v++) {
+            if (userAgentInfo.indexOf(Agents[v]) > 0) return true;
+        }
+        return false;
     }
 })(window, jQuery);
