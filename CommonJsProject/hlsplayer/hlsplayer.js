@@ -6,7 +6,6 @@
     if (!flowPlayerSrc) console.log("flowplayer attr required");
     if (!flashlsFlowPlayerSrc) console.log("flowplayerhls attr required");
     var hlsSupported = (Hls.isSupported() || IsMobile()) ? true : false;
-    //hlsSupported = false;
     $(function () {
         begin();
     });
