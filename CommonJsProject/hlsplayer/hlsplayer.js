@@ -90,6 +90,7 @@
     }
     //初始化播放源 hls
     function initHlsPlayer(video) {
+        if (video.src.indexOf("blob:") >= 0) return;
         var src = video.getElementsByTagName("source")[0].src || video.src;
         var hls = new Hls();
         hls.loadSource(src);
