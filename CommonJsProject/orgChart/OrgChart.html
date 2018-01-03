@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <!--<script src="../Scripts/jquery-1.10.2.js"></script>-->
+    <script src="../Scripts/jquery-3.2.1.min.js"></script>
+    <script src="orgChart.js"></script>
+    <link href="orgChart.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            $(".orgChart").orgChart();
+        });
+    </script>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="orgChart">
+        <ul style="display:none">
+            <li>
+                <div class="node">0</div>
+                <ul>
+                    <li>
+                        <div class="node">01</div>
+                        <ul>
+                            <li>
+                                <div class="node">011</div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="node">02</div>
+                        <ul>
+                            <li>
+                                <div class="node">021</div>
+                            </li>
+                            <li>
+                                <div class="node">022</div>
+                            </li>
+                            <li>
+                                <div class="node">023</div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="node">03</div>
+                    </li>
+                    <li>
+                        <div class="node">04</div>
+                        <ul>
+                            <li>
+                                <div class="node">041</div>
+                                <ul>
+                                    <li>
+                                        <div class="node">0441</div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="node">042</div>
+                            </li>
+                            <li>
+                                <div class="node">043</div>
+                                <ul>
+                                    <li>
+                                        <div class="node">0441</div>
+                                    </li>
+                                    <li>
+                                        <div class="node">0442</div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="node">05</div>
+                        <ul>
+                            <li>
+                                <div class="node">051</div>
+                            </li>
+                            <li>
+                                <div class="node">052</div>
+                            </li>
+                            <li>
+                                <div class="node">053</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

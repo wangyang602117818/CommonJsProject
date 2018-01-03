@@ -1,0 +1,75 @@
+﻿.orgChart .pc td {
+    text-align: center;
+    vertical-align: top;
+}
+
+.orgChart .pc .top {
+    border-top: 1px solid #000;
+}
+
+.orgChart .pc .left {
+    border-left: 1px solid #000;
+}
+
+.orgChart .pc .right {
+    border-right: 1px solid #000;
+}
+
+.orgChart .pc .trans_right {
+    border-right: 1px solid rgba(0,0,0,0);
+}
+
+.orgChart .pc .trans_left {
+    border-left: 1px solid rgba(0,0,0,0);
+}
+
+.orgChart .pc .org_line {
+    height: 22px;
+}
+
+.orgChart .pc .line_down {
+    display: inline-block;
+    height: 22px;
+    width: 1px;
+    background-color: #000;
+}
+
+.orgChart .pc .node {
+    display: inline-block;
+    border: 1px solid #000;
+    margin: 0 4px;
+    height: 60px;
+    width: 80px;
+}
+/***************************************************************************/
+.orgChart .mobile td {
+    padding: 0;
+    text-align: left;
+}
+
+.orgChart .mobile .node {
+    display: inline-block;
+    height: 60px;
+    width: 80px;
+    border: 1px solid #000;
+}
+
+.orgChart .mobile .bottom {
+    border-bottom: 1px solid #000;
+}
+
+.orgChart .mobile .left {
+    border-left: 1px solid #000;
+}
+
+.orgChart .mobile .trans_right {
+    border-right: 1px solid rgba(0,0,0,0);
+}
+
+.orgChart .mobile .org_line_width {
+    width: 10px;
+}
+
+.orgChart .mobile .org_line_height {
+    height: 7px;
+}

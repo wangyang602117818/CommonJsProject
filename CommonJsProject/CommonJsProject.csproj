@@ -113,6 +113,9 @@
     <Content Include="Loading\Styles\loading.css" />
     <Content Include="Loading\Scripts\loading.js" />
     <Content Include="Loading\Scripts\jquery-1.10.2.js" />
+    <Content Include="orgChart\orgChart.css" />
+    <Content Include="orgChart\OrgChart.html" />
+    <Content Include="orgChart\orgChart.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="hlsplayer\video\1\output.m3u8" />
