@@ -1,15 +1,17 @@
 ﻿(function ($) {
     $.fn.orgChart = function () {
         var that = this;
-        appendTableHtml(that.find("ul:first"), that, isPc());
-        function appendTableHtml($ul, container, isPc) {
+        var depth = 0;
+        appendTableHtml(that.find("ul:first"), that);
+        function appendTableHtml($ul, container) {
             var tableHtml = "";
-            if (isPc) {
+            if (chartType() == "pc") {
                 tableHtml = getChildNodePc($ul.find("li:first"));
             } else {
-                tableHtml = getChildNodeMobile($ul.find("li:first"));
+                tableHtml = getChildNodeMobile($ul.find("li:first"), 1);
             }
             container.append(tableHtml);
+            changeMobileWidth();
         }
         function getChildNodePc(topLi) {
             var tableHtml = '<table class="pc" cellspacing="0" cellpadding="0" border="0"><tbody>';
@@ -52,7 +54,8 @@
                 return tableHtml + topHtml + lineHtml + orgLineHtml + orgDataHtml + "</tbody></table>";
             }
         }
-        function getChildNodeMobile(topLi) {
+        function getChildNodeMobile(topLi, k) {
+            if (k > depth) depth = k;
             var tableHtml = '<table class="mobile" cellspacing="0" cellpadding="0" border="0"><tbody>';
             var dataNode = topLi.find("div:first"),
                 childNodeLiArray = topLi.find("ul:first").children("li");
@@ -71,7 +74,7 @@
                 } else {
                     for (var j = 0; j < (liNumbs.length + 1) * 2; j++) {
                         if (j == 0) {
-                            tableHtml += '<tr><td class="trans_right">&nbsp;</td><td class="left bottom">&nbsp;</td><td class="bottom">&nbsp;</td><td rowspan="' + (liNumbs.length + 1) * 2 + '">' + getChildNodeMobile($(childNodeLiArray[i])) + '</td></tr>';
+                            tableHtml += '<tr><td class="trans_right">&nbsp;</td><td class="left bottom">&nbsp;</td><td class="bottom">&nbsp;</td><td rowspan="' + (liNumbs.length + 1) * 2 + '">' + getChildNodeMobile($(childNodeLiArray[i]), k + 1) + '</td></tr>';
                         } else if ((i == childNodeLiArray.length - 1) && (j > 0)) {
                             tableHtml += '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
                         }
@@ -93,17 +96,40 @@
             }
             return flag;
         }
-        $(window).resize(function () {
+        function chartType() {
+            if (isPc() && $(window).width() >= 800) {
+                return "pc";
+            } else {
+                return "mobile";
+            }
+        }
+        function changeMobileWidth() {
+            var widow_width = $(window).width();
+            var node_width = that.find("table .node:first").width();
+            var line_width = that.find("table .org_line_width:first").width();
+            var new_line_width = (widow_width - node_width * (depth+1)) / (depth);
+            that.find("table .org_line_width").width(new_line_width);
+        }
+        function windowResize() {
             var topUl = that.find("ul:first");
-            var version = that.find("table").attr("class");
-            if ($(window).width() <= 800 && version == "pc") {
-                that.find("table").remove();
-                appendTableHtml(topUl, that, false);
+            //var version = that.find("table").attr("class");
+            //if ($(window).width() <= 800 && version == "pc") {
+            //    that.find("table").remove();
+            //    appendTableHtml(topUl, that);
+            //}
+            //if ($(window).width() > 800 && version == "mobile") {
+            //    that.find("table").remove();
+            //    appendTableHtml(topUl, that);
+            //}
+            that.find("table").remove();
+            appendTableHtml(topUl, that);
+
+            if (chartType() == "mobile") {
+                changeMobileWidth();
             }
-            if ($(window).width() > 800 && version == "mobile") {
-                that.find("table").remove();
-                appendTableHtml(topUl, that, true);
-            }
+        }
+        $(window).resize(function () {
+            windowResize();
         });
     }
 })($);
