@@ -123,7 +123,6 @@
             //}
             that.find("table").remove();
             appendTableHtml(topUl, that);
-
             if (chartType() == "mobile") {
                 changeMobileWidth();
             }
