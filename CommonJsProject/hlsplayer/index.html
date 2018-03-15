@@ -3,23 +3,20 @@
 <head>
     <title></title>
     <meta charset="utf-8" />
-    <script src="http://localhost:7070/hlsplayer/jquery-1.10.2.min.js"></script>
 
-    <!--<script src="http://localhost:7070/hlsplayer/flowplayer-3.2.13.js"></script>
-    <script src="http://localhost:7070/hlsplayer/hls.js"></script>
-    <script src="http://localhost:7070/hlsplayer/hlsplayer.js" script-flowplayer="flowplayer.swf" script-flowplayerhls="flowplayerhls.swf"></script>-->
+    <script src="jquery-1.10.2.min.js"></script>
+
+    <!--<script src="flowplayer-3.2.13.js"></script>
+    <script src="hls.js"></script>
+    <script src="hlsplayer.js" script-flowplayer="flowplayer.swf" script-flowplayerhls="flowplayerhls.swf"></script>-->
 
     <script src="hlsplayer.min.js" script-flowplayer="flowplayer.swf" script-flowplayerhls="flowplayerhls.swf"></script>
-    
+
 </head>
 <body>
     Video<br />
-    <!--<video controls="controls" width="400" height="400" id="v1" class="hlsplayer">
-        <source src="video/1/output.m3u8" />
-    </video>-->
-
     <video controls="controls" width="400" height="400" class="hlsplayer">
-        <source src="video/1/output.m3u8"/>
+        <source src="video/1/output.m3u8" />
     </video>
     <br />
     <input type="button" value="btn1" id="btn1" />
@@ -31,8 +28,9 @@
 </html>
 <script>
     $("#btn1").click(function () {
-        var video = $("#v1");
 
+        var time = $(".hlsplayer").getPlayerTime();
+        console.log(time);
         //video[0].currentTime = 100;
         //video[0].play();
         //video.setPlayerSrc("video/1/output.m3u8");
