@@ -1,13 +1,16 @@
 ﻿(function (win, $) {
     var scripts = $("script");
     var currentEle = $("script[script-flowplayer]"),
+        autoLoad = currentEle.attr("script-auto") || true,
         flowPlayerSrc = currentEle.attr("script-flowplayer"),
         flashlsFlowPlayerSrc = currentEle.attr("script-flowplayerhls");
     if (!flowPlayerSrc) console.log("flowplayer attr required");
     if (!flashlsFlowPlayerSrc) console.log("flowplayerhls attr required");
+    if (autoLoad == "false") autoLoad = false;
+    if (autoLoad == "true") autoLoad = true;
     var hlsSupported = (Hls.isSupported() || IsMobile()) ? true : false;
     $(function () {
-        begin();
+        if (autoLoad) begin();
     });
     win.hlsplayer = function () {
         begin();
@@ -143,8 +146,8 @@
     function IsMobile() {
         var userAgentInfo = navigator.userAgent;
         var Agents = ["Android", "iPhone",
-                    "SymbianOS", "Windows Phone",
-                    "iPad", "iPod"];
+            "SymbianOS", "Windows Phone",
+            "iPad", "iPod"];
         for (var v = 0; v < Agents.length; v++) {
             if (userAgentInfo.indexOf(Agents[v]) > 0) return true;
         }
