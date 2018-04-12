@@ -90,6 +90,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="datepicker\date-cyan.png" />
+    <Content Include="datepicker\date-orange.png" />
+    <Content Include="datepicker\datepicker-cyan.css" />
+    <Content Include="datepicker\datepicker-cyan.min.css" />
+    <Content Include="datepicker\datepicker-orange.css" />
+    <Content Include="datepicker\datepicker-orange.min.css" />
+    <Content Include="datepicker\datepicker-template.html" />
+    <Content Include="datepicker\datepicker.js" />
+    <Content Include="datepicker\datepicker.min.js" />
+    <Content Include="datepicker\index.html" />
+    <Content Include="datepicker\jquery-3.1.1.min.js" />
     <Content Include="Global.asax" />
     <Content Include="Grid\gridster.js" />
     <Content Include="Grid\index.html" />
