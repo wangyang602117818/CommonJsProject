@@ -1,0 +1,3 @@
+[submodule "CommonJsProject/datepicker"]
+	path = CommonJsProject/datepicker
+	url = https://github.com/wangyang602117818/datepicker.git
