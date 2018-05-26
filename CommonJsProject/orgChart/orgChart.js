@@ -10,6 +10,7 @@
             } else {
                 tableHtml = getChildNodeMobile($ul.find("li:first"), 1);
             }
+            $(container).find("table").remove();
             container.append(tableHtml);
             changeMobileWidth();
         }
