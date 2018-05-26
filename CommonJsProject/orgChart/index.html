@@ -11,6 +11,19 @@
         $(function () {
             $(".orgChart").orgChart();
         });
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("Text", ev.target.id);
+        }
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            console.log(data);
+            ev.target.appendChild(document.getElementById(data));
+        }
     </script>
     <style>
     </style>
@@ -22,7 +35,7 @@
                 <div class="node">0</div>
                 <ul>
                     <li>
-                        <div class="node">01</div>
+                        <div class="node" ondrop="drop(event)" ondragover="allowDrop(event)">01</div>
                         <ul>
                             <li>
                                 <div class="node">011</div>
@@ -33,7 +46,7 @@
                         <div class="node">02</div>
                         <ul>
                             <li>
-                                <div class="node">021</div>
+                                <div class="node" draggable="true" ondragstart="drag(event)">021</div>
                             </li>
                             <li>
                                 <div class="node">022</div>
