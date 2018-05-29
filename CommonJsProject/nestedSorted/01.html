@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../Scripts/jquery-3.3.1.min.js"></script>
+
+    <script src="../Scripts/jquery-ui.js"></script>
+    <script src="jquery.ui.nestedSortable.js"></script>
+
+    <style>
+        div{
+            height:30px;
+            width:300px;
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <ol class="sortable">
+        <li id="list_1"><div>Item 1</div>
+        <li id="list_2">
+            <div>Item 2</div>
+            <ol>
+                <li id="list_3"><div>Sub Item 2.1</div>
+                <li id="list_4"><div>Sub Item 2.2</div>
+                <li id="list_5"><div>Sub Item 2.3</div>
+                <li id="list_6"><div>Sub Item 2.4</div>
+            </ol>
+        <li id="list_7" class="no-nest"><div>Item 3 (no-nesting)</div>
+        <li id="list_8" class="no-nest"><div>Item 4 (no-nesting)</div>
+        <li id="list_9"><div>Item 5</div>
+        <li id="list_10">
+            <div>Item 6</div>
+            <ol>
+                <li id="list_11"><div>Sub Item 6.1</div>
+                <li id="list_12" class="no-nest"><div>Sub Item 6.2 (no-nesting)</div>
+                <li id="list_13"><div>Sub Item 6.3</div>
+                <li id="list_14"><div>Sub Item 6.4</div>
+            </ol>
+        <li id="list_15"><div>Item 7</div>
+        <li id="list_16"><div>Item 8</div>
+    </ol>
+
+</body>
+</html>
+<script>
+
+    $(document).ready(function () {
+
+        $('ol.sortable').nestedSortable({
+            disableNesting: 'no-nest',
+            forcePlaceholderSize: true,
+            handle: 'div',
+            helper: 'clone',
+            items: 'li',
+            maxLevels: 3,
+            opacity: .6,
+            placeholder: 'placeholder',
+            revert: 250,
+            tabSize: 25,
+            tolerance: 'pointer',
+            toleranceElement: '> div'
+        });
+
+        $('#serialize').click(function () {
+            serialized = $('ol.sortable').nestedSortable('serialize');
+            $('#serializeOutput').text(serialized + '\n\n');
+        })
+
+        $('#toHierarchy').click(function (e) {
+            hiered = $('ol.sortable').nestedSortable('toHierarchy');
+            hiered = dump(hiered);
+            (typeof ($('#toHierarchyOutput')[0].textContent) != 'undefined') ?
+                $('#toHierarchyOutput')[0].textContent = hiered : $('#toHierarchyOutput')[0].innerText = hiered;
+        })
+
+        $('#toArray').click(function (e) {
+            arraied = $('ol.sortable').nestedSortable('toArray', { startDepthCount: 0 });
+            arraied = dump(arraied);
+            (typeof ($('#toArrayOutput')[0].textContent) != 'undefined') ?
+                $('#toArrayOutput')[0].textContent = arraied : $('#toArrayOutput')[0].innerText = arraied;
+        })
+
+    });
+
+    function dump(arr, level) {
+        var dumped_text = "";
+        if (!level) level = 0;
+
+        //The padding given at the beginning of the line.
+        var level_padding = "";
+        for (var j = 0; j < level + 1; j++) level_padding += "    ";
+
+        if (typeof (arr) == 'object') { //Array/Hashes/Objects
+            for (var item in arr) {
+                var value = arr[item];
+
+                if (typeof (value) == 'object') { //If it is an array,
+                    dumped_text += level_padding + "'" + item + "' ...\n";
+                    dumped_text += dump(value, level + 1);
+                } else {
+                    dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+                }
+            }
+        } else { //Strings/Chars/Numbers etc.
+            dumped_text = "===>" + arr + "<===(" + typeof (arr) + ")";
+        }
+        return dumped_text;
+    }
+
+</script>
