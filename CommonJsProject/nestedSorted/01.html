@@ -29,35 +29,37 @@
 </head>
 <body>
     <ol class="sortable">
-        <li id="list_1">
+        <li>
             <div>Item 1</div>
         </li>
-        <li id="list_2">
+        <li>
             <div>Item 2</div>
             <ol>
-                <li id="list_3"><div>Sub Item 2.1</div></li>
-                <li id="list_4"><div>Sub Item 2.2</div></li>
-                <li id="list_5"><div>Sub Item 2.3</div></li>
-                <li id="list_6"><div>Sub Item 2.4</div></li>
+                <li><div>Sub Item 2.1</div></li>
+                <li><div>Sub Item 2.2</div></li>
+                <li><div>Sub Item 2.3</div></li>
+                <li><div>Sub Item 2.4</div></li>
 
             </ol>
         </li>
-        <li id="list_7"><div>Item 3</div></li>
-        <li id="list_8"><div>Item 4 </div></li>
-        <li id="list_9"><div>Item 5</div></li>
-        <li id="list_10">
+        <li><div>Item 3</div></li>
+        <li><div>Item 4 </div></li>
+        <li><div>Item 5</div></li>
+        <li>
             <div>Item 6</div>
             <ol>
-                <li id="list_11"><div>Sub Item 6.1</div></li>
-                <li id="list_12"><div>Sub Item 6.2</div></li>
-                <li id="list_13"><div>Sub Item 6.3</div></li>
-                <li id="list_14"><div>Sub Item 6.4</div></li>
+                <li><div>Sub Item 6.1</div></li>
+                <li><div>Sub Item 6.2</div></li>
+                <li><div>Sub Item 6.3</div></li>
+                <li><div>Sub Item 6.4</div></li>
             </ol>
         </li>
-        <li id="list_15"><div>Item 7</div></li>
-        <li id="list_16"><div>Item 8</div></li>
+        <li><div>Item 7</div></li>
+        <li><div>Item 8</div></li>
     </ol>
 
+    <br />
+    <input type="button" name="btn1" value="btn" id="serialize" />
 </body>
 </html>
 <script>
@@ -81,7 +83,7 @@
 
         $('#serialize').click(function () {
             serialized = $('ol.sortable').nestedSortable('serialize');
-            $('#serializeOutput').text(serialized + '\n\n');
+            console.log(serialized);
         })
 
         $('#toHierarchy').click(function (e) {
