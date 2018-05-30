@@ -5,41 +5,57 @@
     <title></title>
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
 
-    <script src="../Scripts/jquery-ui.js"></script>
+    <script src="../Scripts/jquery-ui.min.js"></script>
     <script src="jquery.ui.nestedSortable.js"></script>
 
     <style>
-        div{
-            height:30px;
-            width:300px;
-            border:1px solid red;
+        div {
+            height: 30px;
+            width: 300px;
+            border: 1px solid red;
+            background-color: #ccc;
         }
+
+        ol {
+            /*list-style-type: none;*/
+            margin: 0;
+        }
+
+            ol li {
+                margin-top: 10px;
+                padding: 0;
+            }
     </style>
 </head>
 <body>
     <ol class="sortable">
-        <li id="list_1"><div>Item 1</div>
+        <li id="list_1">
+            <div>Item 1</div>
+        </li>
         <li id="list_2">
             <div>Item 2</div>
             <ol>
-                <li id="list_3"><div>Sub Item 2.1</div>
-                <li id="list_4"><div>Sub Item 2.2</div>
-                <li id="list_5"><div>Sub Item 2.3</div>
-                <li id="list_6"><div>Sub Item 2.4</div>
+                <li id="list_3"><div>Sub Item 2.1</div></li>
+                <li id="list_4"><div>Sub Item 2.2</div></li>
+                <li id="list_5"><div>Sub Item 2.3</div></li>
+                <li id="list_6"><div>Sub Item 2.4</div></li>
+
             </ol>
-        <li id="list_7" class="no-nest"><div>Item 3 (no-nesting)</div>
-        <li id="list_8" class="no-nest"><div>Item 4 (no-nesting)</div>
-        <li id="list_9"><div>Item 5</div>
+        </li>
+        <li id="list_7"><div>Item 3</div></li>
+        <li id="list_8"><div>Item 4 </div></li>
+        <li id="list_9"><div>Item 5</div></li>
         <li id="list_10">
             <div>Item 6</div>
             <ol>
-                <li id="list_11"><div>Sub Item 6.1</div>
-                <li id="list_12" class="no-nest"><div>Sub Item 6.2 (no-nesting)</div>
-                <li id="list_13"><div>Sub Item 6.3</div>
-                <li id="list_14"><div>Sub Item 6.4</div>
+                <li id="list_11"><div>Sub Item 6.1</div></li>
+                <li id="list_12"><div>Sub Item 6.2</div></li>
+                <li id="list_13"><div>Sub Item 6.3</div></li>
+                <li id="list_14"><div>Sub Item 6.4</div></li>
             </ol>
-        <li id="list_15"><div>Item 7</div>
-        <li id="list_16"><div>Item 8</div>
+        </li>
+        <li id="list_15"><div>Item 7</div></li>
+        <li id="list_16"><div>Item 8</div></li>
     </ol>
 
 </body>
