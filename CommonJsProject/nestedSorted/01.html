@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link href="//at.alicdn.com/t/font_375871_mczmyfepofuhaor.css" rel="stylesheet" />
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
 
     <!--<script src="../Scripts/jquery-ui.min.js"></script>-->
@@ -10,51 +11,104 @@
 
     <script src="jquery-ui.js"></script>
     <script src="nestedsortable.js"></script>
+
+
     <style>
-        div {
-            height: 30px;
-            width: 300px;
-            border: 1px solid #ccc;
-            background-color: #ccc;
+        * {
+            margin: 0;
+            padding: 0;
         }
 
         ol {
             list-style-type: none;
-            /*margin: 0;
-            padding-left:30px;*/
         }
 
             ol li {
-                margin-top: 10px;
-                padding: 0;
-                border-left: 1px dashed #ccc;
-                
+                width: 450px;
             }
+
+        .sortable {
+            margin-top: 20px;
+            margin-left: 30px;
+        }
+
+            .sortable ol {
+                margin-left: 30px;
+            }
+
+        ol .sortable_node {
+            margin-top: 10px;
+            
+            height: 27px;
+            line-height: 27px;
+            width: 100%;
+            border: 1px solid #b2b2b3;
+            border-radius: 3px;
+            /*background: linear-gradient(bottom, #dfd3d2 10%, #efe9e9 90%);*/
+            /*background: -o-linear-gradient(bottom, #dfd3d2 10%, #efe9e9 90%);*/
+            /*background: -moz-linear-gradient(bottom, #dfd3d2 10%, #efe9e9 90%);*/
+            background: -webkit-linear-gradient(bottom, #e7e7e8 10%, #d9d9d9 90%);
+            /*background: -ms-linear-gradient(bottom, #dfd3d2 10%, #efe9e9 90%);*/
+        }
+
+        ol .sortable_node .sortable_node_title{
+            display:inline-block;
+            width:100px;
+           
+        }
     </style>
 </head>
 <body>
     <ol class="sortable">
         <li id="item_1">
-            <div>Item 1</div>
+            <div class="sortable_node">
+                <i class="iconfont icon-down"></i><span class="sortable_node_title">Company</span>
+            </div>
         </li>
         <li id="item_2">
-            <div>Item 2</div>
+            <div class="sortable_node">Item 2</div>
             <ol>
-                <li id="item_3"><div>Sub Item 2.1</div></li>
-                <li><div>Sub Item 2.2</div></li>
-                <li><div>Sub Item 2.3</div></li>
-                <li><div>Sub Item 2.4</div></li>
+                <li id="item_3">
+                    <div class="sortable_node">
+                        Sub Item 2.1
+                    </div>
+                </li>
+                <li>
+                    <div class="sortable_node">
+                        Sub Item 2.2
+                    </div>
+                </li>
+                <li>
+                    <div class="sortable_node">
+                        Sub Item 2.3
+                    </div>
+                </li>
+                <li>
+                    <div class="sortable_node">
+                        Sub Item 2.4
+                    </div>
+                </li>
 
             </ol>
         </li>
-        <li><div>Item 3</div></li>
-        <li><div>Item 4 </div></li>
-        <li><div>Item 5</div></li>
-        
+        <li>
+            <div class="sortable_node">
+                Item 3
+            </div>
+        </li>
+        <li>
+            <div class="sortable_node">
+                Item 4
+            </div>
+        </li>
+        <li>
+            <div class="sortable_node">
+                Item 5
+            </div>
+        </li>
+
     </ol>
 
-
-    
     <br />
     <input type="button" name="btn1" value="btn" id="toArray" />
 </body>
