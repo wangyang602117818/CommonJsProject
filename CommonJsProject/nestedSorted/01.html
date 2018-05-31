@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <link href="//at.alicdn.com/t/font_375871_mczmyfepofuhaor.css" rel="stylesheet" />
+    <link href="//at.alicdn.com/t/font_375871_03bpmxfqv5eidx6r.css" rel="stylesheet" />
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
 
     <!--<script src="../Scripts/jquery-ui.min.js"></script>-->
@@ -25,6 +25,7 @@
 
             ol li {
                 width: 450px;
+                border-left: 1px dashed #b2b2b3;
             }
 
         .sortable {
@@ -38,9 +39,11 @@
 
         ol .sortable_node {
             margin-top: 10px;
+            margin-left: -2px;
+            padding-left: 2px;
             
             height: 27px;
-            line-height: 27px;
+            line-height: 26px;
             width: 100%;
             border: 1px solid #b2b2b3;
             border-radius: 3px;
@@ -51,18 +54,48 @@
             /*background: -ms-linear-gradient(bottom, #dfd3d2 10%, #efe9e9 90%);*/
         }
 
-        ol .sortable_node .sortable_node_title{
-            display:inline-block;
-            width:100px;
-           
-        }
+            ol .sortable_node .sortable_node_title {
+                display: inline-block;
+                width: 100px;
+            }
+
+            ol .sortable_node .sortable_node_move {
+                display: inline-block;
+                float: right;
+                width: 28px;
+                text-align: center;
+                cursor: move;
+                background-color:#ccc;
+                height:100%;
+            }
+
+                ol .sortable_node .sortable_node_move:hover {
+                    color: #000;
+                }
+
+            ol .sortable_node .sortable_node_remove {
+                display: inline-block;
+                float: right;
+                width: 25px;
+                text-align: center;
+                cursor: pointer;
+            }
+
+                ol .sortable_node .sortable_node_remove:hover {
+                    color: #000;
+                }
     </style>
 </head>
 <body>
     <ol class="sortable">
         <li id="item_1">
             <div class="sortable_node">
-                <i class="iconfont icon-down"></i><span class="sortable_node_title">Company</span>
+                <i class="iconfont icon-down1"></i>
+                <span class="sortable_node_title">Company</span>
+                <span class="sortable_node_move">
+                    <i class="iconfont icon-menu"></i>
+                </span>
+                
             </div>
         </li>
         <li id="item_2">
@@ -120,10 +153,10 @@
         $('ol.sortable').nestedSortable({
             disableNesting: 'no-nest',
             forcePlaceholderSize: true,
-            handle: 'div',
+            handle: '.sortable_node_move',
             helper: 'clone',
             items: 'li',
-            maxLevels: 6,
+            maxLevels: 10,
             opacity: .6,
             placeholder: 'placeholder',
             revert: 250,
