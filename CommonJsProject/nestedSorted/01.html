@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <link href="//at.alicdn.com/t/font_375871_ckure955rxyctyb9.css" rel="stylesheet" />
+    <link href="//at.alicdn.com/t/font_375871_zxep5ic9biou5wmi.css" rel="stylesheet" />
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
 
     <!--<script src="../Scripts/jquery-ui.min.js"></script>-->
@@ -21,12 +21,15 @@
 
         .container {
             width: 700px;
+            /*border: 1px solid red;*/
+            margin-top: 30px;
+            margin-left: 30px;
         }
 
         .sortable, .sortable ol {
             list-style-type: none;
             margin-left: 30px;
-            border:1px solid red;
+            /*border:1px solid red;*/
         }
 
 
@@ -37,8 +40,9 @@
             line-height: 29px;
             width: 99%;
             border: 1px solid #ddd;
-            border-top: 1px solid transparent;
-            border-radius: 3px;
+            margin-top: 2px;
+            /*border-top: 1px solid transparent;*/
+            /*border-radius: 3px;*/
             background-color: #fff;
         }
 
@@ -61,6 +65,25 @@
                 .sortable_node .icon-menu:hover {
                     color: #000;
                 }
+
+            .sortable_node .icon-dot,
+            .sortable_node .icon-down1,
+            .sortable_node .icon-remove,
+            .sortable_node .icon-add1,
+            .sortable_node .icon-edit {
+                display: inline-block;
+                float: right;
+                width: 30px;
+                text-align: center;
+                color: #8D8784;
+            }
+
+                .sortable_node .icon-down1:hover,
+                .sortable_node .icon-remove:hover,
+                .sortable_node .icon-edit,
+                .sortable_node .icon-add1 {
+                    cursor: pointer;
+                }
     </style>
 </head>
 <body>
@@ -70,12 +93,17 @@
                 <div class="sortable_node">
                     <i class="iconfont icon-menu"></i>
                     <span class="sortable_node_title">Company</span>
+                    <i class="iconfont icon-dot"></i>
+                    <i class="iconfont icon-remove"></i>
+                    <i class="iconfont icon-add1"></i>
+                    <i class="iconfont icon-edit"></i>
                 </div>
             </li>
             <li id="item_2">
                 <div class="sortable_node">
                     <i class="iconfont icon-menu"></i>
                     <span class="sortable_node_title"> Item 2</span>
+                    <i class="iconfont icon-down1"></i>
                 </div>
                 <ol>
                     <li id="item_2.2">
@@ -130,6 +158,8 @@
     <br />
 
     <input type="button" name="btn1" value="btn" id="toArray" />
+
+
 </body>
 </html>
 <script>
@@ -148,8 +178,12 @@
             revert: 250,
             tabSize: 25,
             tolerance: 'pointer',
-            toleranceElement: '> div'
+            toleranceElement: '> div',
+            change: function () {
+                console.log("x");
+            }
         });
+        //computeDistanceLi($(".sortable"),30);  /////
 
         $('#serialize').click(function () {
             serialized = $('ol.sortable').nestedSortable('serialize');
@@ -169,6 +203,8 @@
             (typeof ($('#toArrayOutput')[0].textContent) != 'undefined') ?
                 $('#toArrayOutput')[0].textContent = arraied : $('#toArrayOutput')[0].innerText = arraied;
         })
+
+
 
     });
 
@@ -197,4 +233,20 @@
         return dumped_text;
     }
 
+    function computeDistanceLi(olEle, liHeight) {
+        var containerOffset = $(".container").offset();
+        console.log(containerOffset);
+        var lis = olEle.find("li");
+        $(".divPadding").remove();
+        for (var i = 0; i < lis.length; i++) {
+
+            var liOffset = $(lis[i]).offset();
+            var divLeft = containerOffset.left,
+                divTop = liOffset.top + 2,
+                divWidth = liOffset.left - containerOffset.left;
+
+            var divHtml = "<div class=\"divPadding\" style=\"position: absolute;border: 1px solid #ddd;border-right:0; width: " + divWidth + "px; height: " + liHeight + "px; left: " + divLeft + "px; top: " + divTop + "px\"></div>";
+            $(lis[i]).before(divHtml);
+        }
+    }
 </script>
