@@ -133,6 +133,8 @@
     <Content Include="Loading\Scripts\loading.js" />
     <Content Include="Loading\Scripts\jquery-1.10.2.js" />
     <Content Include="nestedSorted\01.html" />
+    <Content Include="nestedSorted\demo\jquery-ui.js" />
+    <Content Include="nestedSorted\demo\jquery-ui.min.js" />
     <Content Include="nestedSorted\jquery-ui.js" />
     <Content Include="nestedSorted\nestedsortable.js" />
     <Content Include="orgChart\jquery-1.10.2.min.js" />
