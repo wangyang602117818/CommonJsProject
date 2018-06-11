@@ -137,6 +137,7 @@
     <Content Include="nestedSorted\demo\jquery-ui.min.js" />
     <Content Include="nestedSorted\jquery-ui.js" />
     <Content Include="nestedSorted\nestedsortable.js" />
+    <Content Include="orgChart\dropDownList.html" />
     <Content Include="orgChart\jquery-1.10.2.min.js" />
     <Content Include="orgChart\orgChart.css" />
     <Content Include="orgChart\index.html" />
@@ -144,6 +145,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="hlsplayer\video\1\output.m3u8" />
+    <Content Include="orgChart\data.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

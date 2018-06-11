@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="//at.alicdn.com/t/font_375871_02phjz25dbhs38fr.css" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .ddl_con {
+            width: 300px;
+            height: 600px;
+            border: 1px dotted red;
+            padding: 5px;
+        }
+
+            .ddl_con .dd_line {
+                width: 100%;
+                border: 1px dotted blue;
+                vertical-align: middle;
+                margin-top: 2px;
+                display: flex;
+            }
+
+            .ddl_con .dd_left {
+                display: inline-block;
+                border: 1px dashed green;
+                height: 100%;
+            }
+
+            .ddl_con .dd_right {
+                display: inline-block;
+                border: 1px dotted green;
+                /*padding-top:4px;*/
+                /*height: 100%;*/
+            }
+
+            .ddl_con .dd_node {
+                display: inline-block;
+                height: 26px;
+                line-height: 26px;
+                text-align: center;
+                width: 60px;
+                border: 1px solid #000;
+                margin-top:10px;
+            }
+
+            .ddl_con .dd_org_line {
+                height: 10px;
+                width: 60px;
+                text-align: center;
+            }
+
+                .ddl_con .dd_org_line .dd_org_linedown {
+                    position: absolute;
+                    display: inline-block;
+                    border: 0.5px solid #000;
+                    width: 0px;
+                    height: 10px;
+                }
+
+            .ddl_con .dd_org_icon_con {
+                height: 16px;
+                width: 60px;
+                text-align: center;
+                /*border:1px dashed red;*/
+            }
+
+                .ddl_con .dd_org_icon_con .dd_icon_del {
+                    display: inline-block;
+                }
+
+            .ddl_con .dd_org_lineright {
+                position: absolute;
+                display: inline-block;
+                border: 0.5px solid #000;
+                height: 0px;
+                width: 20px;
+                margin-top: 8px;
+            }
+    </style>
+</head>
+<body>
+    <div class="ddl_con">
+        <div class="dd_line">
+            <div class="dd_left">
+                <div class="dd_node">Top</div>
+                <div class="dd_org_line"><span class="dd_org_linedown"></span></div>
+            </div>
+        </div>
+        <div class="dd_line">
+            <div class="dd_left">
+                <div class="dd_org_line"><span class="dd_org_linedown"></span></div>
+                <div class="dd_org_icon_con">
+                    <span class="dd_icon_del">
+                        <svg viewBox="0 0 1024 1024" width="16" height="16"><path d="M512 12C236.31 12 12 236.3 12 512s224.31 500 500 500 500-224.3 500-500S787.69 12 512 12z m0 944.44C266.94 956.44 67.56 757.06 67.56 512S266.94 67.56 512 67.56 956.44 266.94 956.44 512 757.06 956.44 512 956.44z" p-id="1765"></path><path d="M762 484.22H262a27.78 27.78 0 0 0 0 55.56h500a27.78 27.78 0 0 0 0-55.56z" p-id="1766"></path></svg>
+                    </span>
+                    <span class="dd_org_lineright"></span>
+                </div>
+                <div class="dd_org_line"><span class="dd_org_linedown"></span></div>
+            </div>
+            <div class="dd_right">
+                <div class="dd_node">01</div>
+                <div class="dd_org_line"><span class="dd_org_linedown"></span></div>
+            </div>
+            <!--<div class="dd_node">01</div>-->
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+</script>

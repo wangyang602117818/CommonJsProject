@@ -1,0 +1,81 @@
+﻿{
+  "_id": {
+    "$oid": "5b0e18c6c4180813fc692aa3"
+  },
+  "DepartmentName": "Company010",
+  "DepartmentCode": "d81baffbfd1c",
+  "Department": [
+    {
+      "DepartmentName": "Test01",
+      "DepartmentCode": "d81baffbfd13",
+      "Department": [
+        {
+          "DepartmentName": "Test01-01",
+          "DepartmentCode": "d81baffbfd15",
+          "Department": []
+        },
+        {
+          "DepartmentName": "Test01-02",
+          "DepartmentCode": "c949eb5dcbcf",
+          "Department": []
+        },
+        {
+          "DepartmentName": "Test01-03",
+          "DepartmentCode": "fc1df69abbdb",
+          "Department": []
+        }
+      ]
+    },
+    {
+      "DepartmentName": "Test02",
+      "DepartmentCode": "d81baffbfd14",
+      "Department": [
+        {
+          "DepartmentName": "Test02-01",
+          "DepartmentCode": "49c0f3cec0a9",
+          "Department": []
+        },
+        {
+          "DepartmentName": "Test02-02",
+          "DepartmentCode": "773171baeffb",
+          "Department": []
+        }
+      ]
+    },
+    {
+      "DepartmentName": "Test03",
+      "DepartmentCode": "2d4ba482bf88",
+      "Department": []
+    },
+    {
+      "DepartmentName": "Test04",
+      "DepartmentCode": "4faea59ab44e",
+      "Department": [
+        {
+          "DepartmentName": "Test04-01",
+          "DepartmentCode": "0ddfec2b8a45",
+          "Department": []
+        }
+      ]
+    },
+    {
+      "DepartmentName": "Test05",
+      "DepartmentCode": "f406c259b2a7",
+      "Department": [
+        {
+          "DepartmentName": "Test05-01",
+          "DepartmentCode": "38f7e1d96ef0",
+          "Department": []
+        }
+      ]
+    },
+    {
+      "DepartmentName": "Test06",
+      "DepartmentCode": "d231bddd69ff",
+      "Department": []
+    }
+  ],
+  "CreateTime": {
+    "$date": 1527650502068
+  }
+}
