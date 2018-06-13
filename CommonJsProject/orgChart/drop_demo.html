@@ -16,7 +16,7 @@
             width: 15px;
             display: flex;
             align-items: center;
-            /*border: 1px dashed blue;*/
+            border: 1px dashed blue;
         }
 
             .node_leftline_wrap .node_leftline {
@@ -36,13 +36,14 @@
             height: 15px;
             display: flex;
             align-items: center;
+            margin-left:20px;
         }
 
         .node_topline, .node_bottomline {
             display: inline-block;
             border: 0.5px solid #000;
             height: 100%;
-            margin-left: 20px;
+            /*margin-left: 20px;*/
         }
 
         .node_main .node {
@@ -51,6 +52,15 @@
             display: flex;
             align-items: center;
         }
+
+        .button_wrap {
+            display: flex;
+            flex-direction: row;
+            width: 60px;
+            height: 60px;
+            border: 1px dotted blue;
+        }
+
     </style>
 </head>
 <body>
@@ -67,6 +77,28 @@
         </div>
     </div>
     <br />
-
+    <div class="node_wrap">
+        <div class="node_leftline_wrap"></div>
+        <div class="node_main">
+            <div class="node_topline_wrap"></div>
+            <div class="node">Tip</div>
+            <div class="node_bottomline_wrap">
+                <span class="node_bottomline"></span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="button_wrap">
+        <div class="node_leftline_wrap"></div>
+        <div class="node_main">
+            <div class="node_topline_wrap">
+                <span class="node_topline"></span>
+            </div>
+            <div class="node">Tip</div>
+            <div class="node_bottomline_wrap">
+                <span class="node_bottomline"></span>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
