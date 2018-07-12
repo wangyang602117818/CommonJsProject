@@ -22,7 +22,7 @@
 
     function reckonMd5(file) {
         var blobSlice = File.prototype.slice || File.prototype.mozSlice || File.prototype.webkitSlice,
-            chunkSize = 1024 * 1024 * 2,                             // Read in chunks of 2MB
+            chunkSize = 1024 * 1024 * 4,                             // Read in chunks of 2MB
             chunks = Math.ceil(file.size / chunkSize),
             currentChunk = 0,
             spark = new SparkMD5.ArrayBuffer(),
