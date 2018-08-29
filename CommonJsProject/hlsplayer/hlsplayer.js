@@ -9,6 +9,9 @@
     if (autoLoad == "false") autoLoad = false;
     if (autoLoad == "true") autoLoad = true;
     var hlsSupported = (Hls.isSupported() || IsMobile()) ? true : false;
+    var hlsConfig = {
+        maxBufferLength: 5
+    };
     $(function () {
         if (autoLoad) begin();
     });
@@ -76,7 +79,7 @@
     //重新设置播放源 hls
     function setHlsPlayerSrc(video, src) {
         var playing = !video.paused;  //是否正在播放
-        var hls = new Hls();
+        var hls = new Hls(hlsConfig);
         hls.loadSource(src);
         hls.attachMedia(video);
         if (playing) {
@@ -95,7 +98,7 @@
     function initHlsPlayer(video) {
         if (video.src.indexOf("blob:") >= 0) return;
         var src = video.getElementsByTagName("source")[0].src || video.src;
-        var hls = new Hls();
+        var hls = new Hls(hlsConfig);
         hls.loadSource(src);
         hls.attachMedia(video);
     }

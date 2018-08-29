@@ -131,6 +131,7 @@
     <Content Include="hlsplayer\hlsplayer.min.js" />
     <Content Include="hlsplayer\index.html" />
     <Content Include="hlsplayer\jquery-1.10.2.min.js" />
+    <Content Include="hlsplayer\video\2\out.m3u8" />
     <Content Include="JQExtension\JQExtension.js" />
     <Content Include="Grid\jquery-1.10.2.min.js" />
     <Content Include="JQExtension\jquery-1.10.2.min.js" />

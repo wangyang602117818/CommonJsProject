@@ -22,5 +22,9 @@ namespace CommonJsProject.Controllers
             string file = AppConfig.BasePath + @"video\src\1\output\" + filename;
             return File(file, "video/vnd.dlna.mpeg-tts");
         }
+        public ActionResult Key()
+        {
+            return Content("N74kEdQDwUgiR5QNyMQ9fg==");
+        }
     }
 }
