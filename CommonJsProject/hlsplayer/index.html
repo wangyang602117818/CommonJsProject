@@ -6,21 +6,21 @@
     <script src="../Scripts/jquery-3.3.1.js"></script>
     <script src="flowplayer-3.2.13.js"></script>
     <script src="hls.js"></script>
-    <script src="hlsplayer.js" script-flowplayer="flowplayer.swf" script-flowplayerhls="flowplayerhls.swf" script-auto="true"></script>
+    <script src="hlsplayer.js" script-auto="true"></script>
 
-    <!--<script src="hlsplayer.min.js" script-flowplayer="flowplayer.swf" script-flowplayerhls="flowplayerhls.swf" script-auto="true"></script>-->
+    <!--<script src="hlsplayer.min.js" script-flowplayer="flowplayer.swf" script-flowplayerhls="flowplayerhls.swf" script-auto="false"></script>-->
 
 </head>
 <body>
-    <video controls="controls" width="400" height="400" class="hlsplayer" poster="http://localhost:2431/download/videocapture/5b83c181c41807479c774d67">
+    <!--<video controls="controls" width="400" height="400" class="hlsplayer">
         <source src="video/1/output.m3u8" />
-    </video>
+    </video>-->
     <!--<video controls="controls" width="400" height="400" class="hlsplayer">
         <source src="video/2/out.m3u8" />
     </video>-->
-    <!--<video controls="controls" width="400" height="400">
-        <source src="video/1.mp4" type="video/mp4" />
-    </video>-->
+    <video controls="controls" width="400" height="400" class="hlsplayer">
+        <source src="http://streambox.fr/playlists/test_001/stream.m3u8" />
+    </video>
     <br />
     <input type="button" value="btn1" id="btn1" />
     <br />

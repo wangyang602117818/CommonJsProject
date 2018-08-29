@@ -1,7 +1,7 @@
 ﻿(function (win, $) {
     var scripts = $("script");
     var currentEle = $("script[script-flowplayer]"),
-        autoLoad = currentEle.attr("script-auto") || true,
+        autoLoad = $("script[script-auto]").length == 0 ? "true" : $("script[script-auto]").attr("script-auto"),
         flowPlayerSrc = currentEle.attr("script-flowplayer"),
         flashlsFlowPlayerSrc = currentEle.attr("script-flowplayerhls");
     if (!flowPlayerSrc) console.log("flowplayer attr required");
