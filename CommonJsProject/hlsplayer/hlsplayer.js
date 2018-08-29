@@ -10,7 +10,8 @@
     if (autoLoad == "true") autoLoad = true;
     var hlsSupported = (Hls.isSupported() || IsMobile()) ? true : false;
     var hlsConfig = {
-        maxBufferLength: 5
+        autoStartLoad: true,
+        maxBufferLength:5
     };
     $(function () {
         if (autoLoad) begin();
@@ -47,7 +48,7 @@
         }
     })
     function begin() {
-        $(".hlsplayer").each(function () { init(this) });
+        $(".hlsplayer").each(function () { init(this); });
     }
     function init(video) {
         hlsSupported ? initHlsPlayer(video) : initFlashPlayer(video);
@@ -101,6 +102,7 @@
         var hls = new Hls(hlsConfig);
         hls.loadSource(src);
         hls.attachMedia(video);
+        //$(video).on("play", function () { console.log("xx"); hls.startLoad(startPosition = -1) });
     }
     //初始化播放源 flash
     function initFlashPlayer(video) {
