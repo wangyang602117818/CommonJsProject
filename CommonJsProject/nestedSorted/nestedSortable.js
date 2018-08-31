@@ -3,7 +3,7 @@
  * v 2.0 / 29 oct 2012
  * http://mjsarfatti.com/sandbox/nestedSortable
  *
- * Depends on:
+ * Depends on: 
  *	 jquery.ui.sortable.js 1.10+
  *
  * Copyright (c) 2010-2013 Manuele J Sarfatti
