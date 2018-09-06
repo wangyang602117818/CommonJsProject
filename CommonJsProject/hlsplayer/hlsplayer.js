@@ -1,20 +1,20 @@
 ﻿(function (win, $) {
-    var scripts = $("script");
     var currentEle = $("script[script-flowplayer]"),
-        autoLoad = $("script[script-auto]").length == 0 ? "true" : $("script[script-auto]").attr("script-auto"),
+        autoInit = $("script[script-auto-init]").length == 0 ? "true" : $("script[script-auto-init]").attr("script-auto-init"),
+        autoLoad = $("script[script-auto-load]").length == 0 ? "true" : $("script[script-auto-load]").attr("script-auto-load"),
         flowPlayerSrc = currentEle.attr("script-flowplayer"),
         flashlsFlowPlayerSrc = currentEle.attr("script-flowplayerhls");
     if (!flowPlayerSrc) console.log("flowplayer attr required");
     if (!flashlsFlowPlayerSrc) console.log("flowplayerhls attr required");
-    if (autoLoad == "false") autoLoad = false;
-    if (autoLoad == "true") autoLoad = true;
+    if (autoInit == "false") autoInit = false; if (autoInit == "true") autoInit = true;
+    if (autoLoad == "false") autoLoad = false; if (autoLoad == "true") autoLoad = true;
     var hlsSupported = (Hls.isSupported() || IsMobile()) ? true : false;
     var hlsConfig = {
         autoStartLoad: true,
-        maxBufferLength:5
+        maxBufferLength: 5
     };
     $(function () {
-        if (autoLoad) begin();
+        if (autoInit) begin();
     });
     win.hlsplayer = function () {
         begin();
