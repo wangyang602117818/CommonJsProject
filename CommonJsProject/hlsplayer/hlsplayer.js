@@ -9,10 +9,6 @@
     if (autoInit == "false") autoInit = false; if (autoInit == "true") autoInit = true;
     if (autoLoad == "false") autoLoad = false; if (autoLoad == "true") autoLoad = true;
     var hlsSupported = (Hls.isSupported() || IsMobile()) ? true : false;
-    var hlsConfig = {
-        autoStartLoad: true,
-        maxBufferLength: 5
-    };
     $(function () {
         if (autoInit) begin();
     });
@@ -80,7 +76,14 @@
     //重新设置播放源 hls
     function setHlsPlayerSrc(video, src) {
         var playing = !video.paused;  //是否正在播放
-        var hls = new Hls(hlsConfig);
+        var hls = new Hls({
+            autoStartLoad: true,
+            maxBufferLength: 5,
+            startPosition: -1,
+            xhrSetup: function (xhr, url) {
+                xhr.setRequestHeader("CurrentTime", Math.floor(video.currentTime));
+            }
+        });
         hls.loadSource(src);
         hls.attachMedia(video);
         if (playing) {
@@ -98,10 +101,27 @@
     //初始化播放源 hls
     function initHlsPlayer(video) {
         if (video.src.indexOf("blob:") >= 0) return;
+        //getLastPlayerTime(video);
         var src = video.getElementsByTagName("source")[0].src || video.src;
+        var hlsConfig = {
+            autoStartLoad: true,
+            maxBufferLength: 5,
+            startPosition: -1,
+            xhrSetup: function (xhr, url) {
+                xhr.setRequestHeader("CurrentTime", Math.floor(video.currentTime));
+            }
+        };
         var hls = new Hls(hlsConfig);
+        hls.on(Hls.Events.LEVEL_LOADED, function (event, data) {
+            var tsTime = parseInt(data.networkDetails.getResponseHeader("TsTime") || 0, 10);
+            if (tsTime > 0) {
+                video.currentTime = tsTime;
+                //hls.startLoad(startPosition = tsTime);
+            }
+        });
         hls.loadSource(src);
         hls.attachMedia(video);
+
         //$(video).on("play", function () { console.log("xx"); hls.startLoad(startPosition = -1) });
     }
     //初始化播放源 flash
