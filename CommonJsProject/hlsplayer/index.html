@@ -6,7 +6,7 @@
     <script src="../Scripts/jquery-3.3.1.js"></script>
     <script src="flowplayer-3.2.13.js"></script>
     <script src="hls.js"></script>
-    <script src="hlsplayer.js" script-auto-init="true"></script>
+    <script src="hlsplayer.js" script-auto-init="true" script-tstime-record="true"></script>
 
     <!--<script src="hlsplayer.min.js" script-flowplayer="flowplayer.swf" script-flowplayerhls="flowplayerhls.swf" script-auto="false"></script>-->
 
@@ -21,7 +21,8 @@
     <video controls="controls" width="400" height="400" class="hlsplayer" id="v2">
         <!--<source src="http://localhost/FileService.Web/download/M3u8MultiStream/5bd6b9eb29d0de3930646592" />-->
         <!--<source src="http://localhost/FileService.Web/download/M3u8/5bd8029329d0e13930715b43" />-->
-        <source src="http://localhost/FileService.Web/download/M3u8/5bd982e329d0ec4fe4501212" />
+        <source src="http://localhost/FileService.Web/download/M3u8MultiStream/5bd982e329d0ec4fe4501213" />
+        <!--<source src="http://localhost/FileService.Web/download/M3u8/5bd982e329d0ec4fe4501212" />-->
     </video>
     <br />
     <input type="button" value="btn1" id="btn1" />
@@ -33,7 +34,7 @@
 </html>
 <script>
 
-    
+
     $("#btn1").click(function () {
         //hlsplayer();
         var time = $(".hlsplayer").getPlayerTime();

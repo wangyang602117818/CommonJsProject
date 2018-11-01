@@ -1,13 +1,12 @@
 ﻿(function (win, $) {
     var currentEle = $("script[script-flowplayer]"),
         autoInit = $("script[script-auto-init]").length == 0 ? "true" : $("script[script-auto-init]").attr("script-auto-init"),
-        autoLoad = $("script[script-auto-load]").length == 0 ? "true" : $("script[script-auto-load]").attr("script-auto-load"),
+        autoRecord = $("script[script-tstime-record]").length == 0 ? "true" : $("script[script-tstime-record]").attr("script-tstime-record"),
         flowPlayerSrc = currentEle.attr("script-flowplayer"),
         flashlsFlowPlayerSrc = currentEle.attr("script-flowplayerhls");
     if (!flowPlayerSrc) console.log("flowplayer attr required");
     if (!flashlsFlowPlayerSrc) console.log("flowplayerhls attr required");
     if (autoInit == "false") autoInit = false; if (autoInit == "true") autoInit = true;
-    if (autoLoad == "false") autoLoad = false; if (autoLoad == "true") autoLoad = true;
     var hlsSupported = (Hls.isSupported() || IsMobile()) ? true : false;
     $(function () {
         if (autoInit) begin();
@@ -79,10 +78,8 @@
         var hls = new Hls({
             autoStartLoad: true,
             maxBufferLength: 5,
-            startPosition: -1,
-            xhrSetup: function (xhr, url) {
-                xhr.setRequestHeader("CurrentTime", Math.floor(video.currentTime));
-            }
+            maxBufferSize: 2 * 1000 * 1000,  //2M
+            startPosition: -1
         });
         hls.loadSource(src);
         hls.attachMedia(video);
@@ -101,20 +98,21 @@
     //初始化播放源 hls
     function initHlsPlayer(video) {
         if (video.src.indexOf("blob:") >= 0) return;
-        //getLastPlayerTime(video);
         var src = video.getElementsByTagName("source")[0].src || video.src;
         var hlsConfig = {
             autoStartLoad: true,
             maxBufferLength: 5,
+            maxBufferSize: 2 * 1000 * 1000,  //2M
             startPosition: -1,
             xhrSetup: function (xhr, url) {
-                xhr.setRequestHeader("CurrentTime", Math.floor(video.currentTime));
+                if (autoRecord == "true") xhr.setRequestHeader("TsTime", Math.floor(video.currentTime));
             }
         };
         var hls = new Hls(hlsConfig);
+        //初始化之后设置进度条的位置
         hls.on(Hls.Events.LEVEL_LOADED, function (event, data) {
             var tsTime = parseInt(data.networkDetails.getResponseHeader("TsTime") || 0, 10);
-            if (tsTime > 0) {
+            if (tsTime > 0 && autoRecord == "true") {
                 video.currentTime = tsTime;
                 //hls.startLoad(startPosition = tsTime);
             }
