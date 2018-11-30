@@ -1,4 +1,4 @@
-﻿(function (win, $) {
+﻿(function (window, $) {
     var currentEle = $("script[script-flowplayer]"),
         autoInit = $("script[script-auto-init]").length == 0 ? "true" : $("script[script-auto-init]").attr("script-auto-init"),
         autoRecord = $("script[script-tstime-record]").length == 0 ? "true" : $("script[script-tstime-record]").attr("script-tstime-record"),
@@ -7,11 +7,11 @@
     if (!flowPlayerSrc) console.log("flowplayer attr required");
     if (!flashlsFlowPlayerSrc) console.log("flowplayerhls attr required");
     if (autoInit == "false") autoInit = false; if (autoInit == "true") autoInit = true;
-    var hlsSupported = (Hls.isSupported() || IsMobile()) ? true : false;
+    window.hlsSupported = (Hls.isSupported() || IsMobile()) ? true : false;
     $(function () {
         if (autoInit) begin();
     });
-    win.hlsplayer = function () {
+    window.hlsplayer = function () {
         begin();
     };
     $.fn.extend({
@@ -46,7 +46,7 @@
         $(".hlsplayer").each(function () { init(this); });
     }
     function init(video) {
-        hlsSupported ? initHlsPlayer(video) : initFlashPlayer(video);
+        window.hlsSupported ? initHlsPlayer(video) : initFlashPlayer(video);
     }
     //设置hls播放进度
     function setHlsPlayerTime(video, time) {
@@ -98,7 +98,14 @@
     //初始化播放源 hls
     function initHlsPlayer(video) {
         if (video.src.indexOf("blob:") >= 0) return;
-        var src = video.getElementsByTagName("source")[0].src || video.src;
+        var source = video.getElementsByTagName("source");
+        var src = "";
+        if (source.length > 0) {
+            src = video.getElementsByTagName("source")[0].src || video.src;
+        } else {
+            src = video.src;
+        }
+        if (!src) return;
         var hlsConfig = {
             autoStartLoad: true,
             maxBufferLength: 5,
@@ -119,7 +126,6 @@
         });
         hls.loadSource(src);
         hls.attachMedia(video);
-
         //$(video).on("play", function () { console.log("xx"); hls.startLoad(startPosition = -1) });
     }
     //初始化播放源 flash
