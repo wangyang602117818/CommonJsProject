@@ -184,4 +184,18 @@
         }
         return false;
     }
+    function Browser() {
+        var isFirefox = typeof InstallTrigger !== 'undefined';
+        if (isFirefox) return "firefox";
+        var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+        if (isSafari) return "safari";
+        var isIE = /*@cc_on!@*/false || !!document.documentMode;
+        if (isIE) return "ie";
+        var isEdge = !isIE && !!window.StyleMedia;
+        if (isEdge) return "edge";
+        var isChrome = !!window.chrome && !!window.chrome.webstore;
+        if (isChrome) return "chrome";
+    }
+    window.browser = Browser();
+    window.isMobile = IsMobile();
 })(window, jQuery);
