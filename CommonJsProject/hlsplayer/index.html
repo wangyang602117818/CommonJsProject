@@ -19,6 +19,7 @@
         <source src="video/2/out.m3u8" />
     </video>-->
     <video controls="controls" width="400" height="400" class="hlsplayer" id="v2">
+        <source id="source"/>
         <!--<source src="http://localhost/FileService.Web/download/M3u8MultiStream/5bd6b9eb29d0de3930646592" />-->
         <!--<source src="http://localhost/FileService.Web/download/M3u8/5bd8029329d0e13930715b43" />-->
         <source src="http://localhost/FileService.Web/download/M3u8MultiStream/5bd982e329d0ec4fe4501213" />
@@ -36,9 +37,11 @@
 
 
     $("#btn1").click(function () {
+        $("#source").attr("src", "video/1/output.m3u8")
+        
         //hlsplayer();
-        var time = $(".hlsplayer").getPlayerTime();
-        console.log(time);
+        //var time = $(".hlsplayer").getPlayerTime();
+        //console.log(time);
         //video[0].currentTime = 100;
         //video[0].play();
         //video.setPlayerSrc("video/1/output.m3u8");

@@ -8,6 +8,8 @@
     if (!flashlsFlowPlayerSrc) console.log("flowplayerhls attr required");
     if (autoInit == "false") autoInit = false; if (autoInit == "true") autoInit = true;
     window.hlsSupported = (Hls.isSupported() || IsMobile()) ? true : false;
+    window.browser = Browser();
+    window.isMobile = IsMobile();
     $(function () {
         if (autoInit) begin();
     });
@@ -97,7 +99,6 @@
     }
     //初始化播放源 hls
     function initHlsPlayer(video) {
-        console.log(video);
         if (video.src.indexOf("blob:") >= 0) return;
         var source = video.getElementsByTagName("source");
         var src = "";
@@ -106,7 +107,6 @@
         } else {
             src = video.src;
         }
-        console.log(src);
         if (!src) return;
         var hlsConfig = {
             autoStartLoad: true,
@@ -196,6 +196,4 @@
         var isChrome = !!window.chrome && !!window.chrome.webstore;
         if (isChrome) return "chrome";
     }
-    window.browser = Browser();
-    window.isMobile = IsMobile();
 })(window, jQuery);
