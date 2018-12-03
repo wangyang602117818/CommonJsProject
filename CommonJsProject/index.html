@@ -7,13 +7,16 @@
     <script src="Scripts/jquery-3.3.1.js"></script>
 </head>
 <body id="body">
-
+    
 </body>
 </html>
 
 <script>
+    var video = document.createElement("video");
+    var bool = video.canPlayType('application/vnd.apple.mpegurl');
+    alert(bool);
     var userAgent = window.navigator.userAgent;
     document.getElementById("body").innerHTML = userAgent;
 
-   
+
 </script>

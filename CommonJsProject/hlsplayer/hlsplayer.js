@@ -18,20 +18,20 @@
     };
     $.fn.extend({
         setPlayerSrc: function (src) {
-            hlsSupported ? setHlsPlayerSrc(this[0], src) : setFlashPlayerSrc(this[0], src);
+            window.hlsSupported ? setHlsPlayerSrc(this[0], src) : setFlashPlayerSrc(this[0], src);
             return this;
         },
         setPlayerTime: function (time) {
-            hlsSupported ? setHlsPlayerTime(this[0], time) : setFlashPlayerTime(this[0], time);
+            window.hlsSupported ? setHlsPlayerTime(this[0], time) : setFlashPlayerTime(this[0], time);
         },
         getPlayerTime: function () {
-            return hlsSupported ? getHlsPlayerTime(this[0]) : getFlashPlayerTime(this[0]);
+            return window.hlsSupported ? getHlsPlayerTime(this[0]) : getFlashPlayerTime(this[0]);
         },
         getTotalTime: function () {
-            return hlsSupported ? getHlsPlayerTotalTime(this[0]) : getFalshPlayerTotlaTime(this[0]);
+            return window.hlsSupported ? getHlsPlayerTotalTime(this[0]) : getFalshPlayerTotlaTime(this[0]);
         },
         videoCP: function (scale, success) {
-            if (hlsSupported) {
+            if (window.hlsSupported) {
                 var canvas = document.createElement("canvas");
                 canvas.width = this[0].videoWidth * scale;
                 canvas.height = this[0].videoHeight * scale;
