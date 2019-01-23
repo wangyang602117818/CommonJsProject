@@ -9,12 +9,11 @@
             border: 1px solid red;
         }
     </style>
-    <script src="jquery-1.10.2.js"></script>
     <script>
 
     </script>
 </head>
-<body>
+<body id="body">
     template
 </body>
 </html>
@@ -24,22 +23,30 @@
         data: { exist: "true", data: "data000" },
         msg: [{ msg1: "111", msg2: "222" }, { msg1: "m111", msg2: "m222" }]
     };
-    $.get('http://localhost:7070/template/template.html', function (template) {
-        var res = parseHTML(template, data);
-        $("body").append(res);
-        var s = 0;
+    parseHTML("template.html", data, function (htmlDom) {
+        document.getElementById("body").appendChild(htmlDom);
     });
-    //把html解析成dom
-    function parseHTML(html, model) {
-        if (model) {
-            html = parseTemplate(html, model);
+   
+    //把模板解析成字符串,该方法是封装方法，模板中使用asp的语法<%%>，不用理会原理
+    function parseTemplate(templateUrl, model, success) {
+        if (parseTemplate.templateHtml) {
+            var resultHtml = parseTemplateInnser(parseTemplate.templateHtml, model);
+            success(resultHtml);
+            return;
         }
-        var tmp = document.createElement("div");
-        tmp.innerHTML = html;
-        return tmp.childNodes[0];//只允许有一个根节点
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function (event) {
+            var target = event.srcElement || event.target;
+            var html = target.responseText;
+            parseTemplate.templateHtml = html;
+            var resultHtml = parseTemplateInnser(html, model);
+            success(resultHtml);
+        }
+        xhr.open('get', templateUrl, false);
+        xhr.send();
     }
-    //把模板解析成字符串
-    function parseTemplate(html, model) {
+    //内部方法使用模板和model返回解析后的html字符串
+    function parseTemplateInnser(html, model) {
         html = html.replace(/[\r\n]/g, "").replace(/'/g, "\\'");
         var splitRegex = /<%=(.+?)%>|<%([^=]([^%]|\n)*)%>/g,
             code = "var p = [] ;\n",
@@ -54,6 +61,14 @@
         code += "p.push('" + html.slice(cursor) + "');\n;return p.join(\'\')";
         var fn = new Function("model", code);
         return fn(model);
+    }
+    //把html解析成dom
+    function parseHTML(templateUrl, model, success) {
+        parseTemplate(templateUrl, model, function (html) {
+            var tmp = document.createElement("div");
+            tmp.innerHTML = html;
+            success(tmp.childNodes[0]);  //只允许有一个根节点
+        });
     }
 
 </script>
