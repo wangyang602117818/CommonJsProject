@@ -116,6 +116,7 @@
     <Content Include="datepicker\datepicker.min.js" />
     <Content Include="datepicker\index.html" />
     <Content Include="datepicker\jquery-3.1.1.min.js" />
+    <Content Include="drag\index.html" />
     <Content Include="Global.asax" />
     <Content Include="Grid\gridster.js" />
     <Content Include="Grid\index.html" />
