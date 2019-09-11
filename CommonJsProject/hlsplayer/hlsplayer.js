@@ -1,7 +1,7 @@
 ﻿(function (window, $) {
     var currentEle = $("script[script-flowplayer]"),
-        autoInit = $("script[script-auto-init]").length == 0 ? "true" : $("script[script-auto-init]").attr("script-auto-init"),
-        autoRecord = $("script[script-tstime-record]").length == 0 ? "true" : $("script[script-tstime-record]").attr("script-tstime-record"),
+        autoInit = $("script[script-auto-init]").length == 0 ? "false" : $("script[script-auto-init]").attr("script-auto-init"),
+        autoRecord = $("script[script-tstime-record]").length == 0 ? "false" : $("script[script-tstime-record]").attr("script-tstime-record"),
         flowPlayerSrc = currentEle.attr("script-flowplayer"),
         flashlsFlowPlayerSrc = currentEle.attr("script-flowplayerhls");
     if (!flowPlayerSrc) console.log("flowplayer attr required");
