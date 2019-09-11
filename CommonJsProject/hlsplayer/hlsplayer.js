@@ -111,7 +111,9 @@
         var hlsConfig = {
             autoStartLoad: true,
             maxBufferLength: 5,
+            maxMaxBufferLength: 7,
             maxBufferSize: 2 * 1000 * 1000,  //2M
+
             startPosition: -1,
             xhrSetup: function (xhr, url) {
                 if (autoRecord == "true") xhr.setRequestHeader("TsTime", Math.floor(video.currentTime));
