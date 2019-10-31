@@ -4353,7 +4353,7 @@
                 kind: OptionKind.API
             },
             cMapUrl: {
-                value: './',
+                value: cMapUrl,
                 kind: OptionKind.API
             },
             disableAutoFetch: {
