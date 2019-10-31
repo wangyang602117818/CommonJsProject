@@ -1,0 +1,7 @@
+[en-US]
+@import url(en-US/viewer.txt)
+
+[zh-CN]
+@import url(zh-CN/viewer.txt)
+
+
