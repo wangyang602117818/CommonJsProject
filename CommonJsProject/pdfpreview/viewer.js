@@ -4402,7 +4402,7 @@
                 kind: OptionKind.WORKER
             },
             workerSrc: {
-                value: 'pdf.worker.js',
+                value: pdf_work,
                 kind: OptionKind.WORKER
             }
         };
