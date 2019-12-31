@@ -91,6 +91,14 @@
             video.pause();
         }
     }
+    function setTsTime(url, tsTime) {
+        if (url.indexOf("?") > -1) {
+            url = url + "&tstime=" + tsTime;
+        } else {
+            url = url + "?tstime=" + tsTime;
+        }
+        return url;
+    }
     //重新设置播放源 flash
     function setFlashPlayerSrc(obj, src) {
         var playing = flowplayer(obj).isPlaying();  //是否正在播放
@@ -110,22 +118,25 @@
         if (!src) return;
         var hlsConfig = {
             autoStartLoad: true,
-            maxBufferLength: 5,
-            maxMaxBufferLength: 7,
+            maxBufferLength: 10,
+            maxMaxBufferLength: 20,
             maxBufferSize: 2 * 1000 * 1000,  //2M
 
             startPosition: -1,
             xhrSetup: function (xhr, url) {
-                if (autoRecord == "true") xhr.setRequestHeader("TsTime", Math.floor(video.currentTime));
+                if (autoRecord == "true") {
+                    xhr.setRequestHeader("tstime", Math.floor(video.currentTime));
+                    xhr.setRequestHeader("usercode", video.getAttribute("tstime-user"));
+                }
             }
         };
         var hls = new Hls(hlsConfig);
         //初始化之后设置进度条的位置
         hls.on(Hls.Events.LEVEL_LOADED, function (event, data) {
-            var tsTime = parseInt(data.networkDetails.getResponseHeader("TsTime") || 0, 10);
+            var tsTime = parseInt(data.networkDetails.getResponseHeader("tstime") || 0, 10);
             if (tsTime > 0 && autoRecord == "true") {
                 video.currentTime = tsTime;
-                //hls.startLoad(startPosition = tsTime);
+                hls.startLoad(startPosition = tsTime);
             }
         });
         hls.loadSource(src);

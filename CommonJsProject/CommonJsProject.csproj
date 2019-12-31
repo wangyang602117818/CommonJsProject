@@ -126,6 +126,7 @@
     <Content Include="hlsplayer\flowplayer.controls.swf" />
     <Content Include="hlsplayer\flowplayer.swf" />
     <Content Include="hlsplayer\flowplayerhls.swf" />
+    <Content Include="hlsplayer\hls-back.js" />
     <Content Include="hlsplayer\hls.js" />
     <Content Include="hlsplayer\hlsplayer.js" />
     <Content Include="hlsplayer\hlsplayer.min.js" />
