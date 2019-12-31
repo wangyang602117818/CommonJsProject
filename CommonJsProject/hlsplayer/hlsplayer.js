@@ -91,14 +91,6 @@
             video.pause();
         }
     }
-    function setTsTime(url, tsTime) {
-        if (url.indexOf("?") > -1) {
-            url = url + "&tstime=" + tsTime;
-        } else {
-            url = url + "?tstime=" + tsTime;
-        }
-        return url;
-    }
     //重新设置播放源 flash
     function setFlashPlayerSrc(obj, src) {
         var playing = flowplayer(obj).isPlaying();  //是否正在播放
