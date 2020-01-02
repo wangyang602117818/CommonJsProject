@@ -117,20 +117,36 @@
             startPosition: -1,
             xhrSetup: function (xhr, url) {
                 if (autoRecord == "true") {
-                    xhr.setRequestHeader("tstime", Math.floor(video.currentTime));
-                    xhr.setRequestHeader("usercode", video.getAttribute("tstime-user"));
+                    var user = video.getAttribute("tstime-user");
+                    video.ontimeupdate = function () {
+                        var currentTime = Math.floor(video.currentTime);
+                        var time = video.getAttribute("time") || 0;
+                        if (!user) return;
+                        if (currentTime - time > 1) {
+                            this.setAttribute("time", currentTime);
+                            $.ajax({
+                                type: "get",
+                                url: src,
+                                beforeSend: function (xhr) {
+                                    xhr.setRequestHeader("tstime", time);
+                                    xhr.setRequestHeader("usercode", user);
+                                }
+                            })
+                        }
+                    }
+                    xhr.setRequestHeader("usercode", user);
                 }
             }
         };
         var hls = new Hls(hlsConfig);
         //初始化之后设置进度条的位置
-        hls.on(Hls.Events.LEVEL_LOADED, function (event, data) {
-            var tsTime = parseInt(data.networkDetails.getResponseHeader("tstime") || 0, 10);
-            if (tsTime > 0 && autoRecord == "true") {
-                video.currentTime = tsTime;
-                hls.startLoad(startPosition = tsTime);
-            }
-        });
+        //hls.on(Hls.Events.LEVEL_LOADED, function (event, data) {
+        //    var tsTime = parseInt(data.networkDetails.getResponseHeader("tstime") || 0, 10);
+        //    if (tsTime > 0 && autoRecord == "true") {
+        //        video.currentTime = tsTime;
+        //        hls.startLoad(startPosition = tsTime);
+        //    }
+        //});
         hls.loadSource(src);
         hls.attachMedia(video);
         //$(video).on("play", function () { console.log("xx"); hls.startLoad(startPosition = -1) });
