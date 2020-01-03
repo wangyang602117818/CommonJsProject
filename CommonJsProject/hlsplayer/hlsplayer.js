@@ -117,7 +117,7 @@
             startPosition: -1,
             xhrSetup: function (xhr, url) {
                 if (autoRecord == "true") {
-                    var user = video.getAttribute("tstime-user");
+                    var user = video.getAttribute("tstime-user") || StaffID;
                     video.ontimeupdate = function () {
                         var currentTime = Math.floor(video.currentTime);
                         var time = video.getAttribute("time") || 0;
@@ -130,6 +130,9 @@
                                 beforeSend: function (xhr) {
                                     xhr.setRequestHeader("tstime", time);
                                     xhr.setRequestHeader("usercode", user);
+                                },
+                                success: function (result) {
+                                    
                                 }
                             })
                         }
