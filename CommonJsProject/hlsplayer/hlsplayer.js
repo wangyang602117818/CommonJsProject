@@ -122,7 +122,7 @@
                         var currentTime = Math.floor(video.currentTime);
                         var time = video.getAttribute("time") || 0;
                         if (!user) return;
-                        if (currentTime - time > 1) {
+                        if (Math.abs(currentTime - time) > 1) {
                             this.setAttribute("time", currentTime);
                             $.ajax({
                                 type: "get",
