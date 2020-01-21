@@ -14,7 +14,7 @@
 <script>
     var video = document.createElement("video");
     var bool = video.canPlayType('application/vnd.apple.mpegurl');
-    alert(bool);
+    console.log("|"+bool+"|");
     var userAgent = window.navigator.userAgent;
     document.getElementById("body").innerHTML = userAgent;
 
