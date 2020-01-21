@@ -117,24 +117,36 @@
             startPosition: -1,
             xhrSetup: function (xhr, url) {
                 if (autoRecord == "true") {
-                    var user = video.getAttribute("tstime-user") || StaffID;
+                    //获取user
+                    var user = null;
+                    if (typeof StaffID != "undefined") user = StaffID;
+                    var tsuser = video.getAttribute("tstime-user");
+                    if (tsuser) user = tsuser;
+                    //获取文件id
+                    var fileId = src.match(/\w{24}/)[0];
+                    var user_init_time = localStorage.getItem(fileId + "-time");
+                    //未设置user 但是有 user_init_time
+                    if (!user && user_init_time > 0) video.currentTime = user_init_time;
                     video.ontimeupdate = function () {
                         var currentTime = Math.floor(video.currentTime);
                         var time = video.getAttribute("time") || 0;
-                        if (!user) return;
                         if (Math.abs(currentTime - time) > 1) {
                             this.setAttribute("time", currentTime);
-                            $.ajax({
-                                type: "get",
-                                url: src,
-                                beforeSend: function (xhr) {
-                                    xhr.setRequestHeader("tstime", time);
-                                    xhr.setRequestHeader("usercode", user);
-                                },
-                                success: function (result) {
-                                    
-                                }
-                            })
+                            if (user) {
+                                $.ajax({
+                                    type: "get",
+                                    url: src,
+                                    beforeSend: function (xhr) {
+                                        xhr.setRequestHeader("tstime", currentTime);
+                                        xhr.setRequestHeader("usercode", user);
+                                    },
+                                    success: function (result) {
+
+                                    }
+                                })
+                            } else {
+                                localStorage.setItem(fileId + "-time", currentTime)
+                            }
                         }
                     }
                     xhr.setRequestHeader("usercode", user);
