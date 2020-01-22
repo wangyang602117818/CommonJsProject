@@ -1,6 +1,6 @@
-﻿(function (window) {
-    window.addEventListener("load", function () { hlsplayer(false) });
-    window.hlsplayer = function () { hlsplayer(true); }
+﻿(function (win) {
+    win.addEventListener("load", function () { hlsplayer(false) });
+    win.hlsplayer = function () { hlsplayer(true); }
     function hlsplayer(manual) {
         var elements = document.getElementsByClassName("hlsplayer");
         for (var i = 0; i < elements.length; i++) {
@@ -42,7 +42,7 @@
             xhrSetup: function (xhr, url) {
                 //获取user
                 var user = null;
-                if (typeof StaffID != "undefined") user = StaffID;
+                if (typeof win.StaffID != "undefined") user = win.StaffID;
                 var tsuser = video.getAttribute("tstime-user");
                 if (tsuser) user = tsuser;
                 //获取文件id
@@ -65,8 +65,8 @@
                 xhr.setRequestHeader("usercode", user);
             }
         };
-        var hls = new Hls(hlsConfig);
+        var hls = new win.Hls(hlsConfig);
         hls.loadSource(src);
         hls.attachMedia(video);
     }
-})(window)
+})(window);
