@@ -121,6 +121,10 @@
     <Content Include="Grid\gridster.js" />
     <Content Include="Grid\index.html" />
     <Content Include="Grid\jquery.gridster.css" />
+    <Content Include="hlsplayer-v2\hls.js" />
+    <Content Include="hlsplayer-v2\hlsplayer.js" />
+    <Content Include="hlsplayer-v2\hlsplayer.min.js" />
+    <Content Include="hlsplayer-v2\index.html" />
     <Content Include="hlsplayer\flowplayer-3.2.13.js" />
     <Content Include="hlsplayer\flowplayer-3.2.13.min.js" />
     <Content Include="hlsplayer\flowplayer.controls.swf" />

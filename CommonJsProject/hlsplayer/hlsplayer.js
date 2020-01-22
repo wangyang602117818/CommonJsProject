@@ -108,6 +108,7 @@
             src = video.src;
         }
         if (!src) return;
+        if (src.toLowerCase().indexOf("m3u8multistream") == -1) return;
         var hlsConfig = {
             autoStartLoad: true,
             maxBufferLength: 10,
@@ -118,7 +119,7 @@
             xhrSetup: function (xhr, url) {
                 if (autoRecord == "true") {
                     //获取user
-                    var user = null;
+                    var user = "";
                     if (typeof StaffID != "undefined") user = StaffID;
                     var tsuser = video.getAttribute("tstime-user");
                     if (tsuser) user = tsuser;
@@ -126,7 +127,9 @@
                     var fileId = src.match(/\w{24}/)[0];
                     var user_init_time = localStorage.getItem(fileId + "-time");
                     //未设置user 但是有 user_init_time
-                    if (!user && user_init_time > 0) video.currentTime = user_init_time;
+                    if (!user && user_init_time > 0) {
+                        video.currentTime = user_init_time;
+                    } 
                     video.ontimeupdate = function () {
                         var currentTime = Math.floor(video.currentTime);
                         var time = video.getAttribute("time") || 0;
@@ -164,6 +167,7 @@
         //});
         hls.loadSource(src);
         hls.attachMedia(video);
+
         //$(video).on("play", function () { console.log("xx"); hls.startLoad(startPosition = -1) });
     }
     //初始化播放源 flash
