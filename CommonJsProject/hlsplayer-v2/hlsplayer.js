@@ -45,7 +45,7 @@
             autoStartLoad: true,
             maxBufferLength: 20,
             maxMaxBufferLength: 40,
-            maxBufferSize: 10 * 1000 * 1000,  //2M
+            maxBufferSize: 10 * 1000 * 1000,  //10M
             //startPosition: -1,
             xhrSetup: function (xhr) {
                 //获取user
@@ -57,7 +57,9 @@
                 var fileId = src.match(/\w{24}/)[0];
                 var user_init_time = getCookie(fileId + "-time");
                 ////未设置user 但是有 user_init_time
-                if (!user && user_init_time > 0) video.currentTime = user_init_time;
+                if (!user && user_init_time > 0 && video.currentTime == 0) {
+                    video.currentTime = user_init_time;
+                }
                 video.ontimeupdate = function () {
                     var currentTime = Math.floor(video.currentTime);
                     var time = video.getAttribute("time") || 0;
