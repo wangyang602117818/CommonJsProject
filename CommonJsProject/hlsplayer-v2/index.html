@@ -12,15 +12,15 @@
     <!--<video controls="controls" width="400" height="400" class="hlsplayer">
         <source src="video/2/out.m3u8" />5d89b3c153432a1af8cdb214
     </video>-->
-    <video controls="controls" width="400" height="400" class="hlsplayer" id="v2" tstime-user="cn000" auto-init="false">
-        <!--<source id="source" src="" />-->
+    <!--<video controls="controls" width="400" height="400" class="hlsplayer" id="v2" tstime-user="cn000">
+        <source id="source" src="" />
         <source src="http://localhost/FileService.Web/download/M3u8MultiStream/5e09badb3f35fb50f8020d6e" />
-        <!--<source src="http://localhost/FileService.Web/download/M3u8/5d89b3c153432a1af8cdb214" />-->
-        <!--<source src="https://janus.pwchk.com/janus4/Portal/handler/m3u8.ashx?fid=5da82b7353432a07a4837155" />-->
-        <!--<source src="https://janus4/Portal/handler/m3u8.ashx?fid=5da82b7353432a07a4837155" />-->
-        <!--<source src="http://hkappuwv819/FileServiceWeb/download/M3u8MultiStream/5e0dcbac538b8a0d6c2a6eba" />-->
-    </video>
-    <video controls="controls" width="400" height="400" class="hlsplayer" tstime-user="cn000">
+        <source src="http://localhost/FileService.Web/download/M3u8/5d89b3c153432a1af8cdb214" />
+        <source src="https://janus.pwchk.com/janus4/Portal/handler/m3u8.ashx?fid=5da82b7353432a07a4837155" />
+        <source src="https://janus4/Portal/handler/m3u8.ashx?fid=5da82b7353432a07a4837155" />
+        <source src="http://hkappuwv819/FileServiceWeb/download/M3u8MultiStream/5e0dcbac538b8a0d6c2a6eba" />
+    </video>-->
+    <video controls="controls" width="400" height="400" class="hlsplayer" tstime-user="test">
         <source src="http://localhost/FileService.Web/download/M3u8MultiStream/5e0d44e83f35fb3a949bf6fb" />
     </video>
     
@@ -33,9 +33,7 @@
 </body>
 </html>
 <script>
-    window.onload = function () {
-        console.log("down");
-    }
+  
 
     hlsplayer();
 </script>

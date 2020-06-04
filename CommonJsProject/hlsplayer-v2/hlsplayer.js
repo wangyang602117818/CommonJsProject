@@ -1,11 +1,8 @@
-﻿(function (win) {
-    win.addEventListener("load", function () { hlsplayer(false) });
-    win.hlsplayer = function () { hlsplayer(true); }
-    function hlsplayer(manual) {
+﻿(function (window) {
+    window.hlsplayer = function () { hlsplayer(); }
+    function hlsplayer() {
         var elements = document.getElementsByClassName("hlsplayer");
         for (var i = 0; i < elements.length; i++) {
-            var autoInit = elements[i].getAttribute("auto-init");
-            if (!manual && autoInit == "false") continue;
             initPlayer(elements[i]);
         }
     }
@@ -21,6 +18,18 @@
         xhr.setRequestHeader("usercode", headers.usercode);
         xhr.send();
     }
+    function setCookieNonExday(cname, cvalue) {
+        document.cookie = cname + "=" + cvalue + ";path=/";
+    }
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i].trim();
+            if (c.indexOf(name) == 0) { return c.substring(name.length, c.length); }
+        }
+        return "";
+    }
     function initPlayer(video) {
         if (video.src && video.src.indexOf("blob:") >= 0) return;
         var source = video.getElementsByTagName("source");
@@ -34,21 +43,20 @@
 
         var hlsConfig = {
             autoStartLoad: true,
-            maxBufferLength: 10,
-            maxMaxBufferLength: 20,
-            maxBufferSize: 2 * 1000 * 1000,  //2M
-
-            startPosition: -1,
-            xhrSetup: function (xhr, url) {
+            maxBufferLength: 20,
+            maxMaxBufferLength: 40,
+            maxBufferSize: 10 * 1000 * 1000,  //2M
+            //startPosition: -1,
+            xhrSetup: function (xhr) {
                 //获取user
                 var user = null;
-                if (typeof win.StaffID != "undefined") user = win.StaffID;
+                if (typeof StaffID != "undefined") user = StaffID;
                 var tsuser = video.getAttribute("tstime-user");
                 if (tsuser) user = tsuser;
-                //获取文件id
+                ////获取文件id
                 var fileId = src.match(/\w{24}/)[0];
-                var user_init_time = localStorage.getItem(fileId + "-time");
-                //未设置user 但是有 user_init_time
+                var user_init_time = getCookie(fileId + "-time");
+                ////未设置user 但是有 user_init_time
                 if (!user && user_init_time > 0) video.currentTime = user_init_time;
                 video.ontimeupdate = function () {
                     var currentTime = Math.floor(video.currentTime);
@@ -58,14 +66,14 @@
                         if (user) {
                             httpget(src, { tstime: currentTime, usercode: user });
                         } else {
-                            localStorage.setItem(fileId + "-time", currentTime)
+                            setCookieNonExday(fileId + "-time", currentTime);
                         }
                     }
                 }
                 xhr.setRequestHeader("usercode", user);
             }
         };
-        var hls = new win.Hls(hlsConfig);
+        var hls = new Hls(hlsConfig);
         hls.loadSource(src);
         hls.attachMedia(video);
     }
