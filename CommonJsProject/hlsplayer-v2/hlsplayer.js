@@ -40,7 +40,6 @@
             src = video.src;
         }
         if (!src) return;
-
         var hlsConfig = {
             autoStartLoad: true,
             maxBufferLength: 20,

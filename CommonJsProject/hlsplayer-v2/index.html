@@ -20,10 +20,13 @@
         <source src="https://janus4/Portal/handler/m3u8.ashx?fid=5da82b7353432a07a4837155" />
         <source src="http://hkappuwv819/FileServiceWeb/download/M3u8MultiStream/5e0dcbac538b8a0d6c2a6eba" />
     </video>-->
-    <video controls="controls" width="400" height="400" class="hlsplayer" tstime-user="test">
-        <source src="http://localhost/FileService.Web/download/M3u8MultiStream/5e0d44e83f35fb3a949bf6fb" />
+    <video controls="controls" width="400" height="400" class="hlsplayer" tstime-user="test" >
+        <source src="http://localhost/FileService.ApiCore/file/5f1e8d215bc37ab2704a461a/00000.m3u" />
     </video>
-    
+
+    <video controls="controls" id="v1" onplay="play">
+        <source src="../hlsplayer/video/1.mp4" type="video/mp4" />
+    </video>
     <br />
     <input type="button" value="btn1" id="btn1" />
     <br />
@@ -33,7 +36,14 @@
 </body>
 </html>
 <script>
-  
+    var myVid = document.getElementById('v1');
+    if (myVid !== null) { // Possibility of no video loaded in DOM
+        myVid.onplay = function (vieo) {
+            alert(vieo.target.currentTime);
+        };
+    }
+
+
 
     hlsplayer();
 </script>
