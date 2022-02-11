@@ -1,22 +1,23 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
+﻿<!doctype html>
 
-    <script src="Scripts/jquery-3.3.1.js"></script>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My PDF Viewer</title>
+   
 </head>
-<body id="body">
-    
+<body>
+    <div id="my_pdf_viewer">
+        <embed  src="10.pdf" type="application/pdf" height="100%" width="100%">
+    </div>
+
 </body>
 </html>
-
-<script>
-    var video = document.createElement("video");
-    var bool = video.canPlayType('application/vnd.apple.mpegurl');
-    console.log("|"+bool+"|");
-    var userAgent = window.navigator.userAgent;
-    document.getElementById("body").innerHTML = userAgent;
-
-
-</script>
+<style>
+    #my_pdf_viewer{
+        width:800px;
+        height:600px;
+        border:1px solid red
+    }
+</style>
